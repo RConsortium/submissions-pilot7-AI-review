@@ -1,0 +1,333 @@
+# ADRG plan for R Consortium Pilot 5 - authored at SAP / table-shell time, before any data.
+#
+# `adrg init plan.yaml` expands this into a shell-stage adrg.json: every display cell gets a
+# stable ID (CELL:<display>.<section>.<row>.<column>) and a compute spec that says exactly
+# which analysis, records, variable and statistic will produce it. `adrg sync` later fills
+# in datasets, programs, metadata snapshot, code anchors and results.
+#
+# Narrative below is paraphrased from the Pilot 5 ADRG (sections cited) and marked authored.
+
+study:
+  studyId: CDISCPILOT01
+  protocolNumber: CDISCPilot1
+  title: "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate Alzheimer's Disease"
+  aliases:
+    - {value: TDF_ADaM, where: "ADaM spec Define sheet (StudyName)", note: "Test Data Factory name of the replication ADaMs; same study."}
+
+documents:
+  - {id: "DOC:PROTOCOL", role: protocol, path: null, status: external, note: "CDISC pilot protocol, public; not in the package."}
+  - {id: "DOC:SAP", role: statistical-analysis-plan, path: null, status: missing, note: "Cited by the ADaM spec (sections 7.1, 8.2, 14.2) but not in the package."}
+  - {id: "DOC:SPEC", role: adam-specification, path: m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adam-pilot-5.xlsx, status: present}
+  - {id: "DOC:DEFINE", role: define-xml, path: m5/datasets/rconsortiumpilot5/analysis/adam/datasets/define.xml, status: missing, note: "Planned; Dataset-JSON headers reference it."}
+  - {id: "DOC:TLFREPORT", role: tlf-report, path: m5/datasets/rconsortiumpilot5/analysis/adam/programs/pilot5-cmb-report-manual.pdf, status: present}
+  - {id: "DOC:ADRG", role: analysis-data-reviewers-guide, path: m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adrg.pdf, status: present, note: "The hand-written ADRG this file replaces."}
+
+standards:                                     # ADRG §1.2
+  - {name: SDTM Implementation Guide, version: "3.1.2"}
+  - {name: SDTM, version: "1.2"}
+  - {name: SDTM Controlled Terminology, version: "2022-12-16"}
+  - {name: ADaM Implementation Guide, version: "1.1"}
+  - {name: ADaM, version: "2.1"}
+  - {name: ADaM Controlled Terminology, version: "2022-06-24"}
+  - {name: MedDRA, version: "8.0"}
+  - {name: Dataset-JSON, version: "1.1"}
+  - {name: Define-XML, version: "2.0 (planned; not in package)"}
+
+protocol:                                      # ADRG §2.2, paraphrased
+  objectives: "Evaluate the efficacy and safety of transdermal xanomeline (50 cm2 and 75 cm2 patches) against placebo in mild to moderate Alzheimer's disease."
+  design: "Prospective, randomized, multi-center, double-blind, placebo-controlled, parallel-group study; subjects randomized equally to placebo, xanomeline low dose or high dose, applied two patches daily, and were followed for 26 weeks."
+  plannedSubjects: "300 (100 per arm)"
+
+estimands:
+  - id: "EST:ADASCOG.WK24"
+    endpoint: {label: "ADAS-Cog (11) total, change from baseline to Week 24", level: primary}
+    population: "Efficacy population (EFFFL = 'Y' and ITTFL = 'Y')"
+    variable: "Change from baseline in ADAS-Cog (11) total at Week 24"
+    treatments: ["Placebo", "Xanomeline Low Dose", "Xanomeline High Dose"]
+    intercurrentEvents:
+      - {event: "Missing Week 24 assessment (e.g. early discontinuation)", strategy: "LOCF", implementedBy: ["VAR:ADADAS.DTYPE"]}
+      - {event: "Missing ADAS-Cog items at a visit", strategy: "Total adjusted for missing items (SAP §14.2)", implementedBy: ["PARAM:ADADAS.ACTOT"]}
+    summaryMeasure: "Difference in LS means (ANCOVA with site group, baseline)"
+    prespecification: {status: claimed, evidence: null}
+  - id: "EST:GLUC.WK20"
+    endpoint: {label: "Glucose, change from baseline to Week 20", level: safety}
+    population: "Intent-to-treat"
+    variable: "Change from baseline in glucose (mmol/L) at Week 20"
+    treatments: ["Placebo", "Xanomeline High Dose"]
+    summaryMeasure: "Difference in LS means (ANCOVA with baseline)"
+  - id: "EST:TTDE"
+    endpoint: {label: "Time to first dermatologic adverse event", level: safety}
+    population: "Safety population"
+    variable: "Days to first treatment-emergent dermatologic AE"
+    treatments: ["Placebo", "Xanomeline Low Dose", "Xanomeline High Dose"]
+    summaryMeasure: "Kaplan-Meier estimates; numbers at risk"
+
+analysisConsiderations:                        # ADRG §3, paraphrased
+  coreVariables: ["VAR:ADSL.STUDYID", "VAR:ADSL.USUBJID", "VAR:ADSL.SITEGR1", "VAR:ADSL.TRT01P", "VAR:ADSL.SAFFL", "VAR:ADSL.ITTFL", "VAR:ADSL.EFFFL"]
+  qa:
+    - {id: "QA:ARM-TRT01P", section: "3.2", question: "Are values of ARM equivalent in meaning to TRT01P?", answer: "Yes.", about: ["VAR:ADSL.TRT01P"]}
+    - {id: "QA:ACTARM", section: "3.2", question: "If TRT01A is used, are values of ACTARM equivalent to TRT01A?", answer: "Not applicable; ACTARM is not used.", about: ["VAR:ADSL.TRT01A"]}
+    - {id: "QA:PLANNED-ACTUAL", section: "3.2", question: "Are both planned and actual treatment variables used in analysis?", answer: "Yes. Planned treatment for population and efficacy analyses, actual for safety. All subjects received their randomized arm, so planned equals actual.", about: ["VAR:ADSL.TRT01P", "VAR:ADSL.TRT01A"]}
+    - {id: "QA:GROUPING", section: "3.2", question: "Are treatment grouping variables used in analysis?", answer: "Not applicable.", about: ["VAR:ADSL.TRT01P"]}
+    - {id: "QA:WINDOWING", section: "3.3", question: "Was windowing used in one or more analysis datasets?", answer: "Yes (ADADAS; see note on analysis visits).", about: ["VAR:ADADAS.AVISIT"]}
+    - {id: "QA:UNSCHEDULED", section: "3.3", question: "Were unscheduled visits used in any analyses?", answer: "Yes.", about: ["VAR:ADADAS.AVISIT"]}
+
+datasets:                                      # ADRG §5, planned at spec time
+  - {name: ADSL, class: SUBJECT LEVEL ANALYSIS DATASET, structure: "One record per subject", purposes: [baseline],
+     description: "Demographics, treatment groups, population flags and baseline characteristics used across safety and efficacy analyses; every DM subject is included. Key flags: SAFFL (received any study treatment) and ITTFL (randomized)."}
+  - {name: ADADAS, class: BASIC DATA STRUCTURE, structure: "One or more records per subject per parameter per analysis timepoint", purposes: [efficacy, primary-objective],
+     description: "ADAS-Cog item and total scores per subject, parameter and visit. Visits are mapped to analysis visits (AVISIT/AVISITN) by visit date and windows; LOCF records carry DTYPE = 'LOCF'."}
+  - {name: ADAE, class: OCCURRENCE DATA STRUCTURE, structure: "One record per subject per adverse event", purposes: [safety],
+     description: "One record per reported event, 1:1 with SDTM AE (linked by STUDYID, USUBJID, AESEQ). Dermatologic events of interest are flagged in CQ01NAM; AOCC01FL flags the first such event, which feeds ADTTE."}
+  - {name: ADLBC, class: BASIC DATA STRUCTURE, structure: "One or more records per subject per parameter per analysis timepoint", purposes: [safety],
+     description: "Blood chemistry parameters from SDTM LB: standardized values and change relative to normal range. An end-of-treatment visit (AVISITN = 99) is derived for some summaries."}
+  - {name: ADTTE, class: BASIC DATA STRUCTURE, structure: "One record per subject per parameter", purposes: [efficacy, safety],
+     description: "Time to first dermatologic adverse event (PARAMCD = 'TTDE'), an adverse event of special interest."}
+
+analyses:
+  - id: "AN:T14-2.01.DEMOG"
+    purpose: descriptive
+    dataset: "DS:ADSL"
+    analysisSet: {STUDYID: CDISCPILOT01, ITTFL: "Y"}
+    groupBy: TRT01P
+    method: {description: "Mean (SD), median, min-max for continuous; counts for categorical; by planned treatment"}
+    program: "PGM:tlf-demographic.r"
+  - id: "AN:T14-3.01.DESC"
+    estimand: "EST:ADASCOG.WK24"
+    purpose: descriptive
+    dataset: "DS:ADADAS"
+    analysisSet: {EFFFL: "Y", ITTFL: "Y"}
+    dataSubset: {PARAMCD: ACTOT, ANL01FL: "Y"}
+    groupBy: TRTP
+    parameters: ["PARAM:ADADAS.ACTOT"]
+    method: {description: "n, mean (SD), median (range) by planned treatment and visit"}
+    program: "PGM:tlf-primary.r"
+  - id: "AN:T14-3.01.DOSE"
+    estimand: "EST:ADASCOG.WK24"
+    purpose: primary-test
+    dataset: "DS:ADADAS"
+    analysisSet: {EFFFL: "Y", ITTFL: "Y"}
+    dataSubset: {PARAMCD: ACTOT, ANL01FL: "Y", AVISITN: 24}
+    groupBy: TRTP
+    parameters: ["PARAM:ADADAS.ACTOT"]
+    method:
+      description: "ANCOVA: CHG ~ TRTPN (dose, continuous) + SITEGR1 + BASE; type III test of TRTPN"
+      model: {response: CHG, numericTreatment: TRTPN, factors: [SITEGR1], covariates: [BASE]}
+      implementation: "FN:pilot5-helper-fcns.efficacy_models"
+    program: "PGM:tlf-primary.r"
+  - id: "AN:T14-3.01.PAIRWISE"
+    estimand: "EST:ADASCOG.WK24"
+    purpose: primary-estimate
+    dataset: "DS:ADADAS"
+    analysisSet: {EFFFL: "Y", ITTFL: "Y"}
+    dataSubset: {PARAMCD: ACTOT, ANL01FL: "Y", AVISITN: 24}
+    groupBy: TRTP
+    parameters: ["PARAM:ADADAS.ACTOT"]
+    method:
+      description: "ANCOVA: CHG ~ treatment (factor) + SITEGR1 + BASE; pairwise LS-mean differences, unadjusted, t-based 95% CI"
+      model: {response: CHG, treatment: TRTP, factors: [SITEGR1], covariates: [BASE]}
+      implementation: "FN:pilot5-helper-fcns.efficacy_models"
+    program: "PGM:tlf-primary.r"
+  - id: "AN:T14-3.02.DESC"
+    estimand: "EST:GLUC.WK20"
+    purpose: descriptive
+    dataset: "DS:ADLBC"
+    analysisSet: {ITTFL: "Y"}
+    dataSubset: {TRTPN: {in: [0, 81]}, PARAMCD: GLUC, AVISITN: {notnull: true}}
+    groupBy: TRTP
+    parameters: ["PARAM:ADLBC.GLUC"]
+    method: {description: "N, mean (SD) at baseline (of BASE) and Week 20 (of AVAL, CHG) for subjects with non-missing CHG and BASE"}
+    program: "PGM:tlf-efficacy.r"
+  - id: "AN:T14-3.02.ANCOVA"
+    estimand: "EST:GLUC.WK20"
+    purpose: safety-estimate
+    dataset: "DS:ADLBC"
+    analysisSet: {ITTFL: "Y"}
+    dataSubset: {TRTPN: {in: [0, 81]}, PARAMCD: GLUC, AVISITN: 20}
+    groupBy: TRTP
+    parameters: ["PARAM:ADLBC.GLUC"]
+    method:
+      description: "ANCOVA: CHG ~ BASE + treatment; LS means with t-based 95% CI; difference with normal-approximation 95% CI (estimate ± 1.96 SE) and t-test p-value; RMSE = sqrt(mean(residual^2))"
+      model: {response: CHG, treatment: TRTP, covariates: [BASE]}
+    program: "PGM:tlf-efficacy.r"
+  - id: "AN:F14-1.KM"
+    estimand: "EST:TTDE"
+    purpose: safety-estimate
+    dataset: "DS:ADTTE"
+    analysisSet: {SAFFL: "Y", STUDYID: CDISCPILOT01}
+    dataSubset: {PARAMCD: TTDE}
+    groupBy: TRT01A
+    parameters: ["PARAM:ADTTE.TTDE"]
+    method: {description: "Kaplan-Meier, Surv(AVAL, 1 - CNSR) by actual treatment; number at risk = subjects with AVAL >= t"}
+    program: "PGM:tlf-kmplot.r"
+
+# ---------------------------------------------------------------- shells
+# Cell compute = section.compute < column.compute < row.compute (later wins; `where` merges).
+# `text` (optional) is the row's label in the rendered output, used to pick up actual values;
+# `anchor` is the line to search after (default: the section label).
+displays:
+  - id: "DSP:T14-2.01"
+    displayId: "Table 14-2.01"
+    type: table
+    title: "Summary of Demographic and Baseline Characteristics"
+    population: Intent-to-Treat
+    analysis: "AN:T14-2.01.DEMOG"
+    renderedIn: {doc: "DOC:TLFREPORT", page: 2}
+    columns:
+      - {id: PBO, label: Placebo, compute: {group: Placebo}}
+      - {id: LOW, label: Xanomeline Low Dose, compute: {group: Xanomeline Low Dose}}
+      - {id: HIGH, label: Xanomeline High Dose, compute: {group: Xanomeline High Dose}}
+    sections:
+      - {id: POP, label: "", rows: [{id: BIGN, label: "N", text: "", compute: {op: bign}, format: "(N=xx)"}]}
+      - {id: AGE, label: Age, compute: {variable: AGE}, rows: &cont
+          [{id: MEAN_SD, label: "Mean (sd)", compute: {op: mean_sd}, format: "xx.xx (xx.xx)"},
+           {id: MEDIAN, label: Median, compute: {op: median}, format: "xx.xx"},
+           {id: MIN_MAX, label: "Min - Max", compute: {op: min_max}, format: "xx.xx - xx.xx"}]}
+      - {id: AGEGR1, label: Pooled Age Group 1, compute: {variable: AGEGR1, op: count}, rows:
+          [{id: LT65, label: "<65", compute: {value: "<65"}, format: "xx"},
+           {id: "65_80", label: "65-80", compute: {value: "65-80"}, format: "xx"},
+           {id: GT80, label: ">80", compute: {value: ">80"}, format: "xx"}]}
+      - {id: RACE, label: Race, compute: {variable: RACE, op: count}, rows:
+          [{id: WHITE, label: WHITE, compute: {value: WHITE}, format: "xx"},
+           {id: BLACK, label: BLACK OR AFRICAN AMERICAN, compute: {value: BLACK OR AFRICAN AMERICAN}, format: "xx"},
+           {id: AMIND, label: AMERICAN INDIAN OR ALASKA NATIVE, compute: {value: AMERICAN INDIAN OR ALASKA NATIVE}, format: "xx"}]}
+      - {id: HEIGHT, label: "Baseline Height (cm)", compute: {variable: HEIGHTBL}, rows: *cont}
+      - {id: WEIGHT, label: "Baseline Weight (kg)", compute: {variable: WEIGHTBL}, rows: *cont}
+      - {id: BMI, label: "Baseline BMI (kg/m^2)", compute: {variable: BMIBL}, rows: *cont}
+      - {id: MMSE, label: MMSE Total, compute: {variable: MMSETOT}, rows: *cont}
+
+  - id: "DSP:T14-3.01"
+    displayId: "Table 14-3.01"
+    type: table
+    title: "Primary Endpoint Analysis: ADAS Cog (11) - Change from Baseline to Week 24 - LOCF"
+    population: Efficacy
+    analysis: "AN:T14-3.01.DESC"
+    renderedIn: {doc: "DOC:TLFREPORT", page: 3}
+    footnotes:
+      - "[1] Based on ANCOVA with treatment and site group as factors and baseline value as a covariate."
+      - "[2] Test for a non-zero coefficient for treatment (dose) as a continuous variable."
+      - "[3] Pairwise comparison with treatment as a categorical variable; p-values without adjustment for multiple comparisons."
+    columns:
+      - {id: PBO, label: Placebo, compute: {group: Placebo}}
+      - {id: LOW, label: Xanomeline Low Dose, compute: {group: Xanomeline Low Dose}}
+      - {id: HIGH, label: Xanomeline High Dose, compute: {group: Xanomeline High Dose}}
+    sections:
+      - {id: POP, label: "", rows: [{id: BIGN, label: "N", text: "", compute: {op: bign, populationDataset: ADSL, groupVariable: TRT01P}, format: "(N=xx)"}]}
+      - {id: BASELINE, label: Baseline, compute: {variable: AVAL, where: {AVISITN: 0}}, rows: &adas
+          [{id: N, label: n, compute: {op: n}, format: "xx"},
+           {id: MEAN_SD, label: "Mean (SD)", compute: {op: mean_sd}, format: "xx.x (xx.xx)"},
+           {id: MEDIAN_RANGE, label: "Median (Range)", compute: {op: median_range}, format: "xx.x (xx;xx)"}]}
+      - {id: WEEK24, label: Week 24, compute: {variable: AVAL, where: {AVISITN: 24}}, rows: *adas}
+      - {id: CHG, label: Change from Baseline, compute: {variable: CHG, where: {AVISITN: 24}}, rows: *adas}
+      - id: INFERENCE
+        label: Inference
+        anchor: "^p-value\\(Dose Response\\)"
+        rows:
+          - {id: DOSE_P, label: "p-value (dose response)", text: "p-value\\(Dose Response\\).*?", columns: [HIGH], analysis: "AN:T14-3.01.DOSE", compute: {op: ancova_dose_p}, format: "x.xxx"}
+          - {id: VS_PBO_P, label: "p-value (Xan - Placebo)", text: "p-value\\(Xan - Placebo\\).*?", columns: [LOW, HIGH], analysis: "AN:T14-3.01.PAIRWISE", compute: {op: pairwise_p, contrast: ["{group}", Placebo]}, format: "x.xxx"}
+          - {id: VS_PBO_DIFF, label: "Diff of LS means (SE)", text: "Diff of LS Means \\(SE\\)", anchor: "p-value\\(Xan - Placebo\\)", columns: [LOW, HIGH], analysis: "AN:T14-3.01.PAIRWISE", compute: {op: pairwise_diff_se, contrast: ["{group}", Placebo]}, format: "x.x (x.xx)"}
+          - {id: VS_PBO_CI, label: "95% CI", text: "95% CI", anchor: "p-value\\(Xan - Placebo\\)", columns: [LOW, HIGH], analysis: "AN:T14-3.01.PAIRWISE", compute: {op: pairwise_ci, contrast: ["{group}", Placebo]}, format: "(x.x;x.x)"}
+          - {id: HI_LO_P, label: "p-value (Xan High - Xan Low)", text: "p-value\\(Xan High - Xan Low\\).*?", columns: [HIGH], analysis: "AN:T14-3.01.PAIRWISE", compute: {op: pairwise_p, contrast: [Xanomeline High Dose, Xanomeline Low Dose]}, format: "x.xxx"}
+          - {id: HI_LO_DIFF, label: "Diff of LS means (SE)", text: "Diff of LS Means \\(SE\\)", anchor: "p-value\\(Xan High - Xan Low\\)", columns: [HIGH], analysis: "AN:T14-3.01.PAIRWISE", compute: {op: pairwise_diff_se, contrast: [Xanomeline High Dose, Xanomeline Low Dose]}, format: "x.x (x.xx)"}
+          - {id: HI_LO_CI, label: "95% CI", text: "95% CI", anchor: "p-value\\(Xan High - Xan Low\\)", columns: [HIGH], analysis: "AN:T14-3.01.PAIRWISE", compute: {op: pairwise_ci, contrast: [Xanomeline High Dose, Xanomeline Low Dose]}, format: "(x.x;x.x)"}
+
+  - id: "DSP:T14-3.02"
+    displayId: "Table 14-3.02"
+    type: table
+    title: "ANCOVA of Change from Baseline at Week 20"
+    subtitle: "Glucose (mmol/L)"
+    population: Intent-to-Treat
+    analysis: "AN:T14-3.02.DESC"
+    renderedIn: {doc: "DOC:TLFREPORT", page: 4}
+    columns:
+      - {id: BL_N, label: "Baseline N", compute: {op: n, variable: BASE, where: {AVISITN: 0}}, format: "xx"}
+      - {id: BL_MEAN_SD, label: "Baseline Mean (SD)", compute: {op: mean_sd, variable: BASE, where: {AVISITN: 0}}, format: "x.x ( x.xx)"}
+      - {id: W20_N, label: "Week 20 N", compute: {op: n, variable: AVAL, where: {AVISITN: 20, CHG: {notnull: true}, BASE: {notnull: true}}}, format: "xx"}
+      - {id: W20_MEAN_SD, label: "Week 20 Mean (SD)", compute: {op: mean_sd, variable: AVAL, where: {AVISITN: 20, CHG: {notnull: true}, BASE: {notnull: true}}}, format: "x.x ( x.xx)"}
+      - {id: CHG_N, label: "Change N", compute: {op: n, variable: CHG, where: {AVISITN: 20, CHG: {notnull: true}, BASE: {notnull: true}}}, format: "xx"}
+      - {id: CHG_MEAN_SD, label: "Change Mean (SD)", compute: {op: mean_sd, variable: CHG, where: {AVISITN: 20, CHG: {notnull: true}, BASE: {notnull: true}}}, format: "x.x ( x.xx)"}
+      - {id: LSMEAN_CI, label: "LS Mean (95% CI)", analysis: "AN:T14-3.02.ANCOVA", compute: {op: lsmean_ci}, format: "x.xx (x.xx, x.xx)"}
+    sections:
+      - id: BYTRT
+        label: ""
+        rows:
+          - {id: HIGH, label: Xanomeline High Dose, compute: {group: Xanomeline High Dose}}
+          - {id: PBO, label: Placebo, compute: {group: Placebo}}
+      - id: PAIRWISE
+        label: Pairwise Comparison
+        anchor: "^Pairwise Comparison"
+        columns:
+          - {id: DIFF_CI, label: "Difference in LS Mean (95% CI)", analysis: "AN:T14-3.02.ANCOVA", compute: {op: diff_ci_normal}, format: "x.xx (x.xx, x.xx)"}
+          - {id: P, label: "p-Value", analysis: "AN:T14-3.02.ANCOVA", compute: {op: diff_p}, format: "x.xxx"}
+        rows:
+          - {id: HIGH_VS_PBO, label: "Xanomeline High Dose vs. Placebo", text: "Xanomeline High Dose vs\\. Placebo", compute: {contrast: [Xanomeline High Dose, Placebo]}}
+      - id: FIT
+        label: ""
+        columns: [{id: RMSE, label: "RMSE", analysis: "AN:T14-3.02.ANCOVA", compute: {op: rmse_n}, format: "x.xx"}]
+        rows:
+          - {id: RMSE, label: "Root Mean Squared Error of Change", text: "Root Mean Squared Error of Change =", compute: {}}
+
+  - id: "DSP:F14-1"
+    displayId: "Figure 14-1"
+    type: figure
+    title: "KM plot for Time to First Dermatologic Event: Safety population"
+    population: Safety
+    analysis: "AN:F14-1.KM"
+    renderedIn: {doc: "DOC:TLFREPORT", page: 5}
+    columns: [{id: T0, label: "0", compute: {time: 0}}, {id: T20, label: "20", compute: {time: 20}}, {id: T40, label: "40", compute: {time: 40}},
+              {id: T60, label: "60", compute: {time: 60}}, {id: T80, label: "80", compute: {time: 80}}, {id: T100, label: "100", compute: {time: 100}},
+              {id: T120, label: "120", compute: {time: 120}}, {id: T140, label: "140", compute: {time: 140}}, {id: T160, label: "160", compute: {time: 160}},
+              {id: T180, label: "180", compute: {time: 180}}]
+    sections:
+      - id: ATRISK
+        label: At Risk
+        compute: {op: at_risk, variable: AVAL}
+        rows:
+          - {id: PBO, label: Placebo, compute: {group: Placebo}, format: "xx"}
+          - {id: LOW, label: Xanomeline Low Dose, compute: {group: Xanomeline Low Dose}, format: "xx"}
+          - {id: HIGH, label: Xanomeline High Dose, compute: {group: Xanomeline High Dose}, format: "xx"}
+
+conformance:                                   # ADRG §6, transcribed; explanations were left blank
+  inputs:
+    - {question: "Were the analysis datasets evaluated against CDISC ADaM validation checks?", answer: "Yes: Pinnacle 21 Community 4.1.0. P21 does not yet support Dataset-JSON 1.1, so JSON files were (a) converted to XPT and validated, and (b) converted to Dataset-JSON 1.0 and validated."}
+    - {question: "Were the ADaM datasets evaluated in relation to define.xml?", answer: "Yes (ADRG §6.1), although no define.xml is in the package."}
+  issues:
+    - {ruleId: AD0018, message: "Variable label mismatch between dataset and ADaM standard", dataset: "DS:ADADAS", count: 34, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0041A, message: "*DT variable has missing SAS Date Format", dataset: "DS:ADADAS", count: 3, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0018, message: "Variable label mismatch between dataset and ADaM standard", dataset: "DS:ADAE", count: 40, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0041A, message: "*DT variable has missing SAS Date Format", dataset: "DS:ADAE", count: 4, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: SD0059, message: "Define.xml/dataset variable type mismatch", dataset: "DS:ADAE", count: 5, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0018, message: "Variable label mismatch between dataset and ADaM standard", dataset: "DS:ADLBC", count: 34, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0041A, message: "*DT variable has missing SAS Date Format", dataset: "DS:ADLBC", count: 3, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0018, message: "Variable label mismatch between dataset and ADaM standard", dataset: "DS:ADSL", count: 23, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0041A, message: "*DT variable has missing SAS Date Format", dataset: "DS:ADSL", count: 5, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0320, message: "Non-standard dataset label", dataset: "DS:ADSL", count: 1, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0018, message: "Variable label mismatch between dataset and ADaM standard", dataset: "DS:ADTTE", count: 24, explanation: null, context: "Dataset-JSON 1.0 route"}
+    - {ruleId: AD0041A, message: "*DT variable has missing SAS Date Format", dataset: "DS:ADTTE", count: 4, explanation: null, context: "Dataset-JSON 1.0 route"}
+
+notes:
+  - {id: "NOTE:PURPOSE", section: "1.1", about: ["DOC:SPEC"], status: final, title: "Purpose",
+     text: "This guide gives context for the analysis datasets and terminology beyond what the data definition provides, and summarizes ADaM conformance findings. Generated sections are built from the package itself; authored sections hold the study team's explanations."}
+  - {id: "NOTE:SOURCE-DATA", section: "1.3", about: ["DS:ADSL", "DS:ADADAS", "DS:ADAE", "DS:ADLBC", "DS:ADTTE"], status: final, title: "Source data",
+     text: "The ADaM datasets were derived from SDTM version 1.2 of the CDISC SDTM/ADaM Pilot Project data, publicly available in the PHUSE GitHub repository."}
+  - {id: "NOTE:ASTDT-IMPUTATION", section: "3.4", about: ["VAR:ADAE.ASTDT"], status: final, title: "Partial AE start dates",
+     text: "ASTDT is derived from AE.AESTDTC. A missing day is imputed as the 1st of the month; if month and day are both missing, no imputation is done."}
+  - {id: "NOTE:ADADAS-WINDOWS", section: "3.3", about: ["VAR:ADADAS.AVISIT", "VAR:ADADAS.AVISITN", "VAR:ADADAS.DTYPE"], status: final, title: "ADAS-Cog analysis visits",
+     text: "Records are assigned to analysis visits by study day: Baseline (ADY <= 1), Week 8 (2-84), Week 16 (85-140), Week 24 (> 140). Missing Week 8, 16 and 24 values are carried forward from the last observed visit (DTYPE = 'LOCF')."}
+  - {id: "NOTE:ACTOT-MISSING-ITEMS", section: "3.4", about: ["PARAM:ADADAS.ACTOT", "AN:T14-3.01.PAIRWISE"], status: draft, title: "ADAS-Cog total with missing items",
+     text: "ACTOT is taken from SDTM QS (QSTESTCD = 'ACTOT'). At visits where all 11 contributing items are present it equals their sum. At 21 visits (13 subjects) with missing items it carries the SAP section 14.2 adjustment, which is applied upstream of the submitted ADaM programs; 10 Week 24 records in the primary analysis depend on it."}
+  - {id: "NOTE:T14-3.02-CAPTION", about: ["DSP:T14-3.02"], status: draft, title: "Glucose table caption",
+     text: "The TLF report captions this table 'Primary Endpoint Analysis ... LOCF'. The analysis uses observed Week 20 values (ADLBC has no DTYPE), and glucose is a safety endpoint; the program title 'ANCOVA of Change from Baseline at Week 20' is the accurate one."}
+  - {id: "NOTE:T14-3.02-RMSE", about: ["CELL:T14-3.02.FIT.RMSE.RMSE"], status: draft, title: "RMSE definition",
+     text: "The value is sqrt(mean(residual^2)), i.e. divided by n, not the model residual standard error sqrt(SSE/df)."}
+  - {id: "NOTE:ADLBC-EOT", section: "5.2", about: ["DS:ADLBC"], status: final, title: "End-of-treatment visit",
+     text: "Some lab summaries present a derived end-of-treatment visit, AVISITN = 99."}
+
+runInstructions:                               # ADRG §9.5
+  order: ["PGM:pilot5-helper-fcns.r", "PGM:adsl.r", "PGM:adadas.r", "PGM:adae.r", "PGM:adlbc.r", "PGM:adtte.r",
+          "PGM:tlf-demographic.r", "PGM:tlf-efficacy.r", "PGM:tlf-kmplot.r", "PGM:tlf-primary.r"]
+  steps:
+    - "Restore the R environment from renv-lock.txt (renv::restore())."
+    - "Set paths for SDTM JSON, ADaM JSON and outputs (see the path list in the run script)."
+    - "Source pilot5-helper-fcns.r, then run the ADaM programs and the display programs in the order listed."
+  platform: Linux

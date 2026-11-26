@@ -1,0 +1,5584 @@
+{
+ "adrgCore": "0.2.0",
+ "study": "CDISCPILOT01",
+ "stage": "executed",
+ "generated": "2026-11-26T02:22:17+00:00",
+ "sources": {
+  "DOC:SPEC": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adam-pilot-5.xlsx",
+   "sha256": "aaee79438d93273a0376c880c29f1b5b83d707534befbd4ae7d8176b5f95d8a0",
+   "role": "metadata"
+  },
+  "DS:ADADAS": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adadas.json",
+   "sha256": "d3188c5a2982b9e81114f4935d6ce1bd23d8464245ba98be9ba89842b5ba93f6"
+  },
+  "DS:ADAE": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adae.json",
+   "sha256": "73bbde80f78869684a229ab24f3ce0114a51795a7b6631f9ff0cc4b305d54187"
+  },
+  "DS:ADLBC": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adlbc.json",
+   "sha256": "c5a3f6afea791b08190b041b165cc2557a01608136a12ca0baea965c2cf0f180"
+  },
+  "DS:ADSL": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adsl.json",
+   "sha256": "9dfba87a6dd401d2f7517ec2c65ce859772a26be374a72ff48b554a94556c38e"
+  },
+  "DS:ADTTE": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adtte.json",
+   "sha256": "2b16e8c559c05c22298e195e54b080c29dbc881e16c3994abf6e4e70275ad896"
+  },
+  "DS:AE": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/ae.json",
+   "sha256": "7ae43e20b79f891f790aee3d13edb9316a816cc2d03a9592110bd0e1b001c92d"
+  },
+  "DS:CM": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/cm.json",
+   "sha256": "6729cb1f8a63e267ade50e6e9df7a4d86063b86707907b3aa4e9e818975e0973"
+  },
+  "DS:DM": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/dm.json",
+   "sha256": "33b0efc72217f1f12f2e7f75a6668ea92c01230d262722ce03eec9d322cf4a30"
+  },
+  "DS:DS": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/ds.json",
+   "sha256": "506c6196cedf955cf70b40d9d29ec6cd4a8c6f304eec7cd9b0523094ee9254d2"
+  },
+  "DS:EX": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/ex.json",
+   "sha256": "4b5907e9eee4bb8eded57c4beb39288b26fbfe622a79972c73cac1ab8ee9754f"
+  },
+  "DS:LB": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/lb.json",
+   "sha256": "f337c6a862946af94c9cb42b96ac25e306db982b74f14d6282e064776e4d33f4"
+  },
+  "DS:MH": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/mh.json",
+   "sha256": "8370f1a1880f36ef8225c065eca325bcf22fae523a2d650ca532a6152adf8905"
+  },
+  "DS:QS": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/qs.json",
+   "sha256": "bd2c96bd6dc69991681a7f19c88d550462d86fca0bccfa89fe1e3ee7a12d094c"
+  },
+  "DS:RELREC": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/relrec.json",
+   "sha256": "affc3b82d4ea06b21eea36537fc20acfb2882469e9883b9f300d9dd146f7a05f"
+  },
+  "DS:SC": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/sc.json",
+   "sha256": "ad8e1a04cbf5d7e1eb94a73aefeb0edca466adf430e486397082e3a0a8a306f6"
+  },
+  "DS:SE": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/se.json",
+   "sha256": "29d130ab866527b2814f0c2daeea848d65f90919c6dcc796e49f4c9f5ebdd579"
+  },
+  "DS:SUPPAE": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/suppae.json",
+   "sha256": "e62f18b3522374df6764428a9472742f34ab60bb4d92d5b5903c2e57e65e1603"
+  },
+  "DS:SUPPDM": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/suppdm.json",
+   "sha256": "9c1f4d2a037df13b2851bf3af997b41edd4d5dfe0a08f8b70d16b5d93f6d28ea"
+  },
+  "DS:SUPPDS": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/suppds.json",
+   "sha256": "70f18c45b0cea712d3403a902558a8cf35de3c856b15fcadc1578952ab9de7cf"
+  },
+  "DS:SUPPLB": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/supplb.json",
+   "sha256": "8cf4ad942baa8ca1b961d5d223ac211caf59ae4223dc944d267873d0475359d8"
+  },
+  "DS:SV": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/sv.json",
+   "sha256": "b7a735c41f1969337d54021a0e914d0a3c8530b9505650b5fcc3abd7a3a52463"
+  },
+  "DS:TA": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/ta.json",
+   "sha256": "13cf4017eca677c9d5113230f4f830ec478cb33ed23278bd06b5d87f74ac849d"
+  },
+  "DS:TE": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/te.json",
+   "sha256": "9868bd7c56f633845e4cb21e1c17f544ecde6711749f7ac1d93d8005f3dc6e96"
+  },
+  "DS:TI": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/ti.json",
+   "sha256": "6606c0a2e16e22cf6cb3db222e337aac39657c9f63b1ca0acea22a59c6af36f8"
+  },
+  "DS:TV": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/tv.json",
+   "sha256": "b26ca8490f8810bf9ca4e698e82b99490d720503e0e828f34dedf9f397ddb618"
+  },
+  "DS:VS": {
+   "path": "m5/datasets/rconsortiumpilot5/tabulations/sdtm/vs.json",
+   "sha256": "711745df14f29d7a6ba01c68d6dbf146f8beee9a062e96104559d08f264a3808"
+  },
+  "PGM:adadas.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/adadas.r",
+   "sha256": "9c0db3aeac465a2310c2b037c930d054692b64ad334c6ab82a571aa996671b74"
+  },
+  "PGM:adae.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/adae.r",
+   "sha256": "a91865f523b1d1d4cf1bc082ca87991d9d6ba0a0066bffc678064277cfc2f4cd"
+  },
+  "PGM:adlbc.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/adlbc.r",
+   "sha256": "e3e9d7c60aca941b69e265941fca7e8b94bf925e90c80cfad2a07ccb156a6af2"
+  },
+  "PGM:adsl.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/adsl.r",
+   "sha256": "fa5ab27b557d70a4a19882d24ce80a48220e16014d727bf6bc2e33eee8605c36"
+  },
+  "PGM:adtte.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/adtte.r",
+   "sha256": "07155357660ee2eabaf0f83a82d90182a7a1ba0982eac3540e037ef18fdf08ae"
+  },
+  "PGM:pilot5-helper-fcns.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/pilot5-helper-fcns.r",
+   "sha256": "05da64ea8ac67f90dbb1d9cf4c010957a07ba6c21858051214fc6449b17520e7"
+  },
+  "PGM:tlf-demographic.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/tlf-demographic.r",
+   "sha256": "156e7f6c9e02c2d16b673ef5497a9d95591e63fbade0b0960fcecf5ba4ec98bc"
+  },
+  "PGM:tlf-efficacy.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/tlf-efficacy.r",
+   "sha256": "3a8eec7e2be7a1433103907a07471d5ea26ef6941c84672e6398f745cf964819"
+  },
+  "PGM:tlf-kmplot.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/tlf-kmplot.r",
+   "sha256": "c006f3f404af4f1a304f60ba7c3f0ddb3ab61128f2ed0ecc3cb9b99895481ebe"
+  },
+  "PGM:tlf-primary.r": {
+   "path": "m5/datasets/rconsortiumpilot5/analysis/adam/programs/tlf-primary.r",
+   "sha256": "2e75e6a4a3f6c717383ffaabb97a2a0911527289ab85fee49bf940b87a95d190"
+  }
+ },
+ "analyses": [
+  {
+   "id": "AN:T14-2.01.DEMOG",
+   "purpose": "descriptive",
+   "dataset": "DS:ADSL",
+   "population": {
+    "STUDYID": "CDISCPILOT01",
+    "ITTFL": "Y"
+   },
+   "by": "TRT01P",
+   "method": "Mean (SD), median, min-max for continuous; counts for categorical; by planned treatment",
+   "program": "PGM:tlf-demographic.r"
+  },
+  {
+   "id": "AN:T14-3.01.DESC",
+   "purpose": "descriptive",
+   "estimand": "EST:ADASCOG.WK24",
+   "dataset": "DS:ADADAS",
+   "population": {
+    "EFFFL": "Y",
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "PARAMCD": "ACTOT",
+    "ANL01FL": "Y"
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADADAS.ACTOT"
+   ],
+   "method": "n, mean (SD), median (range) by planned treatment and visit",
+   "program": "PGM:tlf-primary.r"
+  },
+  {
+   "id": "AN:T14-3.01.DOSE",
+   "purpose": "primary-test",
+   "estimand": "EST:ADASCOG.WK24",
+   "dataset": "DS:ADADAS",
+   "population": {
+    "EFFFL": "Y",
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "PARAMCD": "ACTOT",
+    "ANL01FL": "Y",
+    "AVISITN": 24
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADADAS.ACTOT"
+   ],
+   "method": "ANCOVA: CHG ~ TRTPN (dose, continuous) + SITEGR1 + BASE; type III test of TRTPN",
+   "model": {
+    "response": "CHG",
+    "numericTreatment": "TRTPN",
+    "factors": [
+     "SITEGR1"
+    ],
+    "covariates": [
+     "BASE"
+    ]
+   },
+   "implementation": "FN:pilot5-helper-fcns.efficacy_models",
+   "program": "PGM:tlf-primary.r"
+  },
+  {
+   "id": "AN:T14-3.01.PAIRWISE",
+   "purpose": "primary-estimate",
+   "estimand": "EST:ADASCOG.WK24",
+   "dataset": "DS:ADADAS",
+   "population": {
+    "EFFFL": "Y",
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "PARAMCD": "ACTOT",
+    "ANL01FL": "Y",
+    "AVISITN": 24
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADADAS.ACTOT"
+   ],
+   "method": "ANCOVA: CHG ~ treatment (factor) + SITEGR1 + BASE; pairwise LS-mean differences, unadjusted, t-based 95% CI",
+   "model": {
+    "response": "CHG",
+    "treatment": "TRTP",
+    "factors": [
+     "SITEGR1"
+    ],
+    "covariates": [
+     "BASE"
+    ]
+   },
+   "implementation": "FN:pilot5-helper-fcns.efficacy_models",
+   "program": "PGM:tlf-primary.r"
+  },
+  {
+   "id": "AN:T14-3.02.DESC",
+   "purpose": "descriptive",
+   "estimand": "EST:GLUC.WK20",
+   "dataset": "DS:ADLBC",
+   "population": {
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "TRTPN": {
+     "in": [
+      0,
+      81
+     ]
+    },
+    "PARAMCD": "GLUC",
+    "AVISITN": {
+     "notnull": true
+    }
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADLBC.GLUC"
+   ],
+   "method": "N, mean (SD) at baseline (of BASE) and Week 20 (of AVAL, CHG) for subjects with non-missing CHG and BASE",
+   "program": "PGM:tlf-efficacy.r"
+  },
+  {
+   "id": "AN:T14-3.02.ANCOVA",
+   "purpose": "safety-estimate",
+   "estimand": "EST:GLUC.WK20",
+   "dataset": "DS:ADLBC",
+   "population": {
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "TRTPN": {
+     "in": [
+      0,
+      81
+     ]
+    },
+    "PARAMCD": "GLUC",
+    "AVISITN": 20
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADLBC.GLUC"
+   ],
+   "method": "ANCOVA: CHG ~ BASE + treatment; LS means with t-based 95% CI; difference with normal-approximation 95% CI (estimate ± 1.96 SE) and t-test p-value; RMSE = sqrt(mean(residual^2))",
+   "model": {
+    "response": "CHG",
+    "treatment": "TRTP",
+    "covariates": [
+     "BASE"
+    ]
+   },
+   "program": "PGM:tlf-efficacy.r"
+  },
+  {
+   "id": "AN:F14-1.KM",
+   "purpose": "safety-estimate",
+   "estimand": "EST:TTDE",
+   "dataset": "DS:ADTTE",
+   "population": {
+    "SAFFL": "Y",
+    "STUDYID": "CDISCPILOT01"
+   },
+   "subset": {
+    "PARAMCD": "TTDE"
+   },
+   "by": "TRT01A",
+   "parameters": [
+    "PARAM:ADTTE.TTDE"
+   ],
+   "method": "Kaplan-Meier, Surv(AVAL, 1 - CNSR) by actual treatment; number at risk = subjects with AVAL >= t",
+   "program": "PGM:tlf-kmplot.r"
+  }
+ ],
+ "displays": [
+  {
+   "id": "DSP:T14-2.01",
+   "title": "Summary of Demographic and Baseline Characteristics",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 2
+   },
+   "columns": [
+    {
+     "id": "PBO",
+     "label": "Placebo"
+    },
+    {
+     "id": "LOW",
+     "label": "Xanomeline Low Dose"
+    },
+    {
+     "id": "HIGH",
+     "label": "Xanomeline High Dose"
+    }
+   ],
+   "sections": [
+    {
+     "id": "POP",
+     "label": "",
+     "rows": [
+      {
+       "id": "BIGN",
+       "label": "N",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.POP.BIGN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "group": "Placebo",
+          "op": "bign"
+         },
+         "format": "(N=xx)",
+         "value": "(N=86)",
+         "recomputed": "(N=86)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.POP.BIGN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "bign"
+         },
+         "format": "(N=xx)",
+         "value": "(N=84)",
+         "recomputed": "(N=84)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.POP.BIGN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "bign"
+         },
+         "format": "(N=xx)",
+         "value": "(N=84)",
+         "recomputed": "(N=84)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "AGE",
+     "label": "Age",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGE.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "75.21 (8.59)",
+         "recomputed": "75.21 (8.59)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "75.67 (8.29)",
+         "recomputed": "75.67 (8.29)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "74.38 (7.89)",
+         "recomputed": "74.38 (7.89)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGE.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "76.00",
+         "recomputed": "76.00",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "77.50",
+         "recomputed": "77.50",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "76.00",
+         "recomputed": "76.00",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGE.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "52.00 - 89.00",
+         "recomputed": "52.00 - 89.00",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "51.00 - 88.00",
+         "recomputed": "51.00 - 88.00",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "56.00 - 88.00",
+         "recomputed": "56.00 - 88.00",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "AGEGR1",
+     "label": "Pooled Age Group 1",
+     "rows": [
+      {
+       "id": "LT65",
+       "label": "<65",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGEGR1.LT65.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Placebo",
+          "value": "<65"
+         },
+         "format": "xx",
+         "value": "14",
+         "recomputed": "14",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.LT65.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "<65"
+         },
+         "format": "xx",
+         "value": "8",
+         "recomputed": "8",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.LT65.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "<65"
+         },
+         "format": "xx",
+         "value": "11",
+         "recomputed": "11",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "65_80",
+       "label": "65-80",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGEGR1.65_80.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Placebo",
+          "value": "65-80"
+         },
+         "format": "xx",
+         "value": "42",
+         "recomputed": "42",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.65_80.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "65-80"
+         },
+         "format": "xx",
+         "value": "47",
+         "recomputed": "47",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.65_80.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "65-80"
+         },
+         "format": "xx",
+         "value": "55",
+         "recomputed": "55",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "GT80",
+       "label": ">80",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGEGR1.GT80.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Placebo",
+          "value": ">80"
+         },
+         "format": "xx",
+         "value": "30",
+         "recomputed": "30",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.GT80.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": ">80"
+         },
+         "format": "xx",
+         "value": "29",
+         "recomputed": "29",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.GT80.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": ">80"
+         },
+         "format": "xx",
+         "value": "18",
+         "recomputed": "18",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "RACE",
+     "label": "Race",
+     "rows": [
+      {
+       "id": "WHITE",
+       "label": "WHITE",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.RACE.WHITE.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Placebo",
+          "value": "WHITE"
+         },
+         "format": "xx",
+         "value": "78",
+         "recomputed": "78",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.WHITE.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "WHITE"
+         },
+         "format": "xx",
+         "value": "78",
+         "recomputed": "78",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.WHITE.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "WHITE"
+         },
+         "format": "xx",
+         "value": "74",
+         "recomputed": "74",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "BLACK",
+       "label": "BLACK OR AFRICAN AMERICAN",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.RACE.BLACK.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Placebo",
+          "value": "BLACK OR AFRICAN AMERICAN"
+         },
+         "format": "xx",
+         "value": "8",
+         "recomputed": "8",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.BLACK.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "BLACK OR AFRICAN AMERICAN"
+         },
+         "format": "xx",
+         "value": "6",
+         "recomputed": "6",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.BLACK.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "BLACK OR AFRICAN AMERICAN"
+         },
+         "format": "xx",
+         "value": "9",
+         "recomputed": "9",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "AMIND",
+       "label": "AMERICAN INDIAN OR ALASKA NATIVE",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.RACE.AMIND.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Placebo",
+          "value": "AMERICAN INDIAN OR ALASKA NATIVE"
+         },
+         "format": "xx",
+         "value": "0",
+         "recomputed": "0",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.AMIND.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "AMERICAN INDIAN OR ALASKA NATIVE"
+         },
+         "format": "xx",
+         "value": "0",
+         "recomputed": "0",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.AMIND.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "AMERICAN INDIAN OR ALASKA NATIVE"
+         },
+         "format": "xx",
+         "value": "1",
+         "recomputed": "1",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "HEIGHT",
+     "label": "Baseline Height (cm)",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "162.57 (11.52)",
+         "recomputed": "162.57 (11.52)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "163.43 (10.42)",
+         "recomputed": "163.43 (10.42)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "165.82 (10.13)",
+         "recomputed": "165.82 (10.13)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "162.60",
+         "recomputed": "162.60",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "162.60",
+         "recomputed": "162.60",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "165.10",
+         "recomputed": "165.10",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "137.20 - 185.40",
+         "recomputed": "137.20 - 185.40",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "135.90 - 195.60",
+         "recomputed": "135.90 - 195.60",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "146.10 - 190.50",
+         "recomputed": "146.10 - 190.50",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "WEIGHT",
+     "label": "Baseline Weight (kg)",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "62.76 (12.77)",
+         "recomputed": "62.76 (12.77)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "67.28 (14.12)",
+         "recomputed": "67.28 (14.12)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "70.00 (14.65)",
+         "recomputed": "70.00 (14.65)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "60.55",
+         "recomputed": "60.55",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "64.90",
+         "recomputed": "64.90",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "69.20",
+         "recomputed": "69.20",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "34.00 - 86.20",
+         "recomputed": "34.00 - 86.20",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "45.40 - 106.10",
+         "recomputed": "45.40 - 106.10",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "41.70 - 108.00",
+         "recomputed": "41.70 - 108.00",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "BMI",
+     "label": "Baseline BMI (kg/m^2)",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.BMI.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "23.64 (3.67)",
+         "recomputed": "23.64 (3.67)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "25.06 (4.27)",
+         "recomputed": "25.06 (4.27)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "25.35 (4.16)",
+         "recomputed": "25.35 (4.16)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.BMI.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "23.40",
+         "recomputed": "23.40",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "24.30",
+         "recomputed": "24.30",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "24.80",
+         "recomputed": "24.80",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.BMI.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "15.10 - 33.30",
+         "recomputed": "15.10 - 33.30",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "17.70 - 40.10",
+         "recomputed": "17.70 - 40.10",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "13.70 - 34.50",
+         "recomputed": "13.70 - 34.50",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "MMSE",
+     "label": "MMSE Total",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.MMSE.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "18.05 (4.27)",
+         "recomputed": "18.05 (4.27)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "17.87 (4.22)",
+         "recomputed": "17.87 (4.22)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "value": "18.51 (4.16)",
+         "recomputed": "18.51 (4.16)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.MMSE.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "19.50",
+         "recomputed": "19.50",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "18.00",
+         "recomputed": "18.00",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "value": "20.00",
+         "recomputed": "20.00",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.MMSE.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "10.00 - 23.00",
+         "recomputed": "10.00 - 23.00",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "10.00 - 24.00",
+         "recomputed": "10.00 - 24.00",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "value": "10.00 - 24.00",
+         "recomputed": "10.00 - 24.00",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "DSP:T14-3.01",
+   "title": "Primary Endpoint Analysis: ADAS Cog (11) - Change from Baseline to Week 24 - LOCF",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 3
+   },
+   "columns": [
+    {
+     "id": "PBO",
+     "label": "Placebo"
+    },
+    {
+     "id": "LOW",
+     "label": "Xanomeline Low Dose"
+    },
+    {
+     "id": "HIGH",
+     "label": "Xanomeline High Dose"
+    }
+   ],
+   "sections": [
+    {
+     "id": "POP",
+     "label": "",
+     "rows": [
+      {
+       "id": "BIGN",
+       "label": "N",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.POP.BIGN.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "group": "Placebo",
+          "op": "bign",
+          "populationDataset": "ADSL",
+          "groupVariable": "TRT01P"
+         },
+         "format": "(N=xx)",
+         "value": "(N=79)",
+         "recomputed": "(N=79)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.POP.BIGN.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "bign",
+          "populationDataset": "ADSL",
+          "groupVariable": "TRT01P"
+         },
+         "format": "(N=xx)",
+         "value": "(N=81)",
+         "recomputed": "(N=81)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.POP.BIGN.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "bign",
+          "populationDataset": "ADSL",
+          "groupVariable": "TRT01P"
+         },
+         "format": "(N=xx)",
+         "value": "(N=74)",
+         "recomputed": "(N=74)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "BASELINE",
+     "label": "Baseline",
+     "rows": [
+      {
+       "id": "N",
+       "label": "n",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.BASELINE.N.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "79",
+         "recomputed": "79",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.N.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "81",
+         "recomputed": "81",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.N.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "74",
+         "recomputed": "74",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (SD)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEAN_SD.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "24.1 (12.19)",
+         "recomputed": "24.1 (12.19)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEAN_SD.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "24.4 (12.92)",
+         "recomputed": "24.4 (12.92)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEAN_SD.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "21.3 (11.74)",
+         "recomputed": "21.3 (11.74)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN_RANGE",
+       "label": "Median (Range)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEDIAN_RANGE.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "21.0 ( 5;61)",
+         "recomputed": "21.0 (5;61)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEDIAN_RANGE.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "21.0 ( 5;57)",
+         "recomputed": "21.0 (5;57)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEDIAN_RANGE.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "18.0 ( 3;57)",
+         "recomputed": "18.0 (3;57)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "WEEK24",
+     "label": "Week 24",
+     "rows": [
+      {
+       "id": "N",
+       "label": "n",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.WEEK24.N.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "79",
+         "recomputed": "79",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.N.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "81",
+         "recomputed": "81",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.N.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "74",
+         "recomputed": "74",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (SD)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEAN_SD.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "26.7 (13.79)",
+         "recomputed": "26.7 (13.79)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEAN_SD.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "26.4 (13.18)",
+         "recomputed": "26.4 (13.18)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEAN_SD.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "22.8 (12.48)",
+         "recomputed": "22.8 (12.48)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN_RANGE",
+       "label": "Median (Range)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEDIAN_RANGE.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "24.0 ( 5;62)",
+         "recomputed": "24.0 (5;62)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEDIAN_RANGE.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "25.0 ( 6;62)",
+         "recomputed": "25.0 (6;62)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEDIAN_RANGE.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "20.0 ( 3;62)",
+         "recomputed": "20.0 (3;62)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "CHG",
+     "label": "Change from Baseline",
+     "rows": [
+      {
+       "id": "N",
+       "label": "n",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.CHG.N.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "79",
+         "recomputed": "79",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.N.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "81",
+         "recomputed": "81",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.N.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "value": "74",
+         "recomputed": "74",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (SD)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.CHG.MEAN_SD.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "2.5 ( 5.80)",
+         "recomputed": "2.5 (5.80)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEAN_SD.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "2.0 ( 5.55)",
+         "recomputed": "2.0 (5.55)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEAN_SD.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "value": "1.5 ( 4.26)",
+         "recomputed": "1.5 (4.26)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN_RANGE",
+       "label": "Median (Range)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.CHG.MEDIAN_RANGE.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "2.0 (-11;16)",
+         "recomputed": "2.0 (-11;16)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEDIAN_RANGE.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "2.0 (-11;17)",
+         "recomputed": "2.0 (-11;17)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEDIAN_RANGE.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "value": "1.0 ( -7;13)",
+         "recomputed": "1.0 (-7;13)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "INFERENCE",
+     "label": "Inference",
+     "rows": [
+      {
+       "id": "DOSE_P",
+       "label": "p-value (dose response)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.DOSE_P.HIGH",
+         "analysis": "AN:T14-3.01.DOSE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "ancova_dose_p"
+         },
+         "format": "x.xxx",
+         "value": "0.245",
+         "recomputed": "0.245",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "VS_PBO_P",
+       "label": "p-value (Xan - Placebo)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_P.LOW",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "pairwise_p",
+          "contrast": [
+           "Xanomeline Low Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xxx",
+         "value": "0.569",
+         "recomputed": "0.569",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_P.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_p",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xxx",
+         "value": "0.233",
+         "recomputed": "0.233",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "VS_PBO_DIFF",
+       "label": "Diff of LS means (SE)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_DIFF.LOW",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "pairwise_diff_se",
+          "contrast": [
+           "Xanomeline Low Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.x (x.xx)",
+         "value": "-0.5 (0.82)",
+         "recomputed": "-0.5 (0.82)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_DIFF.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_diff_se",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.x (x.xx)",
+         "value": "-1.0 (0.84)",
+         "recomputed": "-1.0 (0.84)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "VS_PBO_CI",
+       "label": "95% CI",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_CI.LOW",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "pairwise_ci",
+          "contrast": [
+           "Xanomeline Low Dose",
+           "Placebo"
+          ]
+         },
+         "format": "(x.x;x.x)",
+         "value": "(-2.1;1.1)",
+         "recomputed": "(-2.1;1.1)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_CI.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_ci",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "(x.x;x.x)",
+         "value": "(-2.7;0.7)",
+         "recomputed": "(-2.7;0.7)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "HI_LO_P",
+       "label": "p-value (Xan High - Xan Low)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.HI_LO_P.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_p",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Xanomeline Low Dose"
+          ]
+         },
+         "format": "x.xxx",
+         "value": "0.520",
+         "recomputed": "0.520",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "HI_LO_DIFF",
+       "label": "Diff of LS means (SE)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.HI_LO_DIFF.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_diff_se",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Xanomeline Low Dose"
+          ]
+         },
+         "format": "x.x (x.xx)",
+         "value": "-0.5 (0.84)",
+         "recomputed": "-0.5 (0.84)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "HI_LO_CI",
+       "label": "95% CI",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.HI_LO_CI.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_ci",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Xanomeline Low Dose"
+          ]
+         },
+         "format": "(x.x;x.x)",
+         "value": "(-2.2;1.1)",
+         "recomputed": "(-2.2;1.1)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "DSP:T14-3.02",
+   "title": "ANCOVA of Change from Baseline at Week 20",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 4
+   },
+   "columns": [
+    {
+     "id": "BL_N",
+     "label": "Baseline N"
+    },
+    {
+     "id": "BL_MEAN_SD",
+     "label": "Baseline Mean (SD)"
+    },
+    {
+     "id": "W20_N",
+     "label": "Week 20 N"
+    },
+    {
+     "id": "W20_MEAN_SD",
+     "label": "Week 20 Mean (SD)"
+    },
+    {
+     "id": "CHG_N",
+     "label": "Change N"
+    },
+    {
+     "id": "CHG_MEAN_SD",
+     "label": "Change Mean (SD)"
+    },
+    {
+     "id": "LSMEAN_CI",
+     "label": "LS Mean (95% CI)"
+    }
+   ],
+   "sections": [
+    {
+     "id": "BYTRT",
+     "label": "",
+     "rows": [
+      {
+       "id": "HIGH",
+       "label": "Xanomeline High Dose",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.BL_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "84",
+         "recomputed": "84",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.BL_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.x ( x.xx)",
+         "value": "5.4 ( 1.34)",
+         "recomputed": "5.4 ( 1.34)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.W20_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "31",
+         "recomputed": "31",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.W20_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.x ( x.xx)",
+         "value": "5.8 ( 1.61)",
+         "recomputed": "5.8 ( 1.61)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.CHG_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "31",
+         "recomputed": "31",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.CHG_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.x ( x.xx)",
+         "value": "0.2 ( 1.47)",
+         "recomputed": "0.2 ( 1.47)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.LSMEAN_CI",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "lsmean_ci",
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.xx (x.xx, x.xx)",
+         "value": "0.16 (-0.31, 0.63)",
+         "recomputed": "0.16 (-0.31, 0.63)",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "PBO",
+       "label": "Placebo",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.BL_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "86",
+         "recomputed": "86",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.BL_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo"
+         },
+         "format": "x.x ( x.xx)",
+         "value": "5.6 ( 2.14)",
+         "recomputed": "5.6 ( 2.14)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.W20_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "65",
+         "recomputed": "65",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.W20_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "x.x ( x.xx)",
+         "value": "5.8 ( 1.50)",
+         "recomputed": "5.8 ( 1.50)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.CHG_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "65",
+         "recomputed": "65",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.CHG_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "x.x ( x.xx)",
+         "value": "0.1 ( 2.08)",
+         "recomputed": "0.1 ( 2.08)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.LSMEAN_CI",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "lsmean_ci",
+          "group": "Placebo"
+         },
+         "format": "x.xx (x.xx, x.xx)",
+         "value": "0.09 (-0.23, 0.42)",
+         "recomputed": "0.09 (-0.23, 0.42)",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "PAIRWISE",
+     "label": "Pairwise Comparison",
+     "rows": [
+      {
+       "id": "HIGH_VS_PBO",
+       "label": "Xanomeline High Dose vs. Placebo",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.PAIRWISE.HIGH_VS_PBO.DIFF_CI",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "diff_ci_normal",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xx (x.xx, x.xx)",
+         "value": "0.07 (-0.50, 0.63)",
+         "recomputed": "0.07 (-0.50, 0.63)",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:T14-3.02.PAIRWISE.HIGH_VS_PBO.P",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "diff_p",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xxx",
+         "value": "0.822",
+         "recomputed": "0.822",
+         "status": "verified"
+        }
+       ]
+      }
+     ],
+     "columns": [
+      {
+       "id": "DIFF_CI",
+       "label": "Difference in LS Mean (95% CI)"
+      },
+      {
+       "id": "P",
+       "label": "p-Value"
+      }
+     ]
+    },
+    {
+     "id": "FIT",
+     "label": "",
+     "rows": [
+      {
+       "id": "RMSE",
+       "label": "Root Mean Squared Error of Change",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.FIT.RMSE.RMSE",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "rmse_n"
+         },
+         "format": "x.xx",
+         "value": "1.30",
+         "recomputed": "1.30",
+         "status": "verified"
+        }
+       ]
+      }
+     ],
+     "columns": [
+      {
+       "id": "RMSE",
+       "label": "RMSE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "DSP:F14-1",
+   "title": "KM plot for Time to First Dermatologic Event: Safety population",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 5
+   },
+   "columns": [
+    {
+     "id": "T0",
+     "label": "0"
+    },
+    {
+     "id": "T20",
+     "label": "20"
+    },
+    {
+     "id": "T40",
+     "label": "40"
+    },
+    {
+     "id": "T60",
+     "label": "60"
+    },
+    {
+     "id": "T80",
+     "label": "80"
+    },
+    {
+     "id": "T100",
+     "label": "100"
+    },
+    {
+     "id": "T120",
+     "label": "120"
+    },
+    {
+     "id": "T140",
+     "label": "140"
+    },
+    {
+     "id": "T160",
+     "label": "160"
+    },
+    {
+     "id": "T180",
+     "label": "180"
+    }
+   ],
+   "sections": [
+    {
+     "id": "ATRISK",
+     "label": "At Risk",
+     "rows": [
+      {
+       "id": "PBO",
+       "label": "Placebo",
+       "cells": [
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T0",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 0,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "86",
+         "recomputed": "86",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T20",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 20,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "75",
+         "recomputed": "75",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T40",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 40,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "65",
+         "recomputed": "65",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T60",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 60,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "59",
+         "recomputed": "59",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T80",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 80,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "50",
+         "recomputed": "50",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T100",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 100,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "47",
+         "recomputed": "47",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T120",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 120,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "45",
+         "recomputed": "45",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T140",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 140,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "42",
+         "recomputed": "42",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T160",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 160,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "40",
+         "recomputed": "40",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T180",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 180,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "value": "35",
+         "recomputed": "35",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "LOW",
+       "label": "Xanomeline Low Dose",
+       "cells": [
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T0",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 0,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "84",
+         "recomputed": "84",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T20",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 20,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "58",
+         "recomputed": "58",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T40",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 40,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "31",
+         "recomputed": "31",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T60",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 60,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "20",
+         "recomputed": "20",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T80",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 80,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "14",
+         "recomputed": "14",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T100",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 100,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "12",
+         "recomputed": "12",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T120",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 120,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "8",
+         "recomputed": "8",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T140",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 140,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "6",
+         "recomputed": "6",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T160",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 160,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "6",
+         "recomputed": "6",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T180",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 180,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "value": "5",
+         "recomputed": "5",
+         "status": "verified"
+        }
+       ]
+      },
+      {
+       "id": "HIGH",
+       "label": "Xanomeline High Dose",
+       "cells": [
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T0",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 0,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "84",
+         "recomputed": "84",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T20",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 20,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "48",
+         "recomputed": "48",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T40",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 40,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "31",
+         "recomputed": "31",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T60",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 60,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "14",
+         "recomputed": "14",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T80",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 80,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "7",
+         "recomputed": "7",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T100",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 100,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "4",
+         "recomputed": "4",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T120",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 120,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "4",
+         "recomputed": "4",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T140",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 140,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "4",
+         "recomputed": "4",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T160",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 160,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "4",
+         "recomputed": "4",
+         "status": "verified"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T180",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 180,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "value": "3",
+         "recomputed": "3",
+         "status": "verified"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "variables": [
+  {
+   "id": "VAR:ADADAS.ANL01FL",
+   "derivation": "If multiple visits fall into the same visit window, then the one closest to the target date is chosen for analysis. These are flagged with ANL01FL=\"Y\".",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 150,
+     "role": "derives",
+     "excerpt": "mutate(ANL01FL = if_else(is.na(DTYPE), ANL01FL, \"Y\")) %>%"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 147,
+     "role": "selects",
+     "excerpt": "filter = !is.na(ANL01FL)"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 118,
+     "role": "uses",
+     "excerpt": "new_var = ANL01FL,"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 26,
+     "role": "selects",
+     "excerpt": "ANL01FL == \"Y\""
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.AVAL",
+   "derivation": "QS.QSSTRESN where QSTESTCD=PARAMCD",
+   "predecessors": [
+    "VAR:QS.QSSTRESN"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 85,
+     "role": "derives",
+     "excerpt": "AVAL = QSSTRESN,"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 167,
+     "role": "uses",
+     "excerpt": "source_var = AVAL,"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 42,
+     "role": "uses",
+     "excerpt": "group_desc(AVAL, where = AVISITN == 0, by = \"Baseline\")"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 45,
+     "role": "uses",
+     "excerpt": "group_desc(AVAL, where = AVISITN == 24, by = \"Week 24\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.AVISIT",
+   "derivation": "Derived based on windowing algorithm described in SAP, Section 8.2",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 78,
+     "role": "derives",
+     "excerpt": "AVISIT = case_when("
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 121,
+     "role": "selects",
+     "excerpt": "filter = !is.na(AVISIT)"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 88,
+     "role": "uses",
+     "excerpt": "create_var_from_codelist(adadas_spec, AVISIT, AVISITN) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.AVISITN",
+   "derivation": "Numeric code for AVISIT",
+   "predecessors": [
+    "VAR:ADADAS.AVISIT"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 88,
+     "role": "uses",
+     "excerpt": "create_var_from_codelist(adadas_spec, AVISIT, AVISITN) %>%"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 127,
+     "role": "uses",
+     "excerpt": "~PARAMCD, ~AVISITN, ~AVISIT,"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 144,
+     "role": "uses",
+     "excerpt": "order = exprs(AVISITN, AVISIT),"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 42,
+     "role": "selects",
+     "excerpt": "group_desc(AVAL, where = AVISITN == 0, by = \"Baseline\")"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 45,
+     "role": "selects",
+     "excerpt": "group_desc(AVAL, where = AVISITN == 24, by = \"Week 24\")"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 70,
+     "role": "selects",
+     "excerpt": "filter(AVISITN == wk)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.BASE",
+   "derivation": "QS.QSSTRESN when QS.QSBLFL=Y (QS.VISITNUM=3)",
+   "predecessors": [
+    "VAR:QS.QSSTRESN",
+    "VAR:QS.QSBLFL",
+    "VAR:QS.VISITNUM"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 168,
+     "role": "uses",
+     "excerpt": "new_var = BASE"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 87,
+     "role": "uses",
+     "excerpt": "model1 <- lm(CHG ~ TRTPN + SITEGR1 + BASE, data = data)"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 88,
+     "role": "uses",
+     "excerpt": "model2 <- lm(CHG ~ TRTPCD_F + SITEGR1 + BASE, data = data)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.CHG",
+   "derivation": "AVAL - BASE",
+   "predecessors": [
+    "VAR:ADADAS.AVAL",
+    "VAR:ADADAS.BASE"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 48,
+     "role": "uses",
+     "excerpt": "group_desc(CHG, where = AVISITN == 24, by = \"Change from Baseline\")"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 77,
+     "role": "uses",
+     "excerpt": "model_portion <- efficacy_models(adas, \"CHG\", 24)"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 86,
+     "role": "uses",
+     "excerpt": "if (var == \"CHG\") {"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 87,
+     "role": "uses",
+     "excerpt": "model1 <- lm(CHG ~ TRTPN + SITEGR1 + BASE, data = data)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.DTYPE",
+   "derivation": "Set to \"LOCF\" if a record is imputated when PARAMCD=\"ACTOT\"; otherwise, set to missing",
+   "predecessors": [
+    "VAR:ADADAS.PARAMCD"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 150,
+     "role": "selects",
+     "excerpt": "mutate(ANL01FL = if_else(is.na(DTYPE), ANL01FL, \"Y\")) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.EFFFL",
+   "predecessors": [
+    "VAR:ADSL.EFFFL"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 142,
+     "role": "uses",
+     "excerpt": "ITTFL, EFFFL, COMP24FL, PARAMCD"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 23,
+     "role": "selects",
+     "excerpt": "EFFFL == \"Y\","
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 34,
+     "role": "selects",
+     "excerpt": "set_pop_where(EFFFL == \"Y\" & ITTFL == \"Y\") %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.ITTFL",
+   "predecessors": [
+    "VAR:ADSL.ITTFL"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 142,
+     "role": "uses",
+     "excerpt": "ITTFL, EFFFL, COMP24FL, PARAMCD"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 24,
+     "role": "selects",
+     "excerpt": "ITTFL == \"Y\","
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 34,
+     "role": "selects",
+     "excerpt": "set_pop_where(EFFFL == \"Y\" & ITTFL == \"Y\") %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.PARAMCD",
+   "predecessors": [
+    "VAR:QS.QSTESTCD"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 64,
+     "role": "selects",
+     "excerpt": "PARAMCD %in%"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 116,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(USUBJID, PARAMCD, AVISIT),"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 127,
+     "role": "uses",
+     "excerpt": "~PARAMCD, ~AVISITN, ~AVISIT,"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 25,
+     "role": "selects",
+     "excerpt": "PARAMCD == \"ACTOT\","
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.SITEGR1",
+   "predecessors": [
+    "VAR:ADSL.SITEGR1"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 140,
+     "role": "uses",
+     "excerpt": "STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 87,
+     "role": "uses",
+     "excerpt": "model1 <- lm(CHG ~ TRTPN + SITEGR1 + BASE, data = data)"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 88,
+     "role": "uses",
+     "excerpt": "model2 <- lm(CHG ~ TRTPCD_F + SITEGR1 + BASE, data = data)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.TRTP",
+   "predecessors": [
+    "VAR:DM.ARM"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 141,
+     "role": "uses",
+     "excerpt": "TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 31,
+     "role": "uses",
+     "excerpt": "t <- tplyr_table(adas, TRTP) %>%"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 52,
+     "role": "uses",
+     "excerpt": "distinct(TRTP, TRTPN) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.TRTPN",
+   "predecessors": [
+    "VAR:ADSL.TRT01PN"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 141,
+     "role": "uses",
+     "excerpt": "TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 52,
+     "role": "uses",
+     "excerpt": "distinct(TRTP, TRTPN) %>%"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 53,
+     "role": "uses",
+     "excerpt": "arrange(TRTPN) %>%"
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 75,
+     "role": "selects",
+     "excerpt": "TRTPN == 0 ~ \"Pbo\","
+    },
+    {
+     "program": "PGM:pilot5-helper-fcns.r",
+     "line": 76,
+     "role": "selects",
+     "excerpt": "TRTPN == 54 ~ \"Xan_Lo\","
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADADAS.USUBJID",
+   "predecessors": [
+    "VAR:ADSL.USUBJID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 61,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID, QSSEQ)"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 116,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(USUBJID, PARAMCD, AVISIT),"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 140,
+     "role": "uses",
+     "excerpt": "STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 35,
+     "role": "uses",
+     "excerpt": "set_distinct_by(USUBJID) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADAE.ASTDT",
+   "derivation": "AE.AESTDTC, converted to a numeric SAS date. Some events with partial dates are imputed in a conservative manner. If the day component is missing, a value of '01' is used. If both the month and day are missing no imputation is performed as these dates clearly indicate a start prior to the beginning of treatment. There are no events with completely missing start dates.",
+   "predecessors": [
+    "VAR:AE.AESTDTC"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adae.r",
+     "line": 117,
+     "role": "selects",
+     "excerpt": "filter = !is.na(ASTDT)"
+    },
+    {
+     "program": "PGM:adae.r",
+     "line": 100,
+     "role": "uses",
+     "excerpt": "source_vars = exprs(TRTSDT, ASTDT, AENDT)"
+    },
+    {
+     "program": "PGM:adae.r",
+     "line": 105,
+     "role": "uses",
+     "excerpt": "start_date = ASTDT,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADAE.TRTEMFL",
+   "derivation": "If ASTDT >= TRTSDT > . then TRTEMFL='Y'. Otherwise TRTEMFL='N'",
+   "predecessors": [
+    "VAR:ADAE.ASTDT",
+    "VAR:ADAE.TRTSDT"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adae.r",
+     "line": 127,
+     "role": "selects",
+     "excerpt": "), filter = TRTEMFL == \"Y\""
+    },
+    {
+     "program": "PGM:adae.r",
+     "line": 137,
+     "role": "selects",
+     "excerpt": "), filter = TRTEMFL == \"Y\""
+    },
+    {
+     "program": "PGM:adae.r",
+     "line": 147,
+     "role": "selects",
+     "excerpt": "), filter = TRTEMFL == \"Y\""
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADAE.TRTSDT",
+   "derivation": "ADSL.TRTSDT",
+   "predecessors": [
+    "VAR:ADSL.TRTSDT"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adae.r",
+     "line": 53,
+     "role": "uses",
+     "excerpt": "TRTSDT,"
+    },
+    {
+     "program": "PGM:adae.r",
+     "line": 66,
+     "role": "uses",
+     "excerpt": "TRTSDT,"
+    },
+    {
+     "program": "PGM:adae.r",
+     "line": 99,
+     "role": "uses",
+     "excerpt": "reference_date = TRTSDT,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.AVAL",
+   "predecessors": [
+    "VAR:LB.LBSTRESN"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 106,
+     "role": "derives",
+     "excerpt": "AVAL = LBSTRESN,"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 107,
+     "role": "selects",
+     "excerpt": "AVALC = ifelse(!is.na(AVAL), LBSTRESC, NA)"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 206,
+     "role": "selects",
+     "excerpt": "ANRIND = ifelse(is.na(AVAL), \"N\", ANRIND)"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 60,
+     "role": "uses",
+     "excerpt": "mean = mean(AVAL),"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 61,
+     "role": "uses",
+     "excerpt": "sd = sd(AVAL)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.AVISITN",
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 140,
+     "role": "derives",
+     "excerpt": "AVISITN = 99,"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 156,
+     "role": "derives",
+     "excerpt": "AVISITN = case_when("
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 164,
+     "role": "derives",
+     "excerpt": "AVISITN = ifelse(AVISITN == -1, \"\", AVISITN)"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 35,
+     "role": "selects",
+     "excerpt": "subset(TRTPN %in% c(0, 81) & PARAMCD == \"GLUC\" & !is.na(AVISITN)) %>%"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 40,
+     "role": "selects",
+     "excerpt": "filter(AVISITN == 20) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.BASE",
+   "derivation": "LB.LBSTNRHI",
+   "predecessors": [
+    "VAR:LB.LBSTNRHI"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 129,
+     "role": "uses",
+     "excerpt": "new_var = BASE"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 200,
+     "role": "uses",
+     "excerpt": "BR2A1LO = BASE / A1LO,"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 201,
+     "role": "uses",
+     "excerpt": "BR2A1HI = BASE / A1HI,"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 54,
+     "role": "selects",
+     "excerpt": "filter(AVISITN == 20, !is.na(CHG), !is.na(BASE)) %>%"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 41,
+     "role": "uses",
+     "excerpt": "lm(CHG ~ BASE + TRTPN, data = .)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.CHG",
+   "derivation": "AVAL - BASE",
+   "predecessors": [
+    "VAR:ADLBC.AVAL",
+    "VAR:ADLBC.BASE"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 132,
+     "role": "derives",
+     "excerpt": "mutate(CHG = ifelse(VISITNUM == 1, NA, CHG))"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 54,
+     "role": "selects",
+     "excerpt": "filter(AVISITN == 20, !is.na(CHG), !is.na(BASE)) %>%"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 41,
+     "role": "uses",
+     "excerpt": "lm(CHG ~ BASE + TRTPN, data = .)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.PARAMCD",
+   "predecessors": [
+    "VAR:LB.TESTCD"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 114,
+     "role": "derives",
+     "excerpt": "PARAMCD = LBTESTCD,"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 127,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID, PARAMCD),"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 169,
+     "role": "uses",
+     "excerpt": "arrange(STUDYID, USUBJID, PARAMCD, desc(AVISITN)) %>%"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 35,
+     "role": "selects",
+     "excerpt": "subset(TRTPN %in% c(0, 81) & PARAMCD == \"GLUC\" & !is.na(AVISITN)) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.STUDYID",
+   "predecessors": [
+    "VAR:ADSL.STUDYID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 51,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, IDVAR, IDVARVAL, QNAM, QLABEL, QVAL) %>%"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 53,
+     "role": "uses",
+     "excerpt": "id_cols = c(STUDYID, USUBJID, IDVARVAL),"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 61,
+     "role": "uses",
+     "excerpt": "left_join(sup, by = c(\"STUDYID\", \"USUBJID\", \"LBSEQ\")) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.TRTP",
+   "derivation": "ADSL.TRT01P",
+   "predecessors": [
+    "VAR:ADSL.TRT01P"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 233,
+     "role": "derives",
+     "excerpt": "TRTP = TRT01P,"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 46,
+     "role": "uses",
+     "excerpt": "group_by(TRTPN, TRTP) %>%"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 55,
+     "role": "uses",
+     "excerpt": "group_by(TRTPN, TRTP) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.TRTPN",
+   "derivation": "ADSL.TRT01PN",
+   "predecessors": [
+    "VAR:ADSL.TRT01PN"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 234,
+     "role": "derives",
+     "excerpt": "TRTPN = TRT01PN,"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 36,
+     "role": "derives",
+     "excerpt": "mutate(TRTPN = ifelse(TRTPN == 0, 99, TRTPN)) # change treatment order for pairwise comparison"
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 35,
+     "role": "selects",
+     "excerpt": "subset(TRTPN %in% c(0, 81) & PARAMCD == \"GLUC\" & !is.na(AVISITN)) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADLBC.USUBJID",
+   "predecessors": [
+    "VAR:ADSL.USUBJID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 51,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, IDVAR, IDVARVAL, QNAM, QLABEL, QVAL) %>%"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 53,
+     "role": "uses",
+     "excerpt": "id_cols = c(STUDYID, USUBJID, IDVARVAL),"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 61,
+     "role": "uses",
+     "excerpt": "left_join(sup, by = c(\"STUDYID\", \"USUBJID\", \"LBSEQ\")) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.AGE",
+   "derivation": "DM.AGE",
+   "predecessors": [
+    "VAR:DM.AGE"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 150,
+     "role": "uses",
+     "excerpt": "create_cat_var(adsl_spec, AGE, AGEGR1, AGEGR1N) %>%"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.AGEGR1",
+   "derivation": "Character variable derived from ADSL.AGEGR1N",
+   "predecessors": [
+    "VAR:ADSL.AGEGR1N"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 150,
+     "role": "uses",
+     "excerpt": "create_cat_var(adsl_spec, AGE, AGEGR1, AGEGR1N) %>%"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 42,
+     "role": "derives",
+     "excerpt": "AGEGR1 = factor(AGEGR1, levels = c(\"<65\", \"65-80\", \">80\")),"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.AGEGR1N",
+   "derivation": "AGEGR1 = 1 if AGE <65. AGEGR1 = 2 if AGE 65-80. AGEGR1 = 3 if AGE >80.",
+   "predecessors": [
+    "VAR:ADSL.AGEGR1",
+    "VAR:ADSL.AGE"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 150,
+     "role": "uses",
+     "excerpt": "create_cat_var(adsl_spec, AGE, AGEGR1, AGEGR1N) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.BMIBL",
+   "derivation": "WEIGHTBL / ((HEIGHTBL/100)**2)",
+   "predecessors": [
+    "VAR:ADSL.WEIGHTBL",
+    "VAR:ADSL.HEIGHTBL"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 240,
+     "role": "derives",
+     "excerpt": "BMIBL = round_half_up(WEIGHTBL / (HEIGHTBL / 100)^2, digits = 1)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 242,
+     "role": "uses",
+     "excerpt": "create_cat_var(adsl_spec, BMIBL, BMIBLGR1)"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.EFFFL",
+   "derivation": "Y if SAFFL='Y AND subject has at least one record in QS for ADAS-Cog with VISITNUM>3 AND at least one record in QS for CIBIC+ with VISITNUM>3, N otherwise",
+   "predecessors": [
+    "VAR:ADSL.SAFFL"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 179,
+     "role": "derives",
+     "excerpt": "EFFFL = case_when("
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.HEIGHTBL",
+   "derivation": "VSSTRESN when VS.VSTESTCD='HEIGHT' and VS.VISITNUM=1",
+   "predecessors": [
+    "VAR:VS.VSTESTCD",
+    "VAR:VS.VISITNUM"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 240,
+     "role": "uses",
+     "excerpt": "BMIBL = round_half_up(WEIGHTBL / (HEIGHTBL / 100)^2, digits = 1)"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.ITTFL",
+   "derivation": "Y if ARMCD ne ' '. N otherwise",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 174,
+     "role": "derives",
+     "excerpt": "ITTFL = case_when("
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 35,
+     "role": "selects",
+     "excerpt": "ITTFL == \"Y\""
+    },
+    {
+     "program": "PGM:tlf-efficacy.r",
+     "line": 31,
+     "role": "uses",
+     "excerpt": "itt <- adsl[adsl[[\"ITTFL\"]] == \"Y\", c(\"STUDYID\", \"USUBJID\")]"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.MMSETOT",
+   "derivation": "sum of QS.QSORRES values for the subject when QSCAT = MINI-MENTAL STATE",
+   "predecessors": [
+    "VAR:QS.QSORRES"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 306,
+     "role": "derives",
+     "excerpt": "summarise(MMSETOT = sum(as.numeric(QSORRES), na.rm = TRUE)) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 307,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, MMSETOT)"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.RACE",
+   "derivation": "DM.RACE",
+   "predecessors": [
+    "VAR:DM.RACE"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 151,
+     "role": "uses",
+     "excerpt": "create_var_from_codelist(adsl_spec, RACE, RACEN)"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 43,
+     "role": "derives",
+     "excerpt": "RACE = factor(RACE, levels = c("
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.RFENDTC",
+   "derivation": "DM.RFENDTC",
+   "predecessors": [
+    "VAR:DM.RFENDTC"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 299,
+     "role": "uses",
+     "excerpt": "dtc = RFENDTC,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.RFSTDTC",
+   "derivation": "DM.RFSTDTC",
+   "predecessors": [
+    "VAR:DM.RFSTDTC"
+   ]
+  },
+  {
+   "id": "VAR:ADSL.SAFFL",
+   "derivation": "Y if ITTFL='Y' and TRTSDT ne missing. N otherwise",
+   "predecessors": [
+    "VAR:ADSL.ITTFL",
+    "VAR:ADSL.TRTSDT"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 169,
+     "role": "derives",
+     "excerpt": "SAFFL = case_when("
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.SITEGR1",
+   "derivation": "refer to SAP, Section 7.1 - if not pooled then SITEGR1=SITEID. If pooled, SITEGR1 will be 900",
+   "predecessors": [
+    "VAR:ADSL.SITEID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 315,
+     "role": "derives",
+     "excerpt": "mutate(SITEGR1 = format_sitegr1(SITEID))"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.SITEID",
+   "derivation": "DM.SITEID",
+   "predecessors": [
+    "VAR:DM.SITEID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 315,
+     "role": "uses",
+     "excerpt": "mutate(SITEGR1 = format_sitegr1(SITEID))"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.STUDYID",
+   "predecessors": [
+    "VAR:DM.STUDYID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 64,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 84,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID),"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 99,
+     "role": "uses",
+     "excerpt": "group_by(STUDYID, USUBJID, EXTRT) %>%"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 34,
+     "role": "selects",
+     "excerpt": "STUDYID == \"CDISCPILOT01\","
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.TRT01A",
+   "derivation": "TRT01A=TRT01P, i.e., no difference between actual and randomized treatment in this study.",
+   "predecessors": [
+    "VAR:ADSL.TRT01P"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 120,
+     "role": "derives",
+     "excerpt": "TRT01A = TRT01P,"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 45,
+     "role": "derives",
+     "excerpt": "TRT01A = factor(TRT01A, levels = c(\"Placebo\", \"Xanomeline Low Dose\", \"Xanomeline High Dose\"))"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 37,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, TRT01A) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.TRT01P",
+   "derivation": "DM.ARM",
+   "predecessors": [
+    "VAR:DM.ARM"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 112,
+     "role": "derives",
+     "excerpt": "mutate(TRT01P = ARM) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 115,
+     "role": "uses",
+     "excerpt": "input_var = TRT01P,"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 120,
+     "role": "uses",
+     "excerpt": "TRT01A = TRT01P,"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 38,
+     "role": "derives",
+     "excerpt": "TRT01P = factor(TRT01P, levels = c("
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 57,
+     "role": "uses",
+     "excerpt": "split_cols_by(\"TRT01P\") %>%"
+    },
+    {
+     "program": "PGM:tlf-primary.r",
+     "line": 33,
+     "role": "uses",
+     "excerpt": "set_pop_treat_var(TRT01P) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.TRT01PN",
+   "derivation": "Numeric code for TRT01P which corresponds to the randomized dose",
+   "predecessors": [
+    "VAR:ADSL.TRT01P"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 116,
+     "role": "uses",
+     "excerpt": "out_var = TRT01PN"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 121,
+     "role": "uses",
+     "excerpt": "TRT01AN = TRT01PN"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.TRTSDT",
+   "derivation": "SV.SVSTDTC when SV.VISITNUM=3, converted to SAS date",
+   "predecessors": [
+    "VAR:SV.SVSTDTC",
+    "VAR:SV.VISITNUM"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 127,
+     "role": "derives",
+     "excerpt": "new_vars = exprs(TRTSDT = EXSTDT),"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 170,
+     "role": "selects",
+     "excerpt": "ARMCD != \"Scrnfail\" & ARMCD != \"\" & !is.na(TRTSDT) ~ \"Y\","
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 180,
+     "role": "selects",
+     "excerpt": "ARMCD != \"Scrnfail\" & ARMCD != \"\" & !is.na(TRTSDT) & effcnt == 2 ~ \"Y\","
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.USUBJID",
+   "predecessors": [
+    "VAR:DM.USUBJID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 215,
+     "role": "selects",
+     "excerpt": "filter_add = !is.na(USUBJID)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 222,
+     "role": "selects",
+     "excerpt": "filter_add = !is.na(USUBJID)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 64,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADSL.WEIGHTBL",
+   "derivation": "VSSTRESN when VS.VSTESTCD='WEIGHT' and VS.VISITNUM=3",
+   "predecessors": [
+    "VAR:VS.VSTESTCD",
+    "VAR:VS.VISITNUM"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 240,
+     "role": "uses",
+     "excerpt": "BMIBL = round_half_up(WEIGHTBL / (HEIGHTBL / 100)^2, digits = 1)"
+    },
+    {
+     "program": "PGM:tlf-demographic.r",
+     "line": 25,
+     "role": "uses",
+     "excerpt": "vars <- c(\"AGE\", \"AGEGR1\", \"RACE\", \"HEIGHTBL\", \"WEIGHTBL\", \"BMIBL\", \"MMSETOT\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.ADT",
+   "derivation": "if ADAE.ASTDT is not missing and occurred after TRTSDT then ADAE.ASTDT else convert ADSL.RFENDTC to a SAS numeric date",
+   "predecessors": [
+    "VAR:ADAE.ASTDT",
+    "VAR:ADSL.RFENDTC"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 109,
+     "role": "uses",
+     "excerpt": "end_date = ADT"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.AVAL",
+   "derivation": "ADT-STARTDT+1",
+   "predecessors": [
+    "VAR:ADTTE.ADT",
+    "VAR:ADTTE.STARTDT"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 107,
+     "role": "uses",
+     "excerpt": "new_var = AVAL,"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 41,
+     "role": "uses",
+     "excerpt": ") %>% select(STUDYID, USUBJID, AVAL, CNSR, PARAM, PARAMCD),"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 51,
+     "role": "uses",
+     "excerpt": "surv_mod <- ggsurvfit::survfit2(Surv(AVAL, 1 - CNSR) ~ TRT01A, data = anl)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.CNSR",
+   "derivation": "if ADAE.TRTEMFL =\"Y\" then CNSR=0, else CNSR=1",
+   "predecessors": [
+    "VAR:ADAE.TRTEMFL"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 125,
+     "role": "derives",
+     "excerpt": "mutate(CNSR = as.numeric(CNSR))"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.PARAM",
+   "derivation": "PARAM=\"Time to First Dermatologic Event\"",
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 104,
+     "role": "derives",
+     "excerpt": "set_values_to = exprs(PARAMCD = \"TTDE\", PARAM = \"Time to First Dermatologic Event\")"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.PARAMCD",
+   "derivation": "PARAMCD=\"TTDE\"",
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 104,
+     "role": "derives",
+     "excerpt": "set_values_to = exprs(PARAMCD = \"TTDE\", PARAM = \"Time to First Dermatologic Event\")"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 40,
+     "role": "selects",
+     "excerpt": "adtte, PARAMCD == \"TTDE\", STUDYID == \"CDISCPILOT01\""
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 41,
+     "role": "uses",
+     "excerpt": ") %>% select(STUDYID, USUBJID, AVAL, CNSR, PARAM, PARAMCD),"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.SAFFL",
+   "predecessors": [
+    "VAR:ADSL.SAFFL"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 54,
+     "role": "selects",
+     "excerpt": "filter = AOCC01FL == \"Y\" & CQ01NAM == \"DERMATOLOGIC EVENTS\" & SAFFL == \"Y\","
+    },
+    {
+     "program": "PGM:adtte.r",
+     "line": 114,
+     "role": "uses",
+     "excerpt": "AGE, AGEGR1, AGEGR1N, RACE, RACEN, SAFFL, SEX, SITEID, TRT01A,"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 34,
+     "role": "selects",
+     "excerpt": "SAFFL == \"Y\","
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.STARTDT",
+   "derivation": "ADSL.RFSTDTC",
+   "predecessors": [
+    "VAR:ADSL.RFSTDTC"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 108,
+     "role": "uses",
+     "excerpt": "start_date = STARTDT,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.STUDYID",
+   "predecessors": [
+    "VAR:ADSL.STUDYID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 67,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, DSCAT, DSDECOD, DSSTDTC) %>%"
+    },
+    {
+     "program": "PGM:adtte.r",
+     "line": 77,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID),"
+    },
+    {
+     "program": "PGM:adtte.r",
+     "line": 117,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID)"
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 35,
+     "role": "selects",
+     "excerpt": "STUDYID == \"CDISCPILOT01\""
+    },
+    {
+     "program": "PGM:tlf-kmplot.r",
+     "line": 40,
+     "role": "selects",
+     "excerpt": "adtte, PARAMCD == \"TTDE\", STUDYID == \"CDISCPILOT01\""
+    }
+   ]
+  },
+  {
+   "id": "VAR:ADTTE.USUBJID",
+   "predecessors": [
+    "VAR:ADSL.USUBJID"
+   ],
+   "codeAnchors": [
+    {
+     "program": "PGM:adtte.r",
+     "line": 67,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, DSCAT, DSDECOD, DSSTDTC) %>%"
+    },
+    {
+     "program": "PGM:adtte.r",
+     "line": 77,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID),"
+    },
+    {
+     "program": "PGM:adtte.r",
+     "line": 117,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:AE.AESTDTC",
+   "codeAnchors": [
+    {
+     "program": "PGM:adae.r",
+     "line": 84,
+     "role": "uses",
+     "excerpt": "dtc = AESTDTC,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.AGE",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 141,
+     "role": "uses",
+     "excerpt": "TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 150,
+     "role": "uses",
+     "excerpt": "create_cat_var(adsl_spec, AGE, AGEGR1, AGEGR1N) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.ARM",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 112,
+     "role": "uses",
+     "excerpt": "mutate(TRT01P = ARM) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.RACE",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 141,
+     "role": "uses",
+     "excerpt": "TRTP, TRTPN, AGE, AGEGR1, AGEGR1N, RACE, RACEN, SEX,"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 151,
+     "role": "uses",
+     "excerpt": "create_var_from_codelist(adsl_spec, RACE, RACEN)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.RFENDTC",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 299,
+     "role": "uses",
+     "excerpt": "dtc = RFENDTC,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.RFSTDTC"
+  },
+  {
+   "id": "VAR:DM.SITEID",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 140,
+     "role": "uses",
+     "excerpt": "STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 315,
+     "role": "uses",
+     "excerpt": "mutate(SITEGR1 = format_sitegr1(SITEID))"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.STUDYID",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 61,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID, QSSEQ)"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 140,
+     "role": "uses",
+     "excerpt": "STUDYID, SITEID, SITEGR1, USUBJID, TRTSDT, TRTEDT,"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 64,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, EOSDT, DISCONFL, DSRAEFL, DSDECOD, DSTERM, DCDECOD)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 84,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID),"
+    }
+   ]
+  },
+  {
+   "id": "VAR:DM.USUBJID",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 61,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(STUDYID, USUBJID, QSSEQ)"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 116,
+     "role": "uses",
+     "excerpt": "by_vars = exprs(USUBJID, PARAMCD, AVISIT),"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 215,
+     "role": "selects",
+     "excerpt": "filter_add = !is.na(USUBJID)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 222,
+     "role": "selects",
+     "excerpt": "filter_add = !is.na(USUBJID)"
+    }
+   ]
+  },
+  {
+   "id": "VAR:LB.LBSTNRHI",
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 195,
+     "role": "uses",
+     "excerpt": "ANRHI = LBSTNRHI,"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 197,
+     "role": "uses",
+     "excerpt": "A1HI = LBSTNRHI,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:LB.LBSTRESN",
+   "codeAnchors": [
+    {
+     "program": "PGM:adlbc.r",
+     "line": 106,
+     "role": "uses",
+     "excerpt": "AVAL = LBSTRESN,"
+    },
+    {
+     "program": "PGM:adlbc.r",
+     "line": 202,
+     "role": "uses",
+     "excerpt": "ONE = abs((LBSTRESN - (1.5 * LBSTNRHI))),"
+    }
+   ]
+  },
+  {
+   "id": "VAR:LB.TESTCD"
+  },
+  {
+   "id": "VAR:QS.QSBLFL"
+  },
+  {
+   "id": "VAR:QS.QSORRES",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 306,
+     "role": "uses",
+     "excerpt": "summarise(MMSETOT = sum(as.numeric(QSORRES), na.rm = TRUE)) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:QS.QSSTRESN",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 60,
+     "role": "uses",
+     "excerpt": "new_vars = exprs(QSDTC, QSSTRESN, QSTEST),"
+    },
+    {
+     "program": "PGM:adadas.r",
+     "line": 85,
+     "role": "uses",
+     "excerpt": "AVAL = QSSTRESN,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:QS.QSTESTCD",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 162,
+     "role": "selects",
+     "excerpt": "filter(VISITNUM > 3, QSTESTCD %in% c(\"CIBIC\", \"ACTOT\")) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 159,
+     "role": "uses",
+     "excerpt": "qstest <- distinct(qs[, c(\"QSTESTCD\", \"QSTEST\")])"
+    }
+   ]
+  },
+  {
+   "id": "VAR:QS.VISITNUM",
+   "codeAnchors": [
+    {
+     "program": "PGM:adadas.r",
+     "line": 145,
+     "role": "uses",
+     "excerpt": "keep_vars = exprs(VISIT, VISITNUM, ADY, ADT, PARAM, PARAMN, QSSEQ)"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 162,
+     "role": "selects",
+     "excerpt": "filter(VISITNUM > 3, QSTESTCD %in% c(\"CIBIC\", \"ACTOT\")) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 235,
+     "role": "selects",
+     "excerpt": "filter((VSTESTCD == \"HEIGHT\" & VISITNUM == 1) | (VSTESTCD == \"WEIGHT\" & VISITNUM == 3)) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:SV.SVSTDTC",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 189,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, VISIT, VISITDY, SVSTDTC) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 257,
+     "role": "uses",
+     "excerpt": "dtc = SVSTDTC,"
+    }
+   ]
+  },
+  {
+   "id": "VAR:SV.VISITNUM",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 162,
+     "role": "selects",
+     "excerpt": "filter(VISITNUM > 3, QSTESTCD %in% c(\"CIBIC\", \"ACTOT\")) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 235,
+     "role": "selects",
+     "excerpt": "filter((VSTESTCD == \"HEIGHT\" & VISITNUM == 1) | (VSTESTCD == \"WEIGHT\" & VISITNUM == 3)) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:VS.VISITNUM",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 162,
+     "role": "selects",
+     "excerpt": "filter(VISITNUM > 3, QSTESTCD %in% c(\"CIBIC\", \"ACTOT\")) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 235,
+     "role": "selects",
+     "excerpt": "filter((VSTESTCD == \"HEIGHT\" & VISITNUM == 1) | (VSTESTCD == \"WEIGHT\" & VISITNUM == 3)) %>%"
+    }
+   ]
+  },
+  {
+   "id": "VAR:VS.VSTESTCD",
+   "codeAnchors": [
+    {
+     "program": "PGM:adsl.r",
+     "line": 235,
+     "role": "selects",
+     "excerpt": "filter((VSTESTCD == \"HEIGHT\" & VISITNUM == 1) | (VSTESTCD == \"WEIGHT\" & VISITNUM == 3)) %>%"
+    },
+    {
+     "program": "PGM:adsl.r",
+     "line": 237,
+     "role": "uses",
+     "excerpt": "select(STUDYID, USUBJID, VSTESTCD, AVAL) %>%"
+    }
+   ]
+  }
+ ],
+ "parameters": [
+  {
+   "id": "PARAM:ADADAS.ACTOT",
+   "where": "PARAMCD EQ ACTOT",
+   "derivation": "Sum of ADAS scores for items 1, 2, 4, 5, 6, 7, 8, 11, 12, 13, and 14, see SAP section 14.2 for details on adjusting for missing values"
+  },
+  {
+   "id": "PARAM:ADLBC.GLUC"
+  },
+  {
+   "id": "PARAM:ADTTE.TTDE"
+  }
+ ],
+ "programs": [
+  {
+   "id": "PGM:adadas.r",
+   "reads": [
+    "DS:ADSL",
+    "DS:DM",
+    "DS:QS"
+   ],
+   "writes": [
+    "DS:ADADAS"
+   ]
+  },
+  {
+   "id": "PGM:adae.r",
+   "reads": [
+    "DS:ADSL",
+    "DS:AE",
+    "DS:SUPPAE"
+   ],
+   "writes": [
+    "DS:ADAE"
+   ]
+  },
+  {
+   "id": "PGM:adlbc.r",
+   "reads": [
+    "DS:ADSL",
+    "DS:LB",
+    "DS:SUPPLB"
+   ],
+   "writes": [
+    "DS:ADLBC"
+   ]
+  },
+  {
+   "id": "PGM:adsl.r",
+   "reads": [
+    "DS:DM",
+    "DS:DS",
+    "DS:EX",
+    "DS:MH",
+    "DS:QS",
+    "DS:SC",
+    "DS:SV",
+    "DS:VS"
+   ],
+   "writes": [
+    "DS:ADSL"
+   ]
+  },
+  {
+   "id": "PGM:adtte.r",
+   "reads": [
+    "DS:ADAE",
+    "DS:ADSL",
+    "DS:DS"
+   ],
+   "writes": [
+    "DS:ADTTE"
+   ]
+  },
+  {
+   "id": "PGM:pilot5-helper-fcns.r"
+  },
+  {
+   "id": "PGM:tlf-demographic.r",
+   "reads": [
+    "DS:ADSL"
+   ],
+   "writes": [
+    "tlf-demographic-pilot5.out"
+   ]
+  },
+  {
+   "id": "PGM:tlf-efficacy.r",
+   "reads": [
+    "DS:ADLBC",
+    "DS:ADSL"
+   ],
+   "writes": [
+    "tlf-efficacy-pilot5.rtf"
+   ]
+  },
+  {
+   "id": "PGM:tlf-kmplot.r",
+   "reads": [
+    "DS:ADSL",
+    "DS:ADTTE"
+   ],
+   "writes": [
+    "tlf-kmplot-pilot5.pdf"
+   ]
+  },
+  {
+   "id": "PGM:tlf-primary.r",
+   "reads": [
+    "DS:ADADAS",
+    "DS:ADSL"
+   ],
+   "writes": [
+    "tlf-primary-pilot5.rtf"
+   ],
+   "run": {
+    "mode": "interactive",
+    "evidence": "Rendered output says 'Source: <run interactively>'."
+   }
+  }
+ ],
+ "notes": [
+  {
+   "id": "NOTE:PURPOSE",
+   "about": [
+    "DOC:SPEC"
+   ],
+   "title": "Purpose",
+   "text": "This guide gives context for the analysis datasets and terminology beyond what the data definition provides, and summarizes ADaM conformance findings. Generated sections are built from the package itself; authored sections hold the study team's explanations.",
+   "status": "final",
+   "section": "1.1"
+  },
+  {
+   "id": "NOTE:SOURCE-DATA",
+   "about": [
+    "DS:ADSL",
+    "DS:ADADAS",
+    "DS:ADAE",
+    "DS:ADLBC",
+    "DS:ADTTE"
+   ],
+   "title": "Source data",
+   "text": "The ADaM datasets were derived from SDTM version 1.2 of the CDISC SDTM/ADaM Pilot Project data, publicly available in the PHUSE GitHub repository.",
+   "status": "final",
+   "section": "1.3"
+  },
+  {
+   "id": "NOTE:ASTDT-IMPUTATION",
+   "about": [
+    "VAR:ADAE.ASTDT"
+   ],
+   "title": "Partial AE start dates",
+   "text": "ASTDT is derived from AE.AESTDTC. A missing day is imputed as the 1st of the month; if month and day are both missing, no imputation is done.",
+   "status": "final",
+   "section": "3.4"
+  },
+  {
+   "id": "NOTE:ADADAS-WINDOWS",
+   "about": [
+    "VAR:ADADAS.AVISIT",
+    "VAR:ADADAS.AVISITN",
+    "VAR:ADADAS.DTYPE"
+   ],
+   "title": "ADAS-Cog analysis visits",
+   "text": "Records are assigned to analysis visits by study day: Baseline (ADY <= 1), Week 8 (2-84), Week 16 (85-140), Week 24 (> 140). Missing Week 8, 16 and 24 values are carried forward from the last observed visit (DTYPE = 'LOCF').",
+   "status": "final",
+   "section": "3.3"
+  },
+  {
+   "id": "NOTE:ACTOT-MISSING-ITEMS",
+   "about": [
+    "PARAM:ADADAS.ACTOT",
+    "AN:T14-3.01.PAIRWISE"
+   ],
+   "title": "ADAS-Cog total with missing items",
+   "text": "ACTOT is taken from SDTM QS (QSTESTCD = 'ACTOT'). At visits where all 11 contributing items are present it equals their sum. At 21 visits (13 subjects) with missing items it carries the SAP section 14.2 adjustment, which is applied upstream of the submitted ADaM programs; 10 Week 24 records in the primary analysis depend on it.",
+   "status": "draft",
+   "section": "3.4"
+  },
+  {
+   "id": "NOTE:T14-3.02-CAPTION",
+   "about": [
+    "DSP:T14-3.02"
+   ],
+   "title": "Glucose table caption",
+   "text": "The TLF report captions this table 'Primary Endpoint Analysis ... LOCF'. The analysis uses observed Week 20 values (ADLBC has no DTYPE), and glucose is a safety endpoint; the program title 'ANCOVA of Change from Baseline at Week 20' is the accurate one.",
+   "status": "draft"
+  },
+  {
+   "id": "NOTE:T14-3.02-RMSE",
+   "about": [
+    "CELL:T14-3.02.FIT.RMSE.RMSE"
+   ],
+   "title": "RMSE definition",
+   "text": "The value is sqrt(mean(residual^2)), i.e. divided by n, not the model residual standard error sqrt(SSE/df).",
+   "status": "draft"
+  },
+  {
+   "id": "NOTE:ADLBC-EOT",
+   "about": [
+    "DS:ADLBC"
+   ],
+   "title": "End-of-treatment visit",
+   "text": "Some lab summaries present a derived end-of-treatment visit, AVISITN = 99.",
+   "status": "final",
+   "section": "5.2"
+  }
+ ],
+ "findings": [
+  {
+   "id": "FND:DOC.SAP",
+   "severity": "warning",
+   "about": [
+    "DOC:SAP"
+   ],
+   "text": "statistical-analysis-plan is referenced but not in the package.",
+   "check": "DOC"
+  },
+  {
+   "id": "FND:DOC.DEFINE",
+   "severity": "warning",
+   "about": [
+    "DOC:DEFINE"
+   ],
+   "text": "define-xml is referenced but not in the package.",
+   "check": "DOC"
+  },
+  {
+   "id": "FND:DSJSON.NA.ADADAS",
+   "severity": "error",
+   "about": [
+    "DS:ADADAS"
+   ],
+   "text": "10,025 missing values written as the string 'NA' instead of null: PCHG (6143), CHG (3835), AVAL (25).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.ADADAS",
+   "severity": "error",
+   "about": [
+    "DS:ADADAS"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: dbLastModifiedDateTime: '2026-05-05T17:10' does not match '^([0-9][0-9][0-9][0-9])(-(([0][",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.ADAE",
+   "severity": "error",
+   "about": [
+    "DS:ADAE"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: dbLastModifiedDateTime: '2026-06-29T02:27' does not match '^([0-9][0-9][0-9][0-9])(-(([0][",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.ADLBC",
+   "severity": "error",
+   "about": [
+    "DS:ADLBC"
+   ],
+   "text": "6,027 missing values written as the string 'NA' instead of null: CHG (4897), BASE (360), BR2A1LO (360).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.ADLBC",
+   "severity": "error",
+   "about": [
+    "DS:ADLBC"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: dbLastModifiedDateTime: '2026-06-29T02:28' does not match '^([0-9][0-9][0-9][0-9])(-(([0][",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.ADSL",
+   "severity": "error",
+   "about": [
+    "DS:ADSL"
+   ],
+   "text": "2 missing values written as the string 'NA' instead of null: BMIBL (1), WEIGHTBL (1).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.ADSL",
+   "severity": "error",
+   "about": [
+    "DS:ADSL"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: dbLastModifiedDateTime: '2026-06-29T02:27' does not match '^([0-9][0-9][0-9][0-9])(-(([0][",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.ADTTE",
+   "severity": "error",
+   "about": [
+    "DS:ADTTE"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: dbLastModifiedDateTime: '2026-06-29T02:28' does not match '^([0-9][0-9][0-9][0-9])(-(([0][",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.AE",
+   "severity": "error",
+   "about": [
+    "DS:AE"
+   ],
+   "text": "7,645 missing values written as the string 'NA' instead of null: AELLTCD (1191), AEPTCD (1191), AEHLTCD (1191).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.AE",
+   "severity": "error",
+   "about": [
+    "DS:AE"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.CM",
+   "severity": "error",
+   "about": [
+    "DS:CM"
+   ],
+   "text": "12,598 missing values written as the string 'NA' instead of null: CMENDY (6816), CMSTDY (5475), VISITDY (232).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.CM",
+   "severity": "error",
+   "about": [
+    "DS:CM"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.DM",
+   "severity": "error",
+   "about": [
+    "DS:DM"
+   ],
+   "text": "52 missing values written as the string 'NA' instead of null: DMDY (52).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.DM",
+   "severity": "error",
+   "about": [
+    "DS:DM"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.DS",
+   "severity": "error",
+   "about": [
+    "DS:DS"
+   ],
+   "text": "52 missing values written as the string 'NA' instead of null: DSSTDY (52).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.DS",
+   "severity": "error",
+   "about": [
+    "DS:DS"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.EX",
+   "severity": "error",
+   "about": [
+    "DS:EX"
+   ],
+   "text": "6 missing values written as the string 'NA' instead of null: EXENDY (6).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.EX",
+   "severity": "error",
+   "about": [
+    "DS:EX"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.LB",
+   "severity": "error",
+   "about": [
+    "DS:LB"
+   ],
+   "text": "8,270 missing values written as the string 'NA' instead of null: LBSTNRLO (2915), LBSTNRHI (2915), VISITDY (1560).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.LB",
+   "severity": "error",
+   "about": [
+    "DS:LB"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.MH",
+   "severity": "error",
+   "about": [
+    "DS:MH"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.QS",
+   "severity": "error",
+   "about": [
+    "DS:QS"
+   ],
+   "text": "25 missing values written as the string 'NA' instead of null: QSSTRESN (25).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.QS",
+   "severity": "error",
+   "about": [
+    "DS:QS"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.RELREC",
+   "severity": "error",
+   "about": [
+    "DS:RELREC"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SC",
+   "severity": "error",
+   "about": [
+    "DS:SC"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SE",
+   "severity": "error",
+   "about": [
+    "DS:SE"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SUPPAE",
+   "severity": "error",
+   "about": [
+    "DS:SUPPAE"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SUPPDM",
+   "severity": "error",
+   "about": [
+    "DS:SUPPDM"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SUPPDS",
+   "severity": "error",
+   "about": [
+    "DS:SUPPDS"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SUPPLB",
+   "severity": "error",
+   "about": [
+    "DS:SUPPLB"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.SV",
+   "severity": "error",
+   "about": [
+    "DS:SV"
+   ],
+   "text": "196 missing values written as the string 'NA' instead of null: VISITDY (196).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.SV",
+   "severity": "error",
+   "about": [
+    "DS:SV"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.TA",
+   "severity": "error",
+   "about": [
+    "DS:TA"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.TE",
+   "severity": "error",
+   "about": [
+    "DS:TE"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.TI",
+   "severity": "error",
+   "about": [
+    "DS:TI"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.TV",
+   "severity": "error",
+   "about": [
+    "DS:TV"
+   ],
+   "text": "2 missing values written as the string 'NA' instead of null: VISITDY (2).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.TV",
+   "severity": "error",
+   "about": [
+    "DS:TV"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.NA.VS",
+   "severity": "error",
+   "about": [
+    "DS:VS"
+   ],
+   "text": "5,042 missing values written as the string 'NA' instead of null: VSTPTNUM (5024), VISITDY (10), VSSTRESN (8).",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.SCHEMA.VS",
+   "severity": "error",
+   "about": [
+    "DS:VS"
+   ],
+   "text": "Fails the CDISC Dataset-JSON v1.1 schema: label: [] is not of type 'string'",
+   "check": "L18"
+  },
+  {
+   "id": "FND:DSJSON.METADATAREF",
+   "severity": "error",
+   "about": [
+    "DS:ADADAS",
+    "DS:ADAE",
+    "DS:ADLBC",
+    "DS:ADSL",
+    "DS:ADTTE",
+    "DS:AE",
+    "DS:CM",
+    "DS:DM",
+    "DS:DS",
+    "DS:EX",
+    "DS:LB",
+    "DS:MH",
+    "DS:QS",
+    "DS:RELREC",
+    "DS:SC",
+    "DS:SE",
+    "DS:SUPPAE",
+    "DS:SUPPDM",
+    "DS:SUPPDS",
+    "DS:SUPPLB",
+    "DS:SV",
+    "DS:TA",
+    "DS:TE",
+    "DS:TI",
+    "DS:TV",
+    "DS:VS"
+   ],
+   "text": "26 Dataset-JSON files have a metaDataRef that does not resolve to a file in the package.",
+   "check": "L17"
+  },
+  {
+   "id": "FND:WRITE.adadas.r",
+   "severity": "error",
+   "about": [
+    "PGM:adadas.r",
+    "DS:ADADAS"
+   ],
+   "text": "adadas.r line 206 writes `adas`, which it never creates (the dataset it builds is `adadas`); only tlf-primary.r creates `adas`. The submitted adadas.json cannot be shown to come from this program.",
+   "check": "L20"
+  },
+  {
+   "id": "FND:RUN.tlf-primary.r",
+   "severity": "warning",
+   "about": [
+    "PGM:tlf-primary.r",
+    "DSP:T14-3.01"
+   ],
+   "text": "T14-3.01 was produced in an interactive session, not by a scripted run of tlf-primary.r.",
+   "check": "L10"
+  },
+  {
+   "id": "FND:RECEIPTS",
+   "severity": "warning",
+   "about": [
+    "PGM:adadas.r",
+    "PGM:adae.r",
+    "PGM:adlbc.r",
+    "PGM:adsl.r",
+    "PGM:adtte.r",
+    "PGM:tlf-demographic.r",
+    "PGM:tlf-efficacy.r",
+    "PGM:tlf-kmplot.r",
+    "PGM:tlf-primary.r"
+   ],
+   "text": "No program has a build receipt (inputs, hashes, commit, session), so which run produced each file cannot be shown.",
+   "check": "L19"
+  },
+  {
+   "id": "FND:ENV.PLATFORM",
+   "severity": "warning",
+   "about": [
+    "DS:ADAE",
+    "DS:ADLBC",
+    "DS:ADSL",
+    "DS:ADTTE"
+   ],
+   "text": "Run instructions state Linux, but 4 datasets declare another platform: R on mingw32 10 x64 R version 4.4.3 (2025-02-28 ucrt).",
+   "check": "L19"
+  },
+  {
+   "id": "FND:PARAM.NOVLM.ADLBC.GLUC",
+   "severity": "info",
+   "about": [
+    "PARAM:ADLBC.GLUC"
+   ],
+   "text": "No value-level derivation for ADLBC GLUC in the metadata.",
+   "check": "L07"
+  },
+  {
+   "id": "FND:PARAM.NOVLM.ADTTE.TTDE",
+   "severity": "info",
+   "about": [
+    "PARAM:ADTTE.TTDE"
+   ],
+   "text": "No value-level derivation for ADTTE TTDE in the metadata.",
+   "check": "L07"
+  },
+  {
+   "id": "FND:DERIV.ADLBC.BASE",
+   "severity": "error",
+   "about": [
+    "VAR:ADLBC.BASE"
+   ],
+   "text": "Metadata says ADLBC.BASE is derived from LB.LBSTNRHI, but the data agree in only 154 of 36,772 records.",
+   "check": "L06"
+  },
+  {
+   "id": "FND:VAR.MISSING.LB.TESTCD",
+   "severity": "error",
+   "about": [
+    "VAR:LB.TESTCD",
+    "VAR:ADLBC.PARAMCD"
+   ],
+   "text": "ADLBC.PARAMCD cites LB.TESTCD as its predecessor, but there is no such variable in the data.",
+   "check": "L22"
+  },
+  {
+   "id": "FND:CONF.UNEXPLAINED",
+   "severity": "warning",
+   "about": [
+    "DS:ADADAS",
+    "DS:ADAE",
+    "DS:ADLBC",
+    "DS:ADSL",
+    "DS:ADTTE"
+   ],
+   "text": "12 conformance issues have no explanation.",
+   "check": "L16"
+  }
+ ]
+}

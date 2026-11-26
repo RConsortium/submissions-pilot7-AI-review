@@ -1,0 +1,2906 @@
+{
+ "adrgCore": "0.2.0",
+ "study": "CDISCPILOT01",
+ "stage": "planned",
+ "generated": "2026-11-26T02:22:07+00:00",
+ "sources": {},
+ "analyses": [
+  {
+   "id": "AN:T14-2.01.DEMOG",
+   "purpose": "descriptive",
+   "dataset": "DS:ADSL",
+   "population": {
+    "STUDYID": "CDISCPILOT01",
+    "ITTFL": "Y"
+   },
+   "by": "TRT01P",
+   "method": "Mean (SD), median, min-max for continuous; counts for categorical; by planned treatment",
+   "program": "PGM:tlf-demographic.r"
+  },
+  {
+   "id": "AN:T14-3.01.DESC",
+   "purpose": "descriptive",
+   "estimand": "EST:ADASCOG.WK24",
+   "dataset": "DS:ADADAS",
+   "population": {
+    "EFFFL": "Y",
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "PARAMCD": "ACTOT",
+    "ANL01FL": "Y"
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADADAS.ACTOT"
+   ],
+   "method": "n, mean (SD), median (range) by planned treatment and visit",
+   "program": "PGM:tlf-primary.r"
+  },
+  {
+   "id": "AN:T14-3.01.DOSE",
+   "purpose": "primary-test",
+   "estimand": "EST:ADASCOG.WK24",
+   "dataset": "DS:ADADAS",
+   "population": {
+    "EFFFL": "Y",
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "PARAMCD": "ACTOT",
+    "ANL01FL": "Y",
+    "AVISITN": 24
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADADAS.ACTOT"
+   ],
+   "method": "ANCOVA: CHG ~ TRTPN (dose, continuous) + SITEGR1 + BASE; type III test of TRTPN",
+   "model": {
+    "response": "CHG",
+    "numericTreatment": "TRTPN",
+    "factors": [
+     "SITEGR1"
+    ],
+    "covariates": [
+     "BASE"
+    ]
+   },
+   "implementation": "FN:pilot5-helper-fcns.efficacy_models",
+   "program": "PGM:tlf-primary.r"
+  },
+  {
+   "id": "AN:T14-3.01.PAIRWISE",
+   "purpose": "primary-estimate",
+   "estimand": "EST:ADASCOG.WK24",
+   "dataset": "DS:ADADAS",
+   "population": {
+    "EFFFL": "Y",
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "PARAMCD": "ACTOT",
+    "ANL01FL": "Y",
+    "AVISITN": 24
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADADAS.ACTOT"
+   ],
+   "method": "ANCOVA: CHG ~ treatment (factor) + SITEGR1 + BASE; pairwise LS-mean differences, unadjusted, t-based 95% CI",
+   "model": {
+    "response": "CHG",
+    "treatment": "TRTP",
+    "factors": [
+     "SITEGR1"
+    ],
+    "covariates": [
+     "BASE"
+    ]
+   },
+   "implementation": "FN:pilot5-helper-fcns.efficacy_models",
+   "program": "PGM:tlf-primary.r"
+  },
+  {
+   "id": "AN:T14-3.02.DESC",
+   "purpose": "descriptive",
+   "estimand": "EST:GLUC.WK20",
+   "dataset": "DS:ADLBC",
+   "population": {
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "TRTPN": {
+     "in": [
+      0,
+      81
+     ]
+    },
+    "PARAMCD": "GLUC",
+    "AVISITN": {
+     "notnull": true
+    }
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADLBC.GLUC"
+   ],
+   "method": "N, mean (SD) at baseline (of BASE) and Week 20 (of AVAL, CHG) for subjects with non-missing CHG and BASE",
+   "program": "PGM:tlf-efficacy.r"
+  },
+  {
+   "id": "AN:T14-3.02.ANCOVA",
+   "purpose": "safety-estimate",
+   "estimand": "EST:GLUC.WK20",
+   "dataset": "DS:ADLBC",
+   "population": {
+    "ITTFL": "Y"
+   },
+   "subset": {
+    "TRTPN": {
+     "in": [
+      0,
+      81
+     ]
+    },
+    "PARAMCD": "GLUC",
+    "AVISITN": 20
+   },
+   "by": "TRTP",
+   "parameters": [
+    "PARAM:ADLBC.GLUC"
+   ],
+   "method": "ANCOVA: CHG ~ BASE + treatment; LS means with t-based 95% CI; difference with normal-approximation 95% CI (estimate ± 1.96 SE) and t-test p-value; RMSE = sqrt(mean(residual^2))",
+   "model": {
+    "response": "CHG",
+    "treatment": "TRTP",
+    "covariates": [
+     "BASE"
+    ]
+   },
+   "program": "PGM:tlf-efficacy.r"
+  },
+  {
+   "id": "AN:F14-1.KM",
+   "purpose": "safety-estimate",
+   "estimand": "EST:TTDE",
+   "dataset": "DS:ADTTE",
+   "population": {
+    "SAFFL": "Y",
+    "STUDYID": "CDISCPILOT01"
+   },
+   "subset": {
+    "PARAMCD": "TTDE"
+   },
+   "by": "TRT01A",
+   "parameters": [
+    "PARAM:ADTTE.TTDE"
+   ],
+   "method": "Kaplan-Meier, Surv(AVAL, 1 - CNSR) by actual treatment; number at risk = subjects with AVAL >= t",
+   "program": "PGM:tlf-kmplot.r"
+  }
+ ],
+ "displays": [
+  {
+   "id": "DSP:T14-2.01",
+   "title": "Summary of Demographic and Baseline Characteristics",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 2
+   },
+   "columns": [
+    {
+     "id": "PBO",
+     "label": "Placebo"
+    },
+    {
+     "id": "LOW",
+     "label": "Xanomeline Low Dose"
+    },
+    {
+     "id": "HIGH",
+     "label": "Xanomeline High Dose"
+    }
+   ],
+   "sections": [
+    {
+     "id": "POP",
+     "label": "",
+     "rows": [
+      {
+       "id": "BIGN",
+       "label": "N",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.POP.BIGN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "group": "Placebo",
+          "op": "bign"
+         },
+         "format": "(N=xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.POP.BIGN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "bign"
+         },
+         "format": "(N=xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.POP.BIGN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "bign"
+         },
+         "format": "(N=xx)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "AGE",
+     "label": "Age",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGE.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGE.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGE.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGE.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGE",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "AGEGR1",
+     "label": "Pooled Age Group 1",
+     "rows": [
+      {
+       "id": "LT65",
+       "label": "<65",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGEGR1.LT65.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Placebo",
+          "value": "<65"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.LT65.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "<65"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.LT65.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "<65"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "65_80",
+       "label": "65-80",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGEGR1.65_80.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Placebo",
+          "value": "65-80"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.65_80.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "65-80"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.65_80.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "65-80"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "GT80",
+       "label": ">80",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.AGEGR1.GT80.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Placebo",
+          "value": ">80"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.GT80.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": ">80"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.AGEGR1.GT80.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "AGEGR1",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": ">80"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "RACE",
+     "label": "Race",
+     "rows": [
+      {
+       "id": "WHITE",
+       "label": "WHITE",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.RACE.WHITE.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Placebo",
+          "value": "WHITE"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.WHITE.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "WHITE"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.WHITE.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "WHITE"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "BLACK",
+       "label": "BLACK OR AFRICAN AMERICAN",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.RACE.BLACK.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Placebo",
+          "value": "BLACK OR AFRICAN AMERICAN"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.BLACK.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "BLACK OR AFRICAN AMERICAN"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.BLACK.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "BLACK OR AFRICAN AMERICAN"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "AMIND",
+       "label": "AMERICAN INDIAN OR ALASKA NATIVE",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.RACE.AMIND.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Placebo",
+          "value": "AMERICAN INDIAN OR ALASKA NATIVE"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.AMIND.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline Low Dose",
+          "value": "AMERICAN INDIAN OR ALASKA NATIVE"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.RACE.AMIND.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "RACE",
+          "op": "count",
+          "group": "Xanomeline High Dose",
+          "value": "AMERICAN INDIAN OR ALASKA NATIVE"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "HEIGHT",
+     "label": "Baseline Height (cm)",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.HEIGHT.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "HEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "WEIGHT",
+     "label": "Baseline Weight (kg)",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.WEIGHT.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "WEIGHTBL",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "BMI",
+     "label": "Baseline BMI (kg/m^2)",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.BMI.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.BMI.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.BMI.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.BMI.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "BMIBL",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "MMSE",
+     "label": "MMSE Total",
+     "rows": [
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (sd)",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.MMSE.MEAN_SD.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEAN_SD.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEAN_SD.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.xx (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN",
+       "label": "Median",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.MMSE.MEDIAN.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Placebo",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEDIAN.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline Low Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MEDIAN.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline High Dose",
+          "op": "median"
+         },
+         "format": "xx.xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MIN_MAX",
+       "label": "Min - Max",
+       "cells": [
+        {
+         "id": "CELL:T14-2.01.MMSE.MIN_MAX.PBO",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Placebo",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MIN_MAX.LOW",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline Low Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-2.01.MMSE.MIN_MAX.HIGH",
+         "analysis": "AN:T14-2.01.DEMOG",
+         "compute": {
+          "variable": "MMSETOT",
+          "group": "Xanomeline High Dose",
+          "op": "min_max"
+         },
+         "format": "xx.xx - xx.xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "DSP:T14-3.01",
+   "title": "Primary Endpoint Analysis: ADAS Cog (11) - Change from Baseline to Week 24 - LOCF",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 3
+   },
+   "columns": [
+    {
+     "id": "PBO",
+     "label": "Placebo"
+    },
+    {
+     "id": "LOW",
+     "label": "Xanomeline Low Dose"
+    },
+    {
+     "id": "HIGH",
+     "label": "Xanomeline High Dose"
+    }
+   ],
+   "sections": [
+    {
+     "id": "POP",
+     "label": "",
+     "rows": [
+      {
+       "id": "BIGN",
+       "label": "N",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.POP.BIGN.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "group": "Placebo",
+          "op": "bign",
+          "populationDataset": "ADSL",
+          "groupVariable": "TRT01P"
+         },
+         "format": "(N=xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.POP.BIGN.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "bign",
+          "populationDataset": "ADSL",
+          "groupVariable": "TRT01P"
+         },
+         "format": "(N=xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.POP.BIGN.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "bign",
+          "populationDataset": "ADSL",
+          "groupVariable": "TRT01P"
+         },
+         "format": "(N=xx)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "BASELINE",
+     "label": "Baseline",
+     "rows": [
+      {
+       "id": "N",
+       "label": "n",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.BASELINE.N.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.N.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.N.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (SD)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEAN_SD.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEAN_SD.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEAN_SD.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN_RANGE",
+       "label": "Median (Range)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEDIAN_RANGE.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEDIAN_RANGE.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.BASELINE.MEDIAN_RANGE.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "WEEK24",
+     "label": "Week 24",
+     "rows": [
+      {
+       "id": "N",
+       "label": "n",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.WEEK24.N.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.N.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.N.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (SD)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEAN_SD.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEAN_SD.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEAN_SD.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN_RANGE",
+       "label": "Median (Range)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEDIAN_RANGE.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEDIAN_RANGE.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.WEEK24.MEDIAN_RANGE.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "CHG",
+     "label": "Change from Baseline",
+     "rows": [
+      {
+       "id": "N",
+       "label": "n",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.CHG.N.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.N.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.N.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "n"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEAN_SD",
+       "label": "Mean (SD)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.CHG.MEAN_SD.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEAN_SD.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEAN_SD.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "mean_sd"
+         },
+         "format": "xx.x (xx.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "MEDIAN_RANGE",
+       "label": "Median (Range)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.CHG.MEDIAN_RANGE.PBO",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Placebo",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEDIAN_RANGE.LOW",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline Low Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.CHG.MEDIAN_RANGE.HIGH",
+         "analysis": "AN:T14-3.01.DESC",
+         "compute": {
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 24
+          },
+          "group": "Xanomeline High Dose",
+          "op": "median_range"
+         },
+         "format": "xx.x (xx;xx)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "INFERENCE",
+     "label": "Inference",
+     "rows": [
+      {
+       "id": "DOSE_P",
+       "label": "p-value (dose response)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.DOSE_P.HIGH",
+         "analysis": "AN:T14-3.01.DOSE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "ancova_dose_p"
+         },
+         "format": "x.xxx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "VS_PBO_P",
+       "label": "p-value (Xan - Placebo)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_P.LOW",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "pairwise_p",
+          "contrast": [
+           "Xanomeline Low Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xxx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_P.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_p",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xxx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "VS_PBO_DIFF",
+       "label": "Diff of LS means (SE)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_DIFF.LOW",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "pairwise_diff_se",
+          "contrast": [
+           "Xanomeline Low Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.x (x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_DIFF.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_diff_se",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.x (x.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "VS_PBO_CI",
+       "label": "95% CI",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_CI.LOW",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline Low Dose",
+          "op": "pairwise_ci",
+          "contrast": [
+           "Xanomeline Low Dose",
+           "Placebo"
+          ]
+         },
+         "format": "(x.x;x.x)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.01.INFERENCE.VS_PBO_CI.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_ci",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "(x.x;x.x)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "HI_LO_P",
+       "label": "p-value (Xan High - Xan Low)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.HI_LO_P.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_p",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Xanomeline Low Dose"
+          ]
+         },
+         "format": "x.xxx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "HI_LO_DIFF",
+       "label": "Diff of LS means (SE)",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.HI_LO_DIFF.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_diff_se",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Xanomeline Low Dose"
+          ]
+         },
+         "format": "x.x (x.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "HI_LO_CI",
+       "label": "95% CI",
+       "cells": [
+        {
+         "id": "CELL:T14-3.01.INFERENCE.HI_LO_CI.HIGH",
+         "analysis": "AN:T14-3.01.PAIRWISE",
+         "compute": {
+          "group": "Xanomeline High Dose",
+          "op": "pairwise_ci",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Xanomeline Low Dose"
+          ]
+         },
+         "format": "(x.x;x.x)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "DSP:T14-3.02",
+   "title": "ANCOVA of Change from Baseline at Week 20",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 4
+   },
+   "columns": [
+    {
+     "id": "BL_N",
+     "label": "Baseline N"
+    },
+    {
+     "id": "BL_MEAN_SD",
+     "label": "Baseline Mean (SD)"
+    },
+    {
+     "id": "W20_N",
+     "label": "Week 20 N"
+    },
+    {
+     "id": "W20_MEAN_SD",
+     "label": "Week 20 Mean (SD)"
+    },
+    {
+     "id": "CHG_N",
+     "label": "Change N"
+    },
+    {
+     "id": "CHG_MEAN_SD",
+     "label": "Change Mean (SD)"
+    },
+    {
+     "id": "LSMEAN_CI",
+     "label": "LS Mean (95% CI)"
+    }
+   ],
+   "sections": [
+    {
+     "id": "BYTRT",
+     "label": "",
+     "rows": [
+      {
+       "id": "HIGH",
+       "label": "Xanomeline High Dose",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.BL_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.BL_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.x ( x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.W20_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.W20_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.x ( x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.CHG_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.CHG_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.x ( x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.HIGH.LSMEAN_CI",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "lsmean_ci",
+          "group": "Xanomeline High Dose"
+         },
+         "format": "x.xx (x.xx, x.xx)",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "PBO",
+       "label": "Placebo",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.BL_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.BL_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "BASE",
+          "where": {
+           "AVISITN": 0
+          },
+          "group": "Placebo"
+         },
+         "format": "x.x ( x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.W20_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.W20_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "AVAL",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "x.x ( x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.CHG_N",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "n",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.CHG_MEAN_SD",
+         "analysis": "AN:T14-3.02.DESC",
+         "compute": {
+          "op": "mean_sd",
+          "variable": "CHG",
+          "where": {
+           "AVISITN": 20,
+           "CHG": {
+            "notnull": true
+           },
+           "BASE": {
+            "notnull": true
+           }
+          },
+          "group": "Placebo"
+         },
+         "format": "x.x ( x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.BYTRT.PBO.LSMEAN_CI",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "lsmean_ci",
+          "group": "Placebo"
+         },
+         "format": "x.xx (x.xx, x.xx)",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "PAIRWISE",
+     "label": "Pairwise Comparison",
+     "rows": [
+      {
+       "id": "HIGH_VS_PBO",
+       "label": "Xanomeline High Dose vs. Placebo",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.PAIRWISE.HIGH_VS_PBO.DIFF_CI",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "diff_ci_normal",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xx (x.xx, x.xx)",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:T14-3.02.PAIRWISE.HIGH_VS_PBO.P",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "diff_p",
+          "contrast": [
+           "Xanomeline High Dose",
+           "Placebo"
+          ]
+         },
+         "format": "x.xxx",
+         "status": "planned"
+        }
+       ]
+      }
+     ],
+     "columns": [
+      {
+       "id": "DIFF_CI",
+       "label": "Difference in LS Mean (95% CI)"
+      },
+      {
+       "id": "P",
+       "label": "p-Value"
+      }
+     ]
+    },
+    {
+     "id": "FIT",
+     "label": "",
+     "rows": [
+      {
+       "id": "RMSE",
+       "label": "Root Mean Squared Error of Change",
+       "cells": [
+        {
+         "id": "CELL:T14-3.02.FIT.RMSE.RMSE",
+         "analysis": "AN:T14-3.02.ANCOVA",
+         "compute": {
+          "op": "rmse_n"
+         },
+         "format": "x.xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ],
+     "columns": [
+      {
+       "id": "RMSE",
+       "label": "RMSE"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "DSP:F14-1",
+   "title": "KM plot for Time to First Dermatologic Event: Safety population",
+   "renderedIn": {
+    "doc": "DOC:TLFREPORT",
+    "page": 5
+   },
+   "columns": [
+    {
+     "id": "T0",
+     "label": "0"
+    },
+    {
+     "id": "T20",
+     "label": "20"
+    },
+    {
+     "id": "T40",
+     "label": "40"
+    },
+    {
+     "id": "T60",
+     "label": "60"
+    },
+    {
+     "id": "T80",
+     "label": "80"
+    },
+    {
+     "id": "T100",
+     "label": "100"
+    },
+    {
+     "id": "T120",
+     "label": "120"
+    },
+    {
+     "id": "T140",
+     "label": "140"
+    },
+    {
+     "id": "T160",
+     "label": "160"
+    },
+    {
+     "id": "T180",
+     "label": "180"
+    }
+   ],
+   "sections": [
+    {
+     "id": "ATRISK",
+     "label": "At Risk",
+     "rows": [
+      {
+       "id": "PBO",
+       "label": "Placebo",
+       "cells": [
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T0",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 0,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T20",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 20,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T40",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 40,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T60",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 60,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T80",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 80,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T100",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 100,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T120",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 120,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T140",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 140,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T160",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 160,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.PBO.T180",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 180,
+          "group": "Placebo"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "LOW",
+       "label": "Xanomeline Low Dose",
+       "cells": [
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T0",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 0,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T20",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 20,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T40",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 40,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T60",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 60,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T80",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 80,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T100",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 100,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T120",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 120,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T140",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 140,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T160",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 160,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.LOW.T180",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 180,
+          "group": "Xanomeline Low Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      },
+      {
+       "id": "HIGH",
+       "label": "Xanomeline High Dose",
+       "cells": [
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T0",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 0,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T20",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 20,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T40",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 40,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T60",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 60,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T80",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 80,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T100",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 100,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T120",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 120,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T140",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 140,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T160",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 160,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        },
+        {
+         "id": "CELL:F14-1.ATRISK.HIGH.T180",
+         "analysis": "AN:F14-1.KM",
+         "compute": {
+          "op": "at_risk",
+          "variable": "AVAL",
+          "time": 180,
+          "group": "Xanomeline High Dose"
+         },
+         "format": "xx",
+         "status": "planned"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "variables": [
+  {
+   "id": "VAR:ADADAS.ANL01FL"
+  },
+  {
+   "id": "VAR:ADADAS.AVAL"
+  },
+  {
+   "id": "VAR:ADADAS.AVISIT"
+  },
+  {
+   "id": "VAR:ADADAS.AVISITN"
+  },
+  {
+   "id": "VAR:ADADAS.BASE"
+  },
+  {
+   "id": "VAR:ADADAS.CHG"
+  },
+  {
+   "id": "VAR:ADADAS.DTYPE"
+  },
+  {
+   "id": "VAR:ADADAS.EFFFL"
+  },
+  {
+   "id": "VAR:ADADAS.ITTFL"
+  },
+  {
+   "id": "VAR:ADADAS.PARAMCD"
+  },
+  {
+   "id": "VAR:ADADAS.SITEGR1"
+  },
+  {
+   "id": "VAR:ADADAS.TRT01P"
+  },
+  {
+   "id": "VAR:ADADAS.TRTP"
+  },
+  {
+   "id": "VAR:ADADAS.TRTPN"
+  },
+  {
+   "id": "VAR:ADADAS.USUBJID"
+  },
+  {
+   "id": "VAR:ADAE.ASTDT"
+  },
+  {
+   "id": "VAR:ADLBC.AVAL"
+  },
+  {
+   "id": "VAR:ADLBC.AVISITN"
+  },
+  {
+   "id": "VAR:ADLBC.BASE"
+  },
+  {
+   "id": "VAR:ADLBC.CHG"
+  },
+  {
+   "id": "VAR:ADLBC.ITTFL"
+  },
+  {
+   "id": "VAR:ADLBC.PARAMCD"
+  },
+  {
+   "id": "VAR:ADLBC.TRTP"
+  },
+  {
+   "id": "VAR:ADLBC.TRTPN"
+  },
+  {
+   "id": "VAR:ADSL.AGE"
+  },
+  {
+   "id": "VAR:ADSL.AGEGR1"
+  },
+  {
+   "id": "VAR:ADSL.BMIBL"
+  },
+  {
+   "id": "VAR:ADSL.EFFFL"
+  },
+  {
+   "id": "VAR:ADSL.HEIGHTBL"
+  },
+  {
+   "id": "VAR:ADSL.ITTFL"
+  },
+  {
+   "id": "VAR:ADSL.MMSETOT"
+  },
+  {
+   "id": "VAR:ADSL.RACE"
+  },
+  {
+   "id": "VAR:ADSL.SAFFL"
+  },
+  {
+   "id": "VAR:ADSL.SITEGR1"
+  },
+  {
+   "id": "VAR:ADSL.STUDYID"
+  },
+  {
+   "id": "VAR:ADSL.TRT01A"
+  },
+  {
+   "id": "VAR:ADSL.TRT01P"
+  },
+  {
+   "id": "VAR:ADSL.USUBJID"
+  },
+  {
+   "id": "VAR:ADSL.WEIGHTBL"
+  },
+  {
+   "id": "VAR:ADTTE.AVAL"
+  },
+  {
+   "id": "VAR:ADTTE.PARAMCD"
+  },
+  {
+   "id": "VAR:ADTTE.SAFFL"
+  },
+  {
+   "id": "VAR:ADTTE.STUDYID"
+  },
+  {
+   "id": "VAR:ADTTE.TRT01A"
+  }
+ ],
+ "parameters": [
+  {
+   "id": "PARAM:ADADAS.ACTOT"
+  },
+  {
+   "id": "PARAM:ADLBC.GLUC"
+  },
+  {
+   "id": "PARAM:ADTTE.TTDE"
+  }
+ ],
+ "programs": [
+  {
+   "id": "PGM:pilot5-helper-fcns.r"
+  },
+  {
+   "id": "PGM:adsl.r"
+  },
+  {
+   "id": "PGM:adadas.r"
+  },
+  {
+   "id": "PGM:adae.r"
+  },
+  {
+   "id": "PGM:adlbc.r"
+  },
+  {
+   "id": "PGM:adtte.r"
+  },
+  {
+   "id": "PGM:tlf-demographic.r"
+  },
+  {
+   "id": "PGM:tlf-efficacy.r"
+  },
+  {
+   "id": "PGM:tlf-kmplot.r"
+  },
+  {
+   "id": "PGM:tlf-primary.r"
+  }
+ ],
+ "notes": [
+  {
+   "id": "NOTE:PURPOSE",
+   "about": [
+    "DOC:SPEC"
+   ],
+   "title": "Purpose",
+   "text": "This guide gives context for the analysis datasets and terminology beyond what the data definition provides, and summarizes ADaM conformance findings. Generated sections are built from the package itself; authored sections hold the study team's explanations.",
+   "status": "final",
+   "section": "1.1"
+  },
+  {
+   "id": "NOTE:SOURCE-DATA",
+   "about": [
+    "DS:ADSL",
+    "DS:ADADAS",
+    "DS:ADAE",
+    "DS:ADLBC",
+    "DS:ADTTE"
+   ],
+   "title": "Source data",
+   "text": "The ADaM datasets were derived from SDTM version 1.2 of the CDISC SDTM/ADaM Pilot Project data, publicly available in the PHUSE GitHub repository.",
+   "status": "final",
+   "section": "1.3"
+  },
+  {
+   "id": "NOTE:ASTDT-IMPUTATION",
+   "about": [
+    "VAR:ADAE.ASTDT"
+   ],
+   "title": "Partial AE start dates",
+   "text": "ASTDT is derived from AE.AESTDTC. A missing day is imputed as the 1st of the month; if month and day are both missing, no imputation is done.",
+   "status": "final",
+   "section": "3.4"
+  },
+  {
+   "id": "NOTE:ADADAS-WINDOWS",
+   "about": [
+    "VAR:ADADAS.AVISIT",
+    "VAR:ADADAS.AVISITN",
+    "VAR:ADADAS.DTYPE"
+   ],
+   "title": "ADAS-Cog analysis visits",
+   "text": "Records are assigned to analysis visits by study day: Baseline (ADY <= 1), Week 8 (2-84), Week 16 (85-140), Week 24 (> 140). Missing Week 8, 16 and 24 values are carried forward from the last observed visit (DTYPE = 'LOCF').",
+   "status": "final",
+   "section": "3.3"
+  },
+  {
+   "id": "NOTE:ACTOT-MISSING-ITEMS",
+   "about": [
+    "PARAM:ADADAS.ACTOT",
+    "AN:T14-3.01.PAIRWISE"
+   ],
+   "title": "ADAS-Cog total with missing items",
+   "text": "ACTOT is taken from SDTM QS (QSTESTCD = 'ACTOT'). At visits where all 11 contributing items are present it equals their sum. At 21 visits (13 subjects) with missing items it carries the SAP section 14.2 adjustment, which is applied upstream of the submitted ADaM programs; 10 Week 24 records in the primary analysis depend on it.",
+   "status": "draft",
+   "section": "3.4"
+  },
+  {
+   "id": "NOTE:T14-3.02-CAPTION",
+   "about": [
+    "DSP:T14-3.02"
+   ],
+   "title": "Glucose table caption",
+   "text": "The TLF report captions this table 'Primary Endpoint Analysis ... LOCF'. The analysis uses observed Week 20 values (ADLBC has no DTYPE), and glucose is a safety endpoint; the program title 'ANCOVA of Change from Baseline at Week 20' is the accurate one.",
+   "status": "draft"
+  },
+  {
+   "id": "NOTE:T14-3.02-RMSE",
+   "about": [
+    "CELL:T14-3.02.FIT.RMSE.RMSE"
+   ],
+   "title": "RMSE definition",
+   "text": "The value is sqrt(mean(residual^2)), i.e. divided by n, not the model residual standard error sqrt(SSE/df).",
+   "status": "draft"
+  },
+  {
+   "id": "NOTE:ADLBC-EOT",
+   "about": [
+    "DS:ADLBC"
+   ],
+   "title": "End-of-treatment visit",
+   "text": "Some lab summaries present a derived end-of-treatment visit, AVISITN = 99.",
+   "status": "final",
+   "section": "5.2"
+  }
+ ],
+ "findings": []
+}

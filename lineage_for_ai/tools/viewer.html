@@ -1,0 +1,552 @@
+<title>ADRG Trace Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: reviewer's workbench - display rail | shell/actual table | lineage trace; stacks to one column on phones. */
+:root {
+  --bg: #f4f6f8; --surface: #ffffff; --surface-2: #edf0f4; --ink: #17202b; --muted: #5b6778; --line: #d8dde5;
+  --accent: #1c5d8a; --accent-soft: #e1ecf5; --adam: #4a4fae; --adam-soft: #ebebfa; --sdtm: #85561a; --sdtm-soft: #f6eee2;
+  --ok: #1b7841; --warn: #976000; --bad: #bd342a; --plan: #8792a2; --focus: #1c5d8a;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #10141a; --surface: #161b23; --surface-2: #1d242e; --ink: #e3e7ed; --muted: #98a3b3; --line: #2a323e;
+  --accent: #72b2e4; --accent-soft: #1a2b3b; --adam: #a3a6f2; --adam-soft: #23244a; --sdtm: #dba864; --sdtm-soft: #3a2c19;
+  --ok: #4fc27f; --warn: #e2a73b; --bad: #f07368; --plan: #6c7686; --focus: #72b2e4; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #10141a; --surface: #161b23; --surface-2: #1d242e; --ink: #e3e7ed; --muted: #98a3b3; --line: #2a323e;
+  --accent: #72b2e4; --accent-soft: #1a2b3b; --adam: #a3a6f2; --adam-soft: #23244a; --sdtm: #dba864; --sdtm-soft: #3a2c19;
+  --ok: #4fc27f; --warn: #e2a73b; --bad: #f07368; --plan: #6c7686; --focus: #72b2e4; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 14px/1.5 var(--body); margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px 40px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; }
+.mono, code { font-family: var(--mono); font-size: 12px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* header */
+.top { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.eyebrow { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.top h1 { font-size: 22px; line-height: 1.2; margin-top: 6px; max-width: 46ch; }
+.sub { color: var(--muted); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 7px 12px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--surface); font-weight: 500; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.msg { margin: 10px 0 0; padding: 8px 12px; border-radius: 8px; background: var(--accent-soft); }
+.msg.err { background: color-mix(in srgb, var(--bad) 14%, var(--surface)); color: var(--ink); }
+
+/* chips and pills */
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px; border-radius: 999px; font: 500 11.5px/1.6 var(--mono); border: 1px solid var(--line); background: var(--surface); white-space: nowrap; }
+.pill.ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+.pill.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, var(--line)); }
+.pill.bad { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 45%, var(--line)); }
+.pill.plan { color: var(--muted); }
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; background: var(--plan); flex: none; }
+.dot.verified { background: var(--ok); } .dot.mismatch { background: var(--bad); } .dot.missing { background: var(--warn); }
+
+/* workbench */
+.work { display: grid; gap: 16px; margin-top: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .work { grid-template-columns: 220px minmax(0, 1fr); } .trace { grid-column: 2; } }
+@media (min-width: 1280px) { .work { grid-template-columns: 228px minmax(0, 1fr) 430px; } .trace { grid-column: 3; grid-row: 1; } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+.rail { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.rail h2, .label { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.tabs { display: flex; flex-direction: column; gap: 2px; }
+.tabs a { text-decoration: none; color: var(--ink); padding: 6px 10px; border-radius: 6px; display: flex; justify-content: space-between; gap: 8px; }
+.tabs a[aria-current="page"] { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.dlist { display: flex; flex-direction: column; gap: 4px; }
+.dbtn { text-align: left; border: 1px solid transparent; background: transparent; border-radius: 8px; padding: 8px 10px; cursor: pointer; display: grid; gap: 4px; }
+.dbtn:hover { background: var(--surface-2); }
+.dbtn[aria-current="true"] { background: var(--surface); border-color: var(--line); }
+.dbtn .t { font-weight: 500; } .dbtn .s { font-size: 12px; color: var(--muted); }
+.bar { height: 4px; border-radius: 2px; background: var(--surface-2); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--ok); }
+.stages { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 4px; }
+.stages li { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; }
+.stages li .n { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font: 500 10px var(--mono); }
+.stages li.done .n { background: var(--surface-2); color: var(--ink); }
+.stages li.now { color: var(--ink); font-weight: 600; } .stages li.now .n { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.open { margin: 8px 0 0; padding-left: 16px; font-size: 12.5px; color: var(--muted); }
+@media (max-width: 859px) {
+  .dlist { flex-direction: row; overflow-x: auto; padding-bottom: 4px; } .dbtn { min-width: 190px; }
+  .tabs { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* display table */
+.dhead { padding: 14px 16px 10px; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+.dhead h2 { font-size: 18px; line-height: 1.25; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 12px; color: var(--muted); font-size: 12.5px; }
+.tablewrap { overflow-x: auto; padding: 4px 8px 12px; }
+table.shell { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; margin-top: 8px; }
+table.shell th, table.shell td { padding: 0; border-bottom: 1px solid var(--line); text-align: right; vertical-align: middle; }
+table.shell thead th { font: 500 12px/1.3 var(--body); color: var(--muted); padding: 8px 8px; text-align: right; }
+table.shell th.rl, table.shell td.rl { text-align: left; padding: 6px 8px; min-width: 150px; }
+table.shell tr.sec td { font-weight: 600; padding: 10px 8px 4px; border-bottom: 0; text-align: left; font-family: var(--display); font-size: 13.5px; }
+.cellbtn { width: 100%; border: 0; background: transparent; padding: 6px 8px; cursor: pointer; display: flex; gap: 6px; align-items: center; justify-content: flex-end; border-radius: 6px; font: 400 13px/1.3 var(--mono); white-space: pre; }
+.cellbtn:hover { background: var(--surface-2); }
+.cellbtn[aria-pressed="true"] { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.cellbtn.shell { color: var(--muted); }
+.note { color: var(--muted); font-size: 12.5px; padding: 6px 8px 0; }
+
+/* trace */
+.trace { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 14px; align-self: start; }
+.trace h2 { font-size: 16px; }
+.cellcard { display: grid; gap: 8px; }
+.cid { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.cid code { background: var(--surface-2); padding: 2px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+.big { font: 500 24px/1.15 var(--mono); letter-spacing: -.01em; }
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 3px 12px; font-size: 13px; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.chain { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.step { display: grid; grid-template-columns: 66px minmax(0, 1fr); gap: 10px; }
+.lvl { font: 600 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 0; text-align: center; border-radius: 4px; height: fit-content;
+  background: var(--accent-soft); color: var(--accent); }
+.lvl.adam { background: var(--adam-soft); color: var(--adam); } .lvl.sdtm { background: var(--sdtm-soft); color: var(--sdtm); }
+.lvl.code, .lvl.data { background: var(--surface-2); color: var(--muted); }
+.step .body { min-width: 0; display: grid; gap: 4px; }
+.step .title { font-weight: 600; overflow-wrap: anywhere; }
+.step .desc { color: var(--muted); font-size: 13px; }
+details.var { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; background: var(--surface); }
+details.var + details.var { margin-top: 6px; }
+details.var summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; list-style-position: inside; }
+details.var .inner { display: grid; gap: 6px; margin-top: 6px; }
+.vname { font: 500 13px var(--mono); }
+.vname.adam { color: var(--adam); } .vname.sdtm { color: var(--sdtm); }
+.anchors { display: grid; gap: 3px; }
+.anchor { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 6px; font-size: 12px; align-items: baseline; }
+.anchor .r { font: 500 10.5px var(--mono); text-transform: uppercase; color: var(--muted); }
+.anchor code { display: block; background: var(--surface-2); padding: 3px 6px; border-radius: 4px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.preds { border-left: 2px solid var(--line); padding-left: 10px; margin-left: 2px; display: grid; gap: 6px; }
+.find { border-left: 3px solid var(--warn); padding: 4px 8px; font-size: 12.5px; background: var(--surface-2); border-radius: 0; }
+.find.error { border-left-color: var(--bad); } .find.info { border-left-color: var(--plan); }
+.defcmp { font-size: 12px; padding: 4px 8px; border-radius: 6px; background: var(--accent-soft); }
+.defcmp.diff { background: color-mix(in srgb, var(--warn) 16%, var(--surface)); }
+.notecard { border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; font-size: 13px; display: grid; gap: 4px; }
+
+/* findings + datasets views */
+.view { padding: 14px 16px 16px; display: grid; gap: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button[aria-pressed="true"] { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.flist { display: grid; gap: 8px; }
+.fcard { border: 1px solid var(--line); border-left: 4px solid var(--warn); border-radius: 0 8px 8px 0; padding: 8px 12px; display: grid; gap: 6px; background: var(--surface); }
+.fcard.error { border-left-color: var(--bad); } .fcard.info { border-left-color: var(--plan); }
+.abouts { display: flex; flex-wrap: wrap; gap: 4px; }
+.abouts button { cursor: pointer; } .abouts button:hover { border-color: var(--accent); color: var(--accent); }
+table.grid { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+table.grid th, table.grid td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.grid th { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .cellbtn, .dbtn, .btn { transition: background .12s, border-color .12s; } }
+</style>
+
+<header class="top">
+  <div>
+    <div class="eyebrow">ADRG-JSON trace</div>
+    <h1 id="title">Loading…</h1>
+    <div class="sub" id="sub"></div>
+  </div>
+  <div class="actions">
+    <div class="seg" role="group" aria-label="Show">
+      <button id="mode-actual" type="button" aria-pressed="true">Actual results</button>
+      <button id="mode-shell" type="button" aria-pressed="false">Shell</button>
+    </div>
+    <label class="btn" for="file-adrg">Open adrg.json</label>
+    <input class="sr" type="file" id="file-adrg" accept=".json,application/json">
+    <label class="btn" for="file-define">Compare with define.xml</label>
+    <input class="sr" type="file" id="file-define" accept=".xml,application/xml,text/xml">
+  </div>
+</header>
+<div id="msg" class="msg" role="status" hidden></div>
+
+<main class="work">
+  <aside class="rail">
+    <nav aria-label="Views"><div class="tabs" id="tabs"></div></nav>
+    <section><h2>Displays</h2><div class="dlist" id="dlist" style="margin-top:8px"></div></section>
+    <section><h2>Lifecycle</h2><ol class="stages" id="stages"></ol><ul class="open" id="openitems"></ul></section>
+  </aside>
+  <section class="panel" id="center"></section>
+  <section class="panel trace" id="trace" aria-live="polite"></section>
+</main>
+
+<script>
+const EMBEDDED = /*ADRG_JSON*/null;
+const STAGES = ["planned", "specified", "programmed", "executed", "final"];
+const MODEL_OPS = new Set(["ancova_dose_p", "pairwise_p", "pairwise_diff_se", "pairwise_ci", "lsmean_ci", "diff_ci_normal", "diff_p", "rmse_n"]);
+const S = { a: null, define: null, disp: null, cell: null, mode: "actual", sev: "all", ix: null };
+
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids.flat()) if (k != null && k !== false) el.append(k.nodeType ? k : String(k));
+  return el;
+}
+const short = r => (r || "").split(":").slice(1).join(":");
+const pill = (t, cls) => h("span", { class: "pill " + (cls || "") }, t);
+const sevCls = s => ({ error: "bad", warning: "warn", info: "plan", verified: "ok", mismatch: "bad", missing: "warn", planned: "plan",
+  interactive: "warn", scripted: "ok", unknown: "plan", draft: "warn", final: "ok", produced: "plan" }[s] || "plan");
+function say(text, err) { const m = document.getElementById("msg"); m.textContent = text; m.className = "msg" + (err ? " err" : ""); m.hidden = !text; }
+
+function index(a) {
+  const ix = { byId: {}, findingsAbout: {}, notesAbout: {}, cells: [], cellDisp: {}, dsRole: {} };
+  for (const k of ["datasets", "variables", "parameters", "programs", "analyses", "displays", "documents", "estimands"])
+    for (const x of a[k] || []) ix.byId[x.id] = x;
+  for (const d of a.datasets || []) ix.dsRole[d.id] = d.role;
+  for (const d of a.displays || []) for (const s of d.sections) for (const r of s.rows) for (const c of r.cells) {
+    ix.cells.push(c); ix.byId[c.id] = c; ix.cellDisp[c.id] = { d, s, r };
+  }
+  for (const f of a.findings || []) for (const r of f.about) (ix.findingsAbout[r] ||= []).push(f);
+  for (const n of a.notes || []) for (const r of n.about) (ix.notesAbout[r] ||= []).push(n);
+  return ix;
+}
+
+/* ADRG-JSON core profile (adrgCore 0.2.0): expand to the shape the board works on. Labels and origins come from define.xml. */
+function fromCore(c) {
+  const src = c.sources || {}, cellsOf = d => d.sections.flatMap(s => s.rows.flatMap(r => r.cells));
+  const dsName = id => short(id).split(".")[0];
+  const kind = id => { const n = short(id).toLowerCase(); return n.startsWith("tlf") ? "tlf" : /helper|fcns/.test(n) ? "helper" : "adam"; };
+  const writer = {}, reads = {};
+  for (const p of c.programs || []) { for (const w of p.writes || []) if (w.startsWith("DS:")) writer[w] = p.id; reads[p.id] = (p.reads || []).filter(r => r.startsWith("DS:")); }
+  const dsIds = new Set([...Object.keys(src).filter(k => k.startsWith("DS:")), ...(c.variables || []).map(v => "DS:" + dsName(v.id)), ...(c.analyses || []).map(a => a.dataset)]);
+  const datasets = [...dsIds].map(id => ({ id, name: short(id), role: short(id).startsWith("AD") ? "analysis" : "tabulation",
+    file: src[id] ? { path: src[id].path, sha256: src[id].sha256 } : null, producedBy: writer[id] || null, dependsOn: reads[writer[id]] || [] }));
+  const variables = (c.variables || []).map(v => ({ id: v.id, dataset: "DS:" + dsName(v.id), name: short(v.id).split(".")[1],
+    derivation: v.derivation ? { text: v.derivation } : null, predecessors: v.predecessors || [], codeAnchors: v.codeAnchors || [] }));
+  const byDs = {}; for (const v of variables) (byDs[v.dataset] ||= []).push(v.id);
+  const analyses = (c.analyses || []).map(a => ({ id: a.id, purpose: a.purpose, estimand: a.estimand, dataset: a.dataset,
+    analysisSet: a.population || {}, dataSubset: a.subset || {}, groupBy: a.by, parameters: a.parameters || [],
+    method: { description: a.method || "", model: a.model, implementation: a.implementation }, program: a.program,
+    variables: [...(byDs[a.dataset] || []), ...(a.dataset !== "DS:ADSL" ? byDs["DS:ADSL"] || [] : [])] }));
+  const anProg = Object.fromEntries(analyses.map(a => [a.id, a.program]));
+  const displays = (c.displays || []).map(d => {
+    const s = short(d.id), fig = s.startsWith("F");
+    const sections = d.sections.map(sec => ({ ...sec, rows: sec.rows.map(r => ({ ...r, cells: r.cells.map(x => ({ id: x.id, column: x.id.split(".").pop(),
+      analysis: x.analysis, compute: x.compute, format: x.format, result: { value: x.value ?? null, status: x.status || "planned", recomputed: x.recomputed ?? null } })) })) }));
+    const ans = [...new Set(d.sections.flatMap(sec => sec.rows.flatMap(r => r.cells.map(x => x.analysis))))];
+    return { id: d.id, displayId: (fig ? "Figure " : "Table ") + s.slice(1), type: fig ? "figure" : "table", title: d.title, renderedIn: d.renderedIn,
+      columns: d.columns || [], sections, analyses: ans, program: ans.map(x => anProg[x]).find(Boolean) || null };
+  });
+  const parameters = (c.parameters || []).map(p => ({ id: p.id, dataset: "DS:" + dsName(p.id), paramcd: short(p.id).split(".")[1],
+    derivation: { text: p.derivation, whereClause: p.where } }));
+  const programs = (c.programs || []).map(p => ({ id: p.id, kind: kind(p.id), sha256: src[p.id]?.sha256, path: src[p.id]?.path, reads: p.reads || [], writes: p.writes || [],
+    run: p.run || { mode: "unknown", evidence: "No build receipt recorded." } }));
+  const all = displays.flatMap(cellsOf), unver = all.filter(x => x.result.status !== "verified").length;
+  const errs = (c.findings || []).filter(f => f.severity === "error").length, drafts = (c.notes || []).filter(n => n.status === "draft").length;
+  const openItems = [unver ? `${unver} of ${all.length} cells not verified` : null, errs ? `${errs} error findings` : null, drafts ? `${drafts} notes in draft` : null].filter(Boolean);
+  return { adrgJSONVersion: "core " + c.adrgCore, profile: "core", study: { studyId: c.study, title: "Study " + c.study },
+    lifecycle: { stage: c.stage, openItems }, datasets, variables, parameters, programs, analyses, displays, notes: c.notes || [], findings: c.findings || [] };
+}
+
+function load(a, label) {
+  if (a && a.adrgCore) a = fromCore(a);
+  if (!a || !a.adrgJSONVersion || !Array.isArray(a.displays)) throw new Error("This file is not ADRG-JSON: it has no adrgJSONVersion or displays.");
+  S.a = a; S.ix = index(a);
+  S.disp = a.displays.find(d => d.id === "DSP:T14-3.01") || a.displays[0] || null;
+  const pref = S.ix.byId["CELL:T14-3.01.INFERENCE.VS_PBO_DIFF.HIGH"];
+  S.cell = pref || (S.disp ? S.disp.sections[0]?.rows[0]?.cells[0] : null);
+  renderAll();
+  if (label) say(label);
+}
+
+/* ------------------------------------------------------------- header + rail */
+function renderHeader() {
+  const a = S.a, lc = a.lifecycle;
+  document.getElementById("title").textContent = a.study.title;
+  const cells = S.ix.cells, ver = cells.filter(c => c.result?.status === "verified").length;
+  const err = (a.findings || []).filter(f => f.severity === "error").length;
+  const sub = document.getElementById("sub"); sub.replaceChildren(...[
+    h("span", { class: "mono" }, a.study.studyId),
+    pill("stage: " + lc.stage, lc.stage === "final" ? "ok" : "warn"),
+    pill(`${ver}/${cells.length} cells verified`, ver === cells.length ? "ok" : "warn"),
+    err ? pill(`${err} errors`, "bad") : null,
+    S.define ? pill(`define.xml: ${S.define.count} variables`, "ok") : null].filter(Boolean));
+}
+function renderRail() {
+  const view = currentView();
+  const errs = (S.a.findings || []).filter(f => f.severity === "error").length;
+  document.getElementById("tabs").replaceChildren(
+    ...[["displays", "Displays", S.a.displays.length], ["findings", "Findings", (S.a.findings || []).length], ["datasets", "Datasets", (S.a.datasets || []).length]]
+      .map(([id, t, n]) => h("a", { href: "#" + id, "aria-current": view === id ? "page" : null }, t, h("span", { class: "mono" }, id === "findings" && errs ? `${errs} err` : n))));
+  document.getElementById("dlist").replaceChildren(...S.a.displays.map(d => {
+    const cs = d.sections.flatMap(s => s.rows.flatMap(r => r.cells)), v = cs.filter(c => c.result?.status === "verified").length;
+    return h("button", { class: "dbtn", type: "button", "aria-current": S.disp === d && view === "displays" ? "true" : "false",
+      onclick: () => { S.disp = d; S.cell = cs[0]; if (location.hash !== "#displays") location.hash = "displays"; renderAll(); } },
+      h("span", { class: "t" }, d.displayId), h("span", { class: "s" }, d.title),
+      h("span", { class: "bar", "aria-hidden": "true" }, h("i", { style: `width:${cs.length ? (100 * v / cs.length) : 0}%` })),
+      h("span", { class: "s mono" }, S.mode === "shell" ? `${cs.length} cells planned` : `${v}/${cs.length} verified`));
+  }));
+  const at = STAGES.indexOf(S.a.lifecycle.stage);
+  document.getElementById("stages").replaceChildren(...STAGES.map((s, i) =>
+    h("li", { class: i < at ? "done" : i === at ? "now" : "" }, h("span", { class: "n" }, i + 1), s)));
+  document.getElementById("openitems").replaceChildren(...(S.a.lifecycle.openItems || []).map(o => h("li", {}, o)));
+}
+
+/* ------------------------------------------------------------- display table */
+function renderDisplay() {
+  const d = S.disp, center = document.getElementById("center");
+  if (!d) { center.replaceChildren(h("div", { class: "view" }, "No displays in this file.")); return; }
+  const prog = S.ix.byId[d.program];
+  const head = h("div", { class: "dhead" },
+    h("div", { class: "eyebrow" }, d.displayId + " · " + d.type),
+    h("h2", {}, d.title), d.subtitle ? h("div", { class: "meta" }, d.subtitle) : null,
+    h("div", { class: "meta" },
+      h("span", {}, "Population: " + (d.population || Object.entries(S.ix.byId[d.analyses?.[0]]?.analysisSet || {}).map(([k, v]) => `${k}=${v}`).join(", ") || "–")),
+      h("span", {}, "Program: ", h("code", {}, short(d.program) || "–")),
+      prog?.run ? pill("run: " + prog.run.mode, sevCls(prog.run.mode)) : null,
+      d.renderedIn ? h("span", {}, `Rendered: ${short(d.renderedIn.doc)} p.${d.renderedIn.page}`) : null,
+      pill(S.mode === "shell" ? "shell view" : d.status, S.mode === "shell" ? "plan" : sevCls(d.status))));
+  const wrap = h("div", { class: "tablewrap" });
+  // group consecutive sections that share a column set into one table
+  let groups = [], cur = null;
+  for (const s of d.sections) {
+    const cols = s.columns || d.columns, key = cols.map(c => c.id).join("|");
+    if (!cur || cur.key !== key) { cur = { key, cols, secs: [] }; groups.push(cur); }
+    cur.secs.push(s);
+  }
+  for (const g of groups) {
+    const t = h("table", { class: "shell" });
+    t.append(h("thead", {}, h("tr", {}, h("th", { class: "rl", scope: "col" }, d.type === "figure" ? "Number at risk" : ""),
+      ...g.cols.map(c => h("th", { scope: "col" }, d.type === "figure" ? "Day " + c.label : c.label)))));
+    const tb = h("tbody");
+    for (const s of g.secs) {
+      if (s.label) tb.append(h("tr", { class: "sec" }, h("td", { colspan: g.cols.length + 1 }, s.label)));
+      for (const r of s.rows) {
+        const byCol = Object.fromEntries(r.cells.map(c => [c.column, c]));
+        tb.append(h("tr", {}, h("td", { class: "rl" }, r.label),
+          ...g.cols.map(col => { const c = byCol[col.id]; return h("td", {}, c ? cellButton(c, r, col) : ""); })));
+      }
+    }
+    t.append(tb); wrap.append(t);
+  }
+  if (d.type === "figure") wrap.append(h("p", { class: "note" }, "The curves themselves are not cell-traced; the number-at-risk table under the plot is."));
+  for (const fn of d.footnotes || []) wrap.append(h("p", { class: "note" }, fn));
+  center.replaceChildren(head, wrap);
+}
+function cellButton(c, r, col) {
+  const shell = S.mode === "shell", st = c.result?.status || "planned";
+  const label = shell ? c.format : (c.result?.value ?? c.format);
+  return h("button", { class: "cellbtn" + (shell ? " shell" : ""), type: "button", "aria-pressed": S.cell === c ? "true" : "false",
+    "aria-label": `${r.label}, ${col.label}: ${label}${shell ? "" : ", " + st}`,
+    onclick: () => { S.cell = c; renderDisplay(); renderTrace(); if (matchMedia("(max-width: 1279px)").matches) document.getElementById("trace").scrollIntoView({ behavior: "smooth", block: "start" }); } },
+    shell ? null : h("span", { class: "dot " + st, "aria-hidden": "true" }), label);
+}
+
+/* ------------------------------------------------------------- trace */
+function variablesOf(c, an) {
+  const cp = c.compute, m = an.method?.model || {}, out = [];
+  if (MODEL_OPS.has(cp.op)) out.push(m.response, m.treatment, m.numericTreatment, ...(m.factors || []), ...(m.covariates || []));
+  else { out.push(cp.variable); if (cp.op === "bign") out.push(cp.groupVariable); }
+  out.push(an.groupBy, ...Object.keys(an.analysisSet || {}), ...Object.keys(an.dataSubset || {}), ...Object.keys(cp.where || {}));
+  return [...new Set(out.filter(Boolean))];
+}
+function varIdFor(name, an, c) {
+  const list = an.variables || [];
+  return list.find(v => v.split(".").pop() === name) || (c.compute.populationDataset ? `VAR:${c.compute.populationDataset}.${name}` : null);
+}
+function findingsBlock(ids) {
+  const seen = new Set(), out = [];
+  for (const id of ids) for (const f of S.ix.findingsAbout[id] || []) if (!seen.has(f.id)) { seen.add(f.id); out.push(h("div", { class: "find " + f.severity }, h("b", {}, f.severity + ": "), f.text)); }
+  return out;
+}
+function varNode(vid, depth, seen, open) {
+  const v = S.ix.byId[vid];
+  const ds = vid.split(":")[1].split(".")[0], role = S.ix.dsRole["DS:" + ds] === "tabulation" ? "sdtm" : "adam";
+  if (!v) return h("div", { class: "find" }, `${short(vid)} is not in the file.`);
+  if (seen.has(vid)) return h("div", { class: "desc mono" }, short(vid) + " (shown above)");
+  seen.add(vid);
+  const der = v.derivation?.text;
+  const def = S.define?.vars[`${ds}.${v.name}`];
+  const kids = [];
+  const vlabel = v.label || def?.label, vorigin = v.origin || def?.origin;
+  if (vlabel) kids.push(h("div", { class: "desc" }, vlabel));
+  if (der) kids.push(h("div", {}, h("span", { class: "label" }, "Derivation "), der));
+  if (S.define) kids.push(def
+    ? h("div", { class: "defcmp" + (def.methodText && der && def.methodText !== der ? " diff" : "") },
+        "define.xml: " + (def.methodText || def.origin || "no derivation"), def.methodText && der && def.methodText !== der ? " (differs from snapshot)" : "")
+    : h("div", { class: "defcmp diff" }, "Not in the loaded define.xml."));
+  if (v.codeAnchors?.length) kids.push(h("div", { class: "anchors" }, ...v.codeAnchors.map(k =>
+    h("div", { class: "anchor" }, h("span", { class: "r" }, k.role), h("div", {}, h("span", { class: "mono" }, `${short(k.program)}:${k.line}`), h("code", {}, k.excerpt))))));
+  kids.push(...findingsBlock([vid]));
+  if (v.predecessors?.length && depth < 5) kids.push(h("div", { class: "preds" }, h("div", { class: "label" }, "Comes from"), ...v.predecessors.map(p => varNode(p, depth + 1, seen, depth < 1))));
+  const errs = (S.ix.findingsAbout[vid] || []).filter(f => f.severity === "error").length;
+  return h("details", { class: "var", open: open || errs ? true : null },
+    h("summary", {}, h("span", { class: "vname " + role }, short(vid)), pill(role === "sdtm" ? "SDTM" : "ADaM", ""),
+      vorigin ? pill(vorigin, "plan") : null, errs ? pill(errs + " error", "bad") : null),
+    h("div", { class: "inner" }, ...kids));
+}
+function step(level, cls, title, ...body) {
+  return h("li", { class: "step" }, h("div", { class: "lvl " + (cls || "") }, level), h("div", { class: "body" }, h("div", { class: "title" }, title), ...body));
+}
+function renderTrace() {
+  const el = document.getElementById("trace"), c = S.cell;
+  if (!c) { el.replaceChildren(h("h2", {}, "Trace"), h("p", { class: "desc" }, "Select a cell to trace it.")); return; }
+  const { d, s, r } = S.ix.cellDisp[c.id], an = S.ix.byId[c.analysis] || {}, res = c.result || {}, shell = S.mode === "shell";
+  const copy = h("button", { class: "btn", type: "button", onclick: ev => {
+    const done = () => { ev.target.textContent = "Copied"; setTimeout(() => ev.target.textContent = "Copy ID", 1400); };
+    navigator.clipboard?.writeText(c.id).then(done, () => { const sel = getSelection(), rg = document.createRange(); rg.selectNodeContents(idEl); sel.removeAllRanges(); sel.addRange(rg); });
+  } }, "Copy ID");
+  const idEl = h("code", {}, c.id);
+  const card = h("div", { class: "cellcard" },
+    h("div", { class: "eyebrow" }, `${d.displayId} · ${s.label ? s.label + " · " : ""}${r.label} · ${c.column}`),
+    h("div", { class: "cid" }, idEl, copy),
+    shell
+      ? h("div", {}, h("div", { class: "big" }, c.format), h("div", { class: "desc" }, "Shell pattern. This cell's ID and lineage exist before any data; switch to Actual results for its value."))
+      : h("div", {}, h("div", { class: "big" }, res.value ?? "–"), h("div", { class: "cid" }, pill(res.status || "planned", sevCls(res.status)),
+          h("span", { class: "desc" }, "recomputed ", h("span", { class: "mono" }, res.recomputed ?? "–")))),
+    h("dl", { class: "kv" }, h("dt", {}, "Statistic"), h("dd", { class: "mono" }, Object.entries(c.compute).map(([k, v]) => `${k}=${typeof v === "object" ? JSON.stringify(v) : v}`).join("  ")),
+      h("dt", {}, "Format"), h("dd", { class: "mono" }, c.format), !shell && res.source ? [h("dt", {}, "Value from"), h("dd", {}, res.source)] : null),
+    ...findingsBlock([c.id]));
+
+  const chain = h("ol", { class: "chain" });
+  const sel = Object.entries({ ...(an.analysisSet || {}), ...(an.dataSubset || {}), ...(c.compute.where || {}) }).map(([k, v]) => `${k}=${typeof v === "object" ? JSON.stringify(v) : v}`);
+  chain.append(step("Analysis", "", short(an.id),
+    h("div", { class: "desc" }, an.method?.description || ""),
+    h("div", { class: "cid" }, ...sel.map(x => pill(x, "plan")), an.groupBy ? pill("by " + an.groupBy, "plan") : null),
+    an.method?.implementation ? h("div", { class: "desc" }, "Implemented in ", h("code", {}, short(an.method.implementation))) : null,
+    ...(an.estimand ? [h("div", { class: "desc" }, "Estimand: " + (S.ix.byId[an.estimand]?.endpoint?.label || short(an.estimand)))] : [])));
+  for (const pid of an.parameters || []) {
+    const p = S.ix.byId[pid] || {};
+    chain.append(step("Param", "", `${short(pid)}${p.param ? " – " + p.param : ""}`,
+      h("div", { class: "desc" }, p.derivation?.text ? "Derivation: " + p.derivation.text : "No value-level derivation in the metadata."),
+      ...findingsBlock([pid]),
+      ...(S.ix.notesAbout[pid] || []).map(n => h("div", { class: "notecard" }, h("div", {}, h("b", {}, n.title || "Note"), " ", pill(n.status, sevCls(n.status))), n.text))));
+  }
+  const names = variablesOf(c, an), primary = new Set([c.compute.variable, an.method?.model?.response].filter(Boolean));
+  const seen = new Set();
+  const vars = names.map(n => varIdFor(n, an, c)).filter(Boolean);
+  vars.sort((x, y) => (primary.has(y.split(".").pop()) ? 1 : 0) - (primary.has(x.split(".").pop()) ? 1 : 0));
+  chain.append(step("Variables", "adam", `${vars.length} variables, traced to SDTM`, ...vars.map(v => varNode(v, 0, seen, primary.has(v.split(".").pop())))));
+  const ds = S.ix.byId[an.dataset];
+  if (ds) chain.append(step("Dataset", "data", short(ds.id) + (ds.label ? " – " + ds.label : ""),
+    h("dl", { class: "kv" },
+      h("dt", {}, "File"), h("dd", { class: "mono" }, ds.file?.path || "–"),
+      h("dt", {}, "sha256"), h("dd", { class: "mono" }, (ds.file?.sha256 || "").slice(0, 16) + "…"),
+      ds.file?.records != null ? [h("dt", {}, "Records"), h("dd", {}, ds.file.records.toLocaleString())] : null,
+      ds.file?.createdAt ? [h("dt", {}, "Built"), h("dd", {}, `${ds.file.createdAt.slice(0, 16).replace("T", " ")} · ${ds.file?.sourceSystem || ""}`)] : null,
+      h("dt", {}, "Built by"), h("dd", { class: "mono" }, short(ds.producedBy) || "–"),
+      h("dt", {}, "Reads"), h("dd", { class: "mono" }, (ds.dependsOn || []).map(short).join(", ") || "–")),
+    ...findingsBlock([ds.id])));
+  for (const pid of [...new Set([an.program, ds?.producedBy].filter(Boolean))]) {
+    const p = S.ix.byId[pid]; if (!p) continue;
+    chain.append(step("Code", "code", short(pid),
+      h("div", { class: "cid" }, pill(p.kind, "plan"), pill("run: " + (p.run?.mode || "unknown"), sevCls(p.run?.mode)), h("span", { class: "mono desc" }, (p.sha256 || "").slice(0, 12))),
+      h("div", { class: "desc" }, p.run?.evidence || ""),
+      ...findingsBlock([pid]).filter(x => x.className.includes("error"))));
+  }
+  const notes = [...new Set([...(S.ix.notesAbout[c.id] || []), ...(S.ix.notesAbout[d.id] || []), ...(S.ix.notesAbout[an.id] || [])])];
+  el.replaceChildren(h("h2", {}, "Trace"), card, chain,
+    ...(notes.length ? [h("div", { class: "label" }, "Notes"), ...notes.map(n => h("div", { class: "notecard" }, h("div", {}, h("b", {}, n.title || "Note"), " ", pill(n.status, sevCls(n.status))), n.text))] : []));
+}
+
+/* ------------------------------------------------------------- findings + datasets */
+function goTo(ref) {
+  if (ref.startsWith("CELL:") && S.ix.byId[ref]) { S.cell = S.ix.byId[ref]; S.disp = S.ix.cellDisp[ref].d; location.hash = "displays"; renderAll(); }
+  else if (ref.startsWith("DSP:") && S.ix.byId[ref]) { S.disp = S.ix.byId[ref]; S.cell = S.disp.sections[0].rows[0].cells[0]; location.hash = "displays"; renderAll(); }
+}
+function renderFindings() {
+  const all = S.a.findings || [], order = { error: 0, warning: 1, info: 2 };
+  const shown = all.filter(f => S.sev === "all" || f.severity === S.sev).sort((x, y) => order[x.severity] - order[y.severity] || x.id.localeCompare(y.id));
+  const filt = h("div", { class: "filters", role: "group", "aria-label": "Severity" }, ...["all", "error", "warning", "info"].map(s =>
+    h("button", { class: "btn", type: "button", "aria-pressed": S.sev === s ? "true" : "false", onclick: () => { S.sev = s; renderFindings(); } },
+      s === "all" ? `All ${all.length}` : `${s} ${all.filter(f => f.severity === s).length}`)));
+  const list = h("div", { class: "flist" }, ...shown.map(f => h("div", { class: "fcard " + f.severity },
+    h("div", { class: "cid" }, pill(f.severity, sevCls(f.severity)), f.check ? h("span", { class: "mono desc" }, f.check) : null, h("span", { class: "mono desc" }, short(f.id))),
+    h("div", {}, f.text),
+    h("div", { class: "abouts" }, ...f.about.map(ref => (ref.startsWith("CELL:") || ref.startsWith("DSP:"))
+      ? h("button", { class: "pill", type: "button", onclick: () => goTo(ref) }, short(ref)) : pill(short(ref), "plan"))))));
+  document.getElementById("center").replaceChildren(h("div", { class: "view" }, h("h2", {}, "Findings from adrg sync"),
+    h("p", { class: "desc" }, "Generated checks against the package. Errors must be fixed or explained before the guide can be final."), filt, list));
+}
+function renderDatasets() {
+  const rows = (S.a.datasets || []).slice().sort((x, y) => (x.role === y.role ? x.name.localeCompare(y.name) : x.role === "analysis" ? -1 : 1));
+  const usedBy = {};
+  for (const an of S.a.analyses || []) for (const dsp of S.a.displays) if (dsp.analyses?.includes(an.id)) (usedBy[an.dataset] ||= new Set()).add(dsp.displayId);
+  const t = h("table", { class: "grid" }, h("thead", {}, h("tr", {}, ...["Dataset", "Role", "Records", "Built by", "Reads", "Feeds", "Built on", "Findings"].map(x => h("th", { scope: "col" }, x)))),
+    h("tbody", {}, ...rows.map(d => {
+      const fs = S.ix.findingsAbout[d.id] || [];
+      return h("tr", {}, h("td", { class: "mono" }, d.name), h("td", {}, d.role === "analysis" ? "ADaM" : "SDTM"),
+        h("td", {}, d.file?.records?.toLocaleString() ?? "–"), h("td", { class: "mono" }, short(d.producedBy) || "–"),
+        h("td", { class: "mono" }, (d.dependsOn || []).map(short).join(", ") || "–"), h("td", {}, [...(usedBy[d.id] || [])].join(", ") || "–"),
+        h("td", {}, `${(d.file?.createdAt || "").slice(0, 10)} ${d.file?.sourceSystem || ""}`),
+        h("td", {}, fs.length ? h("div", { class: "abouts" }, ...fs.map(f => pill(f.severity, sevCls(f.severity)))) : "–"));
+    })));
+  document.getElementById("center").replaceChildren(h("div", { class: "view" }, h("h2", {}, "Datasets and dependencies"),
+    h("p", { class: "desc" }, "Who builds each dataset, what it reads, and which displays it feeds, taken from the programs' read and write calls."),
+    h("div", { style: "overflow-x:auto" }, t)));
+}
+
+/* ------------------------------------------------------------- routing + loaders */
+function currentView() { const v = location.hash.slice(1); return ["displays", "findings", "datasets"].includes(v) ? v : "displays"; }
+function renderAll() {
+  if (!S.a) return;
+  renderHeader(); renderRail();
+  const v = currentView();
+  if (v === "findings") renderFindings(); else if (v === "datasets") renderDatasets(); else renderDisplay();
+  renderTrace();
+}
+window.addEventListener("hashchange", renderAll);
+function setMode(m) {
+  S.mode = m;
+  document.getElementById("mode-actual").setAttribute("aria-pressed", m === "actual");
+  document.getElementById("mode-shell").setAttribute("aria-pressed", m === "shell");
+  renderAll();
+}
+document.getElementById("mode-actual").addEventListener("click", () => setMode("actual"));
+document.getElementById("mode-shell").addEventListener("click", () => setMode("shell"));
+
+function parseDefine(text) {
+  const doc = new DOMParser().parseFromString(text, "application/xml");
+  if (doc.getElementsByTagName("parsererror").length) throw new Error("That file is not valid XML.");
+  const tag = (root, n) => Array.from(root.getElementsByTagNameNS("*", n));
+  const txt = el => el ? (tag(el, "TranslatedText")[0]?.textContent || "").replace(/\s+/g, " ").trim() : null;
+  const methods = Object.fromEntries(tag(doc, "MethodDef").map(m => [m.getAttribute("OID"), txt(tag(m, "Description")[0])]));
+  const items = Object.fromEntries(tag(doc, "ItemDef").map(i => [i.getAttribute("OID"), i]));
+  const vars = {}; let count = 0;
+  for (const ig of tag(doc, "ItemGroupDef")) {
+    const ds = ig.getAttribute("Name");
+    for (const ref of tag(ig, "ItemRef")) {
+      const it = items[ref.getAttribute("ItemOID")]; if (!it) continue;
+      const origin = tag(it, "Origin")[0];
+      vars[`${ds}.${it.getAttribute("Name")}`] = { origin: origin?.getAttribute("Type") || null, label: txt(tag(it, "Description")[0]), methodText: methods[ref.getAttribute("MethodOID")] || null };
+      count++;
+    }
+  }
+  if (!count) throw new Error("No ItemGroupDef/ItemRef found; is this a define.xml?");
+  return { vars, count };
+}
+function readFile(input, cb) {
+  input.addEventListener("change", () => {
+    const f = input.files?.[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { try { cb(r.result, f.name); } catch (e) { say(e.message, true); } input.value = ""; };
+    r.onerror = () => say("The file could not be read.", true);
+    r.readAsText(f);
+  });
+}
+readFile(document.getElementById("file-adrg"), (t, n) => { S.define = null; load(JSON.parse(t), `Opened ${n}.`); });
+readFile(document.getElementById("file-define"), (t, n) => {
+  S.define = parseDefine(t);
+  const traced = (S.a?.variables || []).filter(v => S.define.vars[`${v.dataset.split(":")[1]}.${v.name}`]).length;
+  renderAll(); say(`Loaded ${n}: ${S.define.count} variables; ${traced} of the traced variables are in it. Derivations that differ from the snapshot are marked in the trace.`);
+});
+
+(async () => {
+  try {
+    if (EMBEDDED) return load(EMBEDDED);
+    const res = await fetch("adrg.json");
+    if (!res.ok) throw new Error(`Could not load adrg.json (HTTP ${res.status}). Use Open adrg.json to choose a file.`);
+    load(await res.json());
+  } catch (e) { say(e.message, true); document.getElementById("title").textContent = "No ADRG-JSON loaded"; }
+})();
+</script>

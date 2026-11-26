@@ -1,0 +1,824 @@
+# Narrative part of the ADRG: written later, merged only at adrg render.
+study:
+  studyId: CDISCPILOT01
+  protocolNumber: CDISCPilot1
+  title: Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients with Mild to Moderate
+    Alzheimer's Disease
+  aliases:
+  - value: TDF_ADaM
+    where: ADaM spec Define sheet (StudyName)
+    note: Test Data Factory name of the replication ADaMs; same study.
+documents:
+- id: DOC:PROTOCOL
+  role: protocol
+  path: null
+  status: external
+  note: CDISC pilot protocol, public; not in the package.
+- id: DOC:SAP
+  role: statistical-analysis-plan
+  path: null
+  status: missing
+  note: Cited by the ADaM spec (sections 7.1, 8.2, 14.2) but not in the package.
+- id: DOC:SPEC
+  role: adam-specification
+  path: m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adam-pilot-5.xlsx
+  status: present
+  sha256: aaee79438d93273a0376c880c29f1b5b83d707534befbd4ae7d8176b5f95d8a0
+- id: DOC:DEFINE
+  role: define-xml
+  path: m5/datasets/rconsortiumpilot5/analysis/adam/datasets/define.xml
+  status: missing
+  note: Planned; Dataset-JSON headers reference it.
+- id: DOC:TLFREPORT
+  role: tlf-report
+  path: m5/datasets/rconsortiumpilot5/analysis/adam/programs/pilot5-cmb-report-manual.pdf
+  status: present
+  sha256: 278618c58bb0b87e6af141f6525b7f384fec57f5563d636d5ae1440a9ee3bd74
+- id: DOC:ADRG
+  role: analysis-data-reviewers-guide
+  path: m5/datasets/rconsortiumpilot5/analysis/adam/datasets/adrg.pdf
+  status: present
+  note: The hand-written ADRG this file replaces.
+  sha256: 79c11731e0becc39a230d22f17788f9d9d4952d665465b1d80a20882523a5b53
+standards:
+- name: SDTM Implementation Guide
+  version: 3.1.2
+  provenance:
+    kind: authored
+    by: study team
+- name: SDTM
+  version: '1.2'
+  provenance:
+    kind: authored
+    by: study team
+- name: SDTM Controlled Terminology
+  version: '2022-12-16'
+  provenance:
+    kind: authored
+    by: study team
+- name: ADaM Implementation Guide
+  version: '1.1'
+  provenance:
+    kind: authored
+    by: study team
+- name: ADaM
+  version: '2.1'
+  provenance:
+    kind: authored
+    by: study team
+- name: ADaM Controlled Terminology
+  version: '2022-06-24'
+  provenance:
+    kind: authored
+    by: study team
+- name: MedDRA
+  version: '8.0'
+  provenance:
+    kind: authored
+    by: study team
+- name: Dataset-JSON
+  version: '1.1'
+  provenance:
+    kind: authored
+    by: study team
+- name: Define-XML
+  version: 2.0 (planned; not in package)
+  provenance:
+    kind: authored
+    by: study team
+protocol:
+  objectives: Evaluate the efficacy and safety of transdermal xanomeline (50 cm2 and 75 cm2 patches) against placebo
+    in mild to moderate Alzheimer's disease.
+  design: Prospective, randomized, multi-center, double-blind, placebo-controlled, parallel-group study; subjects
+    randomized equally to placebo, xanomeline low dose or high dose, applied two patches daily, and were followed
+    for 26 weeks.
+  plannedSubjects: 300 (100 per arm)
+  provenance:
+    kind: authored
+    by: study team
+estimands:
+- id: EST:ADASCOG.WK24
+  endpoint:
+    label: ADAS-Cog (11) total, change from baseline to Week 24
+    level: primary
+  population: Efficacy population (EFFFL = 'Y' and ITTFL = 'Y')
+  variable: Change from baseline in ADAS-Cog (11) total at Week 24
+  treatments:
+  - Placebo
+  - Xanomeline Low Dose
+  - Xanomeline High Dose
+  intercurrentEvents:
+  - event: Missing Week 24 assessment (e.g. early discontinuation)
+    strategy: LOCF
+    implementedBy:
+    - VAR:ADADAS.DTYPE
+  - event: Missing ADAS-Cog items at a visit
+    strategy: Total adjusted for missing items (SAP §14.2)
+    implementedBy:
+    - PARAM:ADADAS.ACTOT
+  summaryMeasure: Difference in LS means (ANCOVA with site group, baseline)
+  prespecification:
+    status: claimed
+    evidence: null
+- id: EST:GLUC.WK20
+  endpoint:
+    label: Glucose, change from baseline to Week 20
+    level: safety
+  population: Intent-to-treat
+  variable: Change from baseline in glucose (mmol/L) at Week 20
+  treatments:
+  - Placebo
+  - Xanomeline High Dose
+  summaryMeasure: Difference in LS means (ANCOVA with baseline)
+- id: EST:TTDE
+  endpoint:
+    label: Time to first dermatologic adverse event
+    level: safety
+  population: Safety population
+  variable: Days to first treatment-emergent dermatologic AE
+  treatments:
+  - Placebo
+  - Xanomeline Low Dose
+  - Xanomeline High Dose
+  summaryMeasure: Kaplan-Meier estimates; numbers at risk
+analysisConsiderations:
+  coreVariables:
+  - VAR:ADSL.STUDYID
+  - VAR:ADSL.USUBJID
+  - VAR:ADSL.SITEGR1
+  - VAR:ADSL.TRT01P
+  - VAR:ADSL.SAFFL
+  - VAR:ADSL.ITTFL
+  - VAR:ADSL.EFFFL
+  qa:
+  - id: QA:ARM-TRT01P
+    section: '3.2'
+    question: Are values of ARM equivalent in meaning to TRT01P?
+    answer: Yes.
+    about:
+    - VAR:ADSL.TRT01P
+    provenance:
+      kind: authored
+      by: study team
+  - id: QA:ACTARM
+    section: '3.2'
+    question: If TRT01A is used, are values of ACTARM equivalent to TRT01A?
+    answer: Not applicable; ACTARM is not used.
+    about:
+    - VAR:ADSL.TRT01A
+    provenance:
+      kind: authored
+      by: study team
+  - id: QA:PLANNED-ACTUAL
+    section: '3.2'
+    question: Are both planned and actual treatment variables used in analysis?
+    answer: Yes. Planned treatment for population and efficacy analyses, actual for safety. All subjects received
+      their randomized arm, so planned equals actual.
+    about:
+    - VAR:ADSL.TRT01P
+    - VAR:ADSL.TRT01A
+    provenance:
+      kind: authored
+      by: study team
+  - id: QA:GROUPING
+    section: '3.2'
+    question: Are treatment grouping variables used in analysis?
+    answer: Not applicable.
+    about:
+    - VAR:ADSL.TRT01P
+    provenance:
+      kind: authored
+      by: study team
+  - id: QA:WINDOWING
+    section: '3.3'
+    question: Was windowing used in one or more analysis datasets?
+    answer: Yes (ADADAS; see note on analysis visits).
+    about:
+    - VAR:ADADAS.AVISIT
+    provenance:
+      kind: authored
+      by: study team
+  - id: QA:UNSCHEDULED
+    section: '3.3'
+    question: Were unscheduled visits used in any analyses?
+    answer: Yes.
+    about:
+    - VAR:ADADAS.AVISIT
+    provenance:
+      kind: authored
+      by: study team
+conformance:
+  inputs:
+  - question: Were the analysis datasets evaluated against CDISC ADaM validation checks?
+    answer: 'Yes: Pinnacle 21 Community 4.1.0. P21 does not yet support Dataset-JSON 1.1, so JSON files were (a)
+      converted to XPT and validated, and (b) converted to Dataset-JSON 1.0 and validated.'
+  - question: Were the ADaM datasets evaluated in relation to define.xml?
+    answer: Yes (ADRG §6.1), although no define.xml is in the package.
+  issues:
+  - ruleId: AD0018
+    message: Variable label mismatch between dataset and ADaM standard
+    dataset: DS:ADADAS
+    count: 34
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0041A
+    message: '*DT variable has missing SAS Date Format'
+    dataset: DS:ADADAS
+    count: 3
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0018
+    message: Variable label mismatch between dataset and ADaM standard
+    dataset: DS:ADAE
+    count: 40
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0041A
+    message: '*DT variable has missing SAS Date Format'
+    dataset: DS:ADAE
+    count: 4
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: SD0059
+    message: Define.xml/dataset variable type mismatch
+    dataset: DS:ADAE
+    count: 5
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0018
+    message: Variable label mismatch between dataset and ADaM standard
+    dataset: DS:ADLBC
+    count: 34
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0041A
+    message: '*DT variable has missing SAS Date Format'
+    dataset: DS:ADLBC
+    count: 3
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0018
+    message: Variable label mismatch between dataset and ADaM standard
+    dataset: DS:ADSL
+    count: 23
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0041A
+    message: '*DT variable has missing SAS Date Format'
+    dataset: DS:ADSL
+    count: 5
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0320
+    message: Non-standard dataset label
+    dataset: DS:ADSL
+    count: 1
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0018
+    message: Variable label mismatch between dataset and ADaM standard
+    dataset: DS:ADTTE
+    count: 24
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  - ruleId: AD0041A
+    message: '*DT variable has missing SAS Date Format'
+    dataset: DS:ADTTE
+    count: 4
+    explanation: null
+    context: Dataset-JSON 1.0 route
+  provenance:
+    kind: authored
+    by: study team
+environment:
+  platform:
+    claimed: Linux
+    observed:
+    - R on linux-gnu 6.17.0-1013-aws R version 4.4.3 (2025-02-28)
+    - R on mingw32 10 x64 R version 4.4.3 (2025-02-28 ucrt)
+  r: 4.4.3
+  lockfile:
+    path: m5/datasets/rconsortiumpilot5/analysis/adam/programs/renv-lock.txt
+    sha256: cb4a45bf39f6d878ab6ed24bc966632cc1a37be51d4febf054f97009ae8313c7
+  packages:
+  - name: admiral
+    version: 1.3.0
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:adtte.r
+  - name: cowplot
+    version: 1.2.0
+    usedBy:
+    - PGM:tlf-kmplot.r
+  - name: datasetjson
+    version: 0.3.0
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:adtte.r
+    - PGM:pilot5-helper-fcns.r
+    - PGM:tlf-demographic.r
+    - PGM:tlf-efficacy.r
+    - PGM:tlf-kmplot.r
+    - PGM:tlf-primary.r
+  - name: dplyr
+    version: 1.1.4
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:adtte.r
+    - PGM:tlf-demographic.r
+    - PGM:tlf-efficacy.r
+    - PGM:tlf-kmplot.r
+    - PGM:tlf-primary.r
+  - name: emmeans
+    version: 1.11.2
+    usedBy:
+    - PGM:pilot5-helper-fcns.r
+    - PGM:tlf-efficacy.r
+  - name: ggplot2
+    version: 3.5.2
+    usedBy:
+    - PGM:tlf-kmplot.r
+  - name: ggsurvfit
+    version: 1.1.0
+    usedBy:
+    - PGM:tlf-kmplot.r
+  - name: glue
+    version: 1.8.0
+    usedBy:
+    - PGM:adsl.r
+  - name: haven
+    version: 2.5.5
+    usedBy:
+    - PGM:adae.r
+    - PGM:adsl.r
+    - PGM:tlf-demographic.r
+    - PGM:tlf-efficacy.r
+    - PGM:tlf-kmplot.r
+  - name: huxtable
+    version: 5.6.0
+    usedBy:
+    - PGM:tlf-primary.r
+  - name: janitor
+    version: 2.2.1
+    usedBy:
+    - PGM:adsl.r
+  - name: knitr
+    version: '1.50'
+    usedBy:
+    - PGM:tlf-efficacy.r
+    - PGM:tlf-kmplot.r
+  - name: metacore
+    version: 0.2.0
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:adtte.r
+  - name: metatools
+    version: 0.1.6
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:adtte.r
+  - name: pharmaRTF
+    version: 0.1.4
+    usedBy:
+    - PGM:tlf-primary.r
+  - name: purrr
+    version: 1.1.0
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:pilot5-helper-fcns.r
+  - name: r2rtf
+    version: 1.1.4
+    usedBy:
+    - PGM:tlf-efficacy.r
+  - name: rtables
+    version: 0.6.13
+    usedBy:
+    - PGM:tlf-demographic.r
+  - name: scales
+    version: 1.4.0
+    usedBy:
+    - PGM:tlf-kmplot.r
+  - name: stringr
+    version: 1.5.1
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+  - name: tibble
+    version: 3.3.0
+    usedBy:
+    - PGM:adadas.r
+  - name: tidyr
+    version: 1.3.1
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adlbc.r
+    - PGM:adsl.r
+    - PGM:adtte.r
+    - PGM:pilot5-helper-fcns.r
+    - PGM:tlf-primary.r
+  - name: Tplyr
+    version: 1.2.1
+    usedBy:
+    - PGM:tlf-primary.r
+  - name: xportr
+    version: 0.4.3
+    usedBy:
+    - PGM:adadas.r
+    - PGM:adae.r
+    - PGM:adsl.r
+  provenance:
+    kind: generated
+    from:
+    - m5/datasets/rconsortiumpilot5/analysis/adam/programs/renv-lock.txt
+    by: adrg sync
+    date: '2026-11-26T02:22:14+00:00'
+runInstructions:
+  order:
+  - PGM:pilot5-helper-fcns.r
+  - PGM:adsl.r
+  - PGM:adadas.r
+  - PGM:adae.r
+  - PGM:adlbc.r
+  - PGM:adtte.r
+  - PGM:tlf-demographic.r
+  - PGM:tlf-efficacy.r
+  - PGM:tlf-kmplot.r
+  - PGM:tlf-primary.r
+  steps:
+  - Restore the R environment from renv-lock.txt (renv::restore()).
+  - Set paths for SDTM JSON, ADaM JSON and outputs (see the path list in the run script).
+  - Source pilot5-helper-fcns.r, then run the ADaM programs and the display programs in the order listed.
+  script: null
+  provenance:
+    kind: authored
+    by: study team
+datasets:
+- id: DS:ADADAS
+  label: ADAS-Cog Analysis
+  class: BASIC DATA STRUCTURE
+  structure: One or more records per subject per parameter per analysis timepoint
+  purposes:
+  - efficacy
+  - primary-objective
+  description: ADAS-Cog item and total scores per subject, parameter and visit. Visits are mapped to analysis visits
+    (AVISIT/AVISITN) by visit date and windows; LOCF records carry DTYPE = 'LOCF'.
+  file:
+    records: 12463
+    createdAt: '2026-05-05T17:10:43'
+    sourceSystem: R on linux-gnu 6.17.0-1013-aws R version 4.4.3 (2025-02-28)
+- id: DS:ADAE
+  label: Adverse Events Analysis Dataset
+  class: OCCURRENCE DATA STRUCTURE
+  structure: One record per subject per adverse event
+  purposes:
+  - safety
+  description: One record per reported event, 1:1 with SDTM AE (linked by STUDYID, USUBJID, AESEQ). Dermatologic
+    events of interest are flagged in CQ01NAM; AOCC01FL flags the first such event, which feeds ADTTE.
+  file:
+    records: 1191
+    createdAt: '2026-06-28T22:27:46'
+    sourceSystem: R on mingw32 10 x64 R version 4.4.3 (2025-02-28 ucrt)
+- id: DS:ADLBC
+  label: Analysis Dataset Lab Blood Chemistry
+  class: BASIC DATA STRUCTURE
+  structure: One or more records per subject per parameter per analysis timepoint
+  purposes:
+  - safety
+  description: 'Blood chemistry parameters from SDTM LB: standardized values and change relative to normal range.
+    An end-of-treatment visit (AVISITN = 99) is derived for some summaries.'
+  file:
+    records: 37132
+    createdAt: '2026-06-28T22:28:04'
+    sourceSystem: R on mingw32 10 x64 R version 4.4.3 (2025-02-28 ucrt)
+- id: DS:ADSL
+  label: Subject-Level Analysis Dataset
+  class: SUBJECT LEVEL ANALYSIS DATASET
+  structure: One record per subject
+  purposes:
+  - baseline
+  description: 'Demographics, treatment groups, population flags and baseline characteristics used across safety
+    and efficacy analyses; every DM subject is included. Key flags: SAFFL (received any study treatment) and ITTFL
+    (randomized).'
+  file:
+    records: 254
+    createdAt: '2026-06-28T22:27:44'
+    sourceSystem: R on mingw32 10 x64 R version 4.4.3 (2025-02-28 ucrt)
+- id: DS:ADTTE
+  label: AE Time To 1st Derm. Event Analysis
+  class: BASIC DATA STRUCTURE
+  structure: One record per subject per parameter
+  purposes:
+  - efficacy
+  - safety
+  description: Time to first dermatologic adverse event (PARAMCD = 'TTDE'), an adverse event of special interest.
+  file:
+    records: 254
+    createdAt: '2026-06-28T22:28:06'
+    sourceSystem: R on mingw32 10 x64 R version 4.4.3 (2025-02-28 ucrt)
+- id: DS:AE
+  file:
+    records: 1191
+    createdAt: '2025-07-25T20:39:21'
+- id: DS:CM
+  file:
+    records: 7510
+    createdAt: '2025-07-25T20:39:22'
+- id: DS:DM
+  file:
+    records: 306
+    createdAt: '2025-07-25T20:39:22'
+- id: DS:DS
+  file:
+    records: 596
+    createdAt: '2025-07-25T20:39:22'
+- id: DS:EX
+  file:
+    records: 591
+    createdAt: '2025-07-25T20:39:22'
+- id: DS:LB
+  file:
+    records: 59580
+    createdAt: '2025-07-25T20:39:25'
+- id: DS:MH
+  file:
+    records: 1818
+    createdAt: '2025-07-25T20:39:25'
+- id: DS:QS
+  file:
+    records: 121749
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:RELREC
+  file:
+    records: 234
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:SC
+  file:
+    records: 254
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:SE
+  file:
+    records: 752
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:SUPPAE
+  file:
+    records: 1191
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:SUPPDM
+  file:
+    records: 1197
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:SUPPDS
+  file:
+    records: 3
+    createdAt: '2025-07-25T20:39:29'
+- id: DS:SUPPLB
+  file:
+    records: 64403
+    createdAt: '2025-07-25T20:39:31'
+- id: DS:SV
+  file:
+    records: 3559
+    createdAt: '2025-07-25T20:39:31'
+- id: DS:TA
+  file:
+    records: 8
+    createdAt: '2025-07-25T20:39:31'
+- id: DS:TE
+  file:
+    records: 7
+    createdAt: '2025-07-25T20:39:31'
+- id: DS:TI
+  file:
+    records: 31
+    createdAt: '2025-07-25T20:39:31'
+- id: DS:TV
+  file:
+    records: 21
+    createdAt: '2025-07-25T20:39:31'
+- id: DS:VS
+  file:
+    records: 29643
+    createdAt: '2025-07-25T20:39:32'
+displays:
+- id: DSP:T14-2.01
+  displayId: Table 14-2.01
+  type: table
+  population: Intent-to-Treat
+  outputFile: tlf-demographic-pilot5.out
+- id: DSP:T14-3.01
+  displayId: Table 14-3.01
+  type: table
+  population: Efficacy
+  footnotes:
+  - '[1] Based on ANCOVA with treatment and site group as factors and baseline value as a covariate.'
+  - '[2] Test for a non-zero coefficient for treatment (dose) as a continuous variable.'
+  - '[3] Pairwise comparison with treatment as a categorical variable; p-values without adjustment for multiple
+    comparisons.'
+  outputFile: tlf-primary-pilot5.rtf
+- id: DSP:T14-3.02
+  displayId: Table 14-3.02
+  type: table
+  population: Intent-to-Treat
+  outputFile: tlf-efficacy-pilot5.rtf
+- id: DSP:F14-1
+  displayId: Figure 14-1
+  type: figure
+  population: Safety
+  outputFile: tlf-kmplot-pilot5.pdf
+variables:
+- id: VAR:ADADAS.ANL01FL
+  label: Analysis Flag 01
+  origin: Derived
+- id: VAR:ADADAS.AVAL
+  label: Analysis Value
+  origin: Derived
+- id: VAR:ADADAS.AVISIT
+  label: Analysis Visit
+  origin: Derived
+- id: VAR:ADADAS.AVISITN
+  label: Analysis Visit (N)
+  origin: Assigned
+- id: VAR:ADADAS.BASE
+  label: Baseline Value
+  origin: Derived
+- id: VAR:ADADAS.CHG
+  label: Change from Baseline
+  origin: Derived
+- id: VAR:ADADAS.DTYPE
+  label: Derivation Type
+  origin: Derived
+- id: VAR:ADADAS.EFFFL
+  label: Efficacy Population Flag
+  origin: Predecessor
+- id: VAR:ADADAS.ITTFL
+  label: Intent-To-Treat Population Flag
+  origin: Predecessor
+- id: VAR:ADADAS.PARAMCD
+  label: Parameter Code
+  origin: Predecessor
+- id: VAR:ADADAS.SITEGR1
+  label: Pooled Site Group 1
+  origin: Predecessor
+- id: VAR:ADADAS.TRTP
+  label: Planned Treatment
+  origin: Predecessor
+- id: VAR:ADADAS.TRTPN
+  label: Planned Treatment (N)
+  origin: Predecessor
+- id: VAR:ADADAS.USUBJID
+  label: Unique Subject Identifier
+  origin: Predecessor
+- id: VAR:ADAE.ASTDT
+  label: Analysis Start Date
+  origin: Derived
+- id: VAR:ADAE.TRTEMFL
+  label: Treatment Emergent Analysis Flag
+  origin: Derived
+- id: VAR:ADAE.TRTSDT
+  label: Date of First Exposure to Treatment
+  origin: Derived
+- id: VAR:ADLBC.AVAL
+  label: Analysis Value
+  origin: Predecessor
+- id: VAR:ADLBC.AVISITN
+  label: Analysis Visit (N)
+  origin: Assigned
+- id: VAR:ADLBC.BASE
+  label: Baseline Value
+  origin: Derived
+- id: VAR:ADLBC.CHG
+  label: Change from Baseline
+  origin: Derived
+- id: VAR:ADLBC.PARAMCD
+  label: Parameter Code
+  origin: Predecessor
+- id: VAR:ADLBC.STUDYID
+  label: Study Identifier
+  origin: Predecessor
+- id: VAR:ADLBC.TRTP
+  label: Planned Treatment
+  origin: Derived
+- id: VAR:ADLBC.TRTPN
+  label: Planned Treatment (N)
+  origin: Derived
+- id: VAR:ADLBC.USUBJID
+  label: Unique Subject Identifier
+  origin: Predecessor
+- id: VAR:ADSL.AGE
+  label: Age
+  origin: Derived
+- id: VAR:ADSL.AGEGR1
+  label: Pooled Age Group 1
+  origin: Derived
+- id: VAR:ADSL.AGEGR1N
+  label: Pooled Age Group 1 (N)
+  origin: Derived
+- id: VAR:ADSL.BMIBL
+  label: Baseline BMI (kg/m^2)
+  origin: Derived
+- id: VAR:ADSL.EFFFL
+  label: Efficacy Population Flag
+  origin: Derived
+- id: VAR:ADSL.HEIGHTBL
+  label: Baseline Height (cm)
+  origin: Derived
+- id: VAR:ADSL.ITTFL
+  label: Intent-To-Treat Population Flag
+  origin: Derived
+- id: VAR:ADSL.MMSETOT
+  label: MMSE Total
+  origin: Derived
+- id: VAR:ADSL.RACE
+  label: Race
+  origin: Derived
+- id: VAR:ADSL.RFENDTC
+  label: Subject Reference End Date/Time
+  origin: Derived
+- id: VAR:ADSL.RFSTDTC
+  label: Subject Reference Start Date/Time
+  origin: Derived
+- id: VAR:ADSL.SAFFL
+  label: Safety Population Flag
+  origin: Derived
+- id: VAR:ADSL.SITEGR1
+  label: Pooled Site Group 1
+  origin: Derived
+- id: VAR:ADSL.SITEID
+  label: Study Site Identifier
+  origin: Derived
+- id: VAR:ADSL.STUDYID
+  label: Study Identifier
+  origin: Predecessor
+- id: VAR:ADSL.TRT01A
+  label: Actual Treatment for Period 01
+  origin: Derived
+- id: VAR:ADSL.TRT01P
+  label: Planned Treatment for Period 01
+  origin: Derived
+- id: VAR:ADSL.TRT01PN
+  label: Planned Treatment for Period 01 (N)
+  origin: Derived
+- id: VAR:ADSL.TRTSDT
+  label: Date of First Exposure to Treatment
+  origin: Derived
+- id: VAR:ADSL.USUBJID
+  label: Unique Subject Identifier
+  origin: Predecessor
+- id: VAR:ADSL.WEIGHTBL
+  label: Baseline Weight (kg)
+  origin: Derived
+- id: VAR:ADTTE.ADT
+  label: Analysis Date
+  origin: Derived
+- id: VAR:ADTTE.AVAL
+  label: Analysis Value
+  origin: Derived
+- id: VAR:ADTTE.CNSR
+  label: Censor
+  origin: Derived
+- id: VAR:ADTTE.PARAM
+  label: Parameter
+  origin: Derived
+- id: VAR:ADTTE.PARAMCD
+  label: Parameter Code
+  origin: Derived
+- id: VAR:ADTTE.SAFFL
+  label: Safety Population Flag
+  origin: Predecessor
+- id: VAR:ADTTE.STARTDT
+  label: Time-to-Event Origin Date for Subject
+  origin: Derived
+- id: VAR:ADTTE.STUDYID
+  label: Study Identifier
+  origin: Predecessor
+- id: VAR:ADTTE.USUBJID
+  label: Unique Subject Identifier
+  origin: Predecessor
+parameters:
+- id: PARAM:ADADAS.ACTOT
+  param: Adas-Cog(11) Subscore
+- id: PARAM:ADLBC.GLUC
+  param: Glucose (mmol/L)
+- id: PARAM:ADTTE.TTDE
+  param: Time to First Dermatologic Event
+metadataKind: spec-xlsx

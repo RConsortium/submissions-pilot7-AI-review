@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/adrg-json/core/0.2.0",
+  "title": "ADRG-JSON core profile 0.2.0",
+  "description": "Only what JSON does better than prose: stable IDs and links, a compute spec and result per cell, notes and findings attached to IDs, and hashes of every source read. Study context, conformance explanations and other narrative are written later and merged when the PDF ADRG is rendered.",
+  "type": "object",
+  "required": ["adrgCore", "study", "stage", "analyses", "displays"],
+  "additionalProperties": false,
+  "properties": {
+    "adrgCore": {"const": "0.2.0"},
+    "study": {"type": "string", "description": "STUDYID"},
+    "stage": {"enum": ["planned", "specified", "programmed", "executed", "final"]},
+    "generated": {"type": ["string", "null"], "format": "date-time"},
+    "sources": {
+      "description": "Every file the tool read, keyed by ID, with its hash. A changed hash means the core is stale.",
+      "type": "object",
+      "propertyNames": {"$ref": "#/$defs/Id"},
+      "additionalProperties": {
+        "type": "object", "required": ["path", "sha256"], "additionalProperties": false,
+        "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                       "role": {"enum": ["metadata"]}}
+      }
+    },
+    "analyses": {"type": "array", "items": {"$ref": "#/$defs/Analysis"}},
+    "displays": {"type": "array", "items": {"$ref": "#/$defs/Display"}},
+    "variables": {"type": "array", "items": {"$ref": "#/$defs/Variable"}},
+    "parameters": {"type": "array", "items": {"$ref": "#/$defs/Parameter"}},
+    "programs": {"type": "array", "items": {"$ref": "#/$defs/Program"}},
+    "notes": {"type": "array", "items": {"$ref": "#/$defs/Note"}},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/Finding"}}
+  },
+  "$defs": {
+    "Id": {"type": "string", "pattern": "^(DS|VAR|PARAM|PGM|FN|AN|DSP|CELL|NOTE|FND|EST|DOC):[^\\s]+$"},
+    "Where": {"type": "object", "description": "Variable -> value, {\"in\": [...]} or {\"notnull\": true}",
+              "additionalProperties": {"type": ["string", "number", "object"]}},
+    "Analysis": {
+      "type": "object", "required": ["id", "dataset", "method"], "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^AN:"},
+        "purpose": {"type": "string"},
+        "estimand": {"type": "string", "pattern": "^EST:", "description": "External: defined in the protocol (USDM) or the narrative"},
+        "dataset": {"type": "string", "pattern": "^DS:"},
+        "population": {"$ref": "#/$defs/Where"},
+        "subset": {"$ref": "#/$defs/Where"},
+        "by": {"type": "string"},
+        "parameters": {"type": "array", "items": {"type": "string", "pattern": "^PARAM:"}},
+        "method": {"type": "string"},
+        "model": {"type": "object"},
+        "implementation": {"type": "string", "pattern": "^FN:"},
+        "program": {"type": "string", "pattern": "^PGM:"}
+      }
+    },
+    "Cell": {
+      "type": "object", "required": ["id", "analysis", "compute", "format", "status"], "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^CELL:"},
+        "analysis": {"type": "string", "pattern": "^AN:"},
+        "compute": {"type": "object", "required": ["op"], "description": "Statistic, group and any extra filter: enough to recompute the cell"},
+        "format": {"type": "string"},
+        "value": {"type": "string", "description": "What the output shows"},
+        "recomputed": {"type": ["string", "null"], "description": "Independent recomputation from the submitted data"},
+        "status": {"enum": ["planned", "verified", "mismatch", "missing", "unverifiable"]}
+      }
+    },
+    "Display": {
+      "type": "object", "required": ["id", "title", "sections"], "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^DSP:"},
+        "title": {"type": "string"},
+        "renderedIn": {"type": "object", "properties": {"doc": {"type": "string"}, "page": {"type": "integer"}}},
+        "columns": {"$ref": "#/$defs/Columns"},
+        "sections": {"type": "array", "items": {
+          "type": "object", "required": ["id", "rows"], "additionalProperties": false,
+          "properties": {
+            "id": {"type": "string"}, "label": {"type": ["string", "null"]}, "columns": {"$ref": "#/$defs/Columns"},
+            "rows": {"type": "array", "items": {
+              "type": "object", "required": ["id", "label", "cells"], "additionalProperties": false,
+              "properties": {"id": {"type": "string"}, "label": {"type": "string"},
+                             "cells": {"type": "array", "items": {"$ref": "#/$defs/Cell"}}}}}}}}
+      }
+    },
+    "Columns": {"type": "array", "items": {"type": "object", "required": ["id", "label"],
+                "properties": {"id": {"type": "string"}, "label": {"type": "string"}}}},
+    "Variable": {
+      "type": "object", "required": ["id"], "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^VAR:[A-Z0-9]+\\.[A-Z0-9_]+$"},
+        "derivation": {"type": "string", "description": "Cached from define.xml or the spec; define.xml wins"},
+        "predecessors": {"type": "array", "items": {"type": "string", "pattern": "^VAR:"}},
+        "codeAnchors": {"type": "array", "items": {
+          "type": "object", "required": ["program", "line", "role"], "additionalProperties": false,
+          "properties": {"program": {"type": "string", "pattern": "^PGM:"}, "line": {"type": "integer"},
+                         "role": {"enum": ["derives", "selects", "uses"]}, "excerpt": {"type": "string"}}}}
+      }
+    },
+    "Parameter": {
+      "type": "object", "required": ["id"], "additionalProperties": false,
+      "properties": {"id": {"type": "string", "pattern": "^PARAM:"}, "where": {"type": "string"}, "derivation": {"type": "string"}}
+    },
+    "Program": {
+      "type": "object", "required": ["id"], "additionalProperties": false,
+      "properties": {"id": {"type": "string", "pattern": "^PGM:"},
+                     "reads": {"type": "array", "items": {"type": "string"}},
+                     "writes": {"type": "array", "items": {"type": "string"}},
+                     "run": {"type": "object", "required": ["mode"], "additionalProperties": false,
+                             "description": "How the program was run, when known (omitted = unknown)",
+                             "properties": {"mode": {"enum": ["scripted", "interactive"]}, "evidence": {"type": "string"}}}}
+    },
+    "Note": {
+      "type": "object", "required": ["id", "about", "text", "status"], "additionalProperties": false,
+      "properties": {"id": {"type": "string", "pattern": "^NOTE:"}, "about": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/Id"}},
+                     "title": {"type": "string"}, "text": {"type": "string"}, "status": {"enum": ["draft", "final"]},
+                     "section": {"type": "string", "description": "Where the PDF places it"}}
+    },
+    "Finding": {
+      "type": "object", "required": ["id", "severity", "about", "text"], "additionalProperties": false,
+      "properties": {"id": {"type": "string", "pattern": "^FND:"}, "severity": {"enum": ["error", "warning", "info"]},
+                     "about": {"type": "array", "items": {"$ref": "#/$defs/Id"}}, "text": {"type": "string"},
+                     "check": {"type": "string"}}
+    }
+  }
+}
