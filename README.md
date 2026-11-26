@@ -26,6 +26,7 @@ The three pilots reviewed here submit the same study, CDISCPILOT01: xanomeline v
 |---|---|---|---|
 | **Step 1:** Open-source pre-check vs FDA AI review | Would open-source tools used as pre-submission checks cover the issues an FDA AI-assisted review raises? | Run the original Pilot 1 / 3 / 5 packages through yamaa and the statistical-reviewer skill. Run the same packages through Elsa. Compare the findings item by item. | Open-source and Elsa reviews done for Pilots 1, 3 and 5, and compared item by item. |
 | **Step 2:** Pre-audited resubmission | Does a pre-audited submission package reduce unnecessary reviewer issues and back-and-forth? | Update each package using the open-source findings. Resubmit the enhanced package and rerun Elsa. Compare the issues raised before and after. | Planned |
+| **Step 3:** AI-ready submission format | In the AI era, is there an alternative file format or file structure that can make FDA AI review more efficient and human oversight more streamlined? | Start with an ADRG.json file: a machine-readable reviewer's guide that specifies the lineage of every number in the primary and key secondary endpoint tables, from the displayed value back to the datasets, filters and programs that produce it. | Proposed |
 
 ## Review tools
 
@@ -43,34 +44,49 @@ The three pilots reviewed here submit the same study, CDISCPILOT01: xanomeline v
 
 In all three pilots, Elsa found no refuse-to-file issues within the pilot's scope, left the fileability decision to the human reviewer, and reproduced the primary ADAS-Cog result in Python. Its review items focus on regulatory completeness and the review environment rather than on the data.
 
-**Answer to Step 1:** used together, the open-source tools anticipated the statistical items Elsa raised in all three pilots, and found data issues it did not raise. Elsa missed the same safety-data defects in every pilot: serious AEs not flagged as serious (AESER), and AE discontinuations that can't be traced to an event (AEACN). In Pilots 3 and 5 it also missed that 12 subjects randomized to High Dose received only 54 mg. What only Elsa checks is regulatory completeness: required modules and documents, package formats, and whether the computing environment can be restored.
+**Answer to Step 1:** used together, the open-source tools anticipated the statistical items Elsa raised in all three pilots, and found data issues it did not raise. In these pilot runs, Elsa was given only the MAPP 6025.4 Rev. 1 (refuse-to-file) rules, and its reviews did not cover the same safety-data defects in any pilot: serious AEs not flagged as serious (AESER), and AE discontinuations that can't be traced to an event (AEACN). In Pilots 3 and 5 they also did not cover the 12 subjects randomized to High Dose who received only 54 mg. In practice, an FDA reviewer may use more tailored rules and prompts. What the Elsa setup in this pilot checks is regulatory completeness: required modules and documents, package formats, and whether the computing environment can be restored.
+
+**AI pre-audits enable earlier correction.** Running AI "pre-audits" before submission can capture the issues an FDA AI review is likely to raise. In these pilots, the open-source tools flagged Elsa's statistical items in advance, such as the missing-data handling, the unanalysed CIBIC+ endpoint, the missing define.xml and the multiplicity strategy. Sponsors who run such pre-audits can correct these issues before submission rather than in response to information requests, which makes for a smoother review experience. Step 2 will test this by resubmitting the pre-audited packages to Elsa.
 
 **yamaa vs statistical-reviewer.** The two open-source tools complement each other. yamaa cannot see an error that the source data and the derived datasets share, such as serious AEs flagged "N" at source. The statistical-reviewer does not audit documentation text, such as a define.xml formula that is wrong but does not change the numbers. For two of yamaa's rule conflicts, the ADAS-Cog values and the treatment-emergent flag, the statistical-reviewer re-derived the variables from source and found no mismatches: the defect is in the documented rule, not in the data. Details: the [consolidated statistical-reviewer findings for Pilots 1, 3 and 5](reports/report1_stat-reviewer_findings_pilots_1_3_5_2026-10-27.md) and the [comparison of the statistical-reviewer and yamaa](reports/report2_stat-reviewer_vs_yamaa_comparison_2026-10-27.md).
 
 ### A) Pilot 1: yamaa vs statistical-reviewer vs Elsa
 
-Elsa's Pilot 1 report found **no refuse-to-file issues within the pilot's stated scope** and left the fileability decision to the human reviewer. It raised 6 review items. It also listed 29 further issues that would matter in a real marketing application; most are components absent by design in this pilot, such as the ISS, ISE, CSR, protocol and SAP.
+| | Pilot 1 |
+|---|---|
+| Elsa: refuse-to-file issues within the pilot's scope | None |
+| Elsa: review items | 6 |
+| Elsa: primary efficacy result reproduced (Python) | Yes |
+| yamaa: ADaM cells reproduced from SDTM | 100% (9.1 M) |
+| yamaa: documentation consistency items (conflict / divergence / gap) | 388 (63 / 191 / 120)\* |
+| statistical-reviewer: findings (High / Medium / Low) | 3 / 8 / 5 |
+| statistical-reviewer: primary efficacy result reproduced | Yes |
 
-- **statistical-reviewer:** covered 4 of Elsa's 6 review items in full and 1 in part; only the ANL01FL label item was missed. It also found data issues that Elsa did not raise, such as unflagged serious AEs and a co-primary endpoint with no analysis.
-- **yamaa:** overlaps with Elsa only at the documentation level: the efficacy-population flag, the imputation documentation and the time-to-event date rule. It reproduced 100% of the ADaM cells from SDTM (9.1 M), and found documentation defects that neither the statistical-reviewer nor Elsa raised.
+\* The remaining 14 items are marked "not reviewed" or "unclear".
 
-In conclusion, the three tools look at different layers. Elsa checks the package against the FDA refuse-to-file criteria and re-runs the primary analysis. The statistical-reviewer tests the data and results in depth. yamaa tests whether the documented derivation process reproduces the datasets.
+The package includes ADaM only: no SDTM, SAP, protocol or CSR. yamaa used SDTM from outside the package.
+
+**Elsa's review items:**
+
+1. The 97.5% normal quantile behind the CIs in Table 14-3.01 differs from FDA's earlier re-calculation (which used 1.96), and the sponsor kept its own approach.
+2. The model specification was verified from the package source, so no information request is needed.
+3. The ANL01FL label differs across datasets.
+4. Confirm the ADTTE censoring convention.
+5. 20 subjects (7.9%) are excluded from the efficacy population without explanation.
+6. A Python re-run of the primary analysis, for comparison with Table 14-3.01.
+
+Elsa also listed 29 further issues that would matter in a real marketing application; most are components absent by design in this pilot.
 
 **Raised by Elsa and anticipated by the open-source tools:**
 
-- **Primary result reproduces.** Elsa re-ran the ADAS-Cog analysis in Python and the statistical-reviewer in R. Both get −1.006 (High − Placebo) and −0.467 (Low − Placebo), with dose-response p = 0.245, and both confirmed the model specification in the submitted program.
-- **20 subjects (7.9%) excluded from the efficacy population without explanation.** The statistical-reviewer had already characterized them: 19 have no post-baseline ADAS-Cog and 1 has no post-baseline CIBIC+. yamaa found that the define.xml source of the efficacy flag (`ADSL.FASFL`) does not exist.
-- **ADRG says "Imputation: Not applicable"** although the primary analysis uses LOCF, and the package states no missing-data strategy.
-- **No sensitivity analysis for missing data.** The statistical-reviewer ran observed-case, all-randomized and on-treatment analyses; the null result holds.
-- **Time-to-event censoring.** The statistical-reviewer reproduced the KM curves and numbers at risk exactly, and flagged the censoring descriptions.
-- **Partly anticipated:** no demographic subgroup analyses (the statistical-reviewer flagged that sex and ethnicity are missing from Table 14-2.01), and the CI quantile method (the statistical-reviewer flagged mixed z- and t-based CIs).
+- **Primary result** (items 2 and 6). Elsa re-ran the ADAS-Cog analysis in Python and the statistical-reviewer in R. Both get −1.006 (High − Placebo) and −0.467 (Low − Placebo), with dose-response p = 0.245, and both confirmed the model specification in the submitted program.
+- **Excluded subjects** (item 5). The statistical-reviewer had already characterized them: 19 have no post-baseline ADAS-Cog and 1 has no post-baseline CIBIC+. yamaa found that the define.xml source of the efficacy flag (`ADSL.FASFL`) does not exist.
+- **Time-to-event censoring** (item 4). The statistical-reviewer reproduced the KM curves and numbers at risk exactly, and flagged the censoring descriptions. yamaa found that the documented time-to-event date rule gives a different date for 5 subjects.
+- **CI method** (item 1, partly). The statistical-reviewer flagged mixed z- and t-based CIs.
+- **Missing-data handling,** from Elsa's appendix: the ADRG says "Imputation: Not applicable" although the primary analysis uses LOCF, and there is no sensitivity analysis. The statistical-reviewer flagged both, and ran observed-case, all-randomized and on-treatment analyses; the null result holds. yamaa flagged divergences in the documented LOCF and proration rules.
+- **Subgroups,** from Elsa's appendix (partly): no demographic subgroup analyses. The statistical-reviewer flagged that sex and ethnicity are missing from Table 14-2.01.
 
-**Raised by Elsa only:**
-
-| Type | Findings |
-|---|---|
-| Regulatory completeness (absent by design in this pilot) | ISS, ISE, CSR, protocol, SAP and Module 2 summaries; SDTM; case report forms; randomization documentation; financial disclosure, user fee and pediatric (PREA) documentation; Form 356h possibly unsigned |
-| Technical | Retired MRAN package repository; ANL01FL label differs across datasets; old MedDRA version (v8.0); no software validation evidence (out of scope by design) |
+**Raised by Elsa only:** the ANL01FL label (item 3); regulatory completeness, absent by design in this pilot (ISS, ISE, CSR, protocol, SAP and Module 2 summaries; SDTM; case report forms; randomization documentation; financial disclosure, user fee and pediatric (PREA) documentation; Form 356h possibly unsigned); and technical items (retired MRAN package repository; old MedDRA version, v8.0; no software validation evidence, out of scope by design).
 
 **Found by the open-source tools but not raised by Elsa:**
 
@@ -78,10 +94,9 @@ In conclusion, the three tools look at different layers. Elsa checks the package
 |---|---|
 | statistical-reviewer | Co-primary CIBIC+ has no output; AESER = "N" on all 3 fatal AEs, and 25 subjects meet seriousness criteria while only 3 are flagged; AEACN blank on all AEs, so the 92 AE discontinuations are untraceable; differential LOCF (17.7 / 39.5 / 44.6%; 79 of the 234 Week 24 values are imputed); 37 subjects with post-discontinuation ADAS-Cog values in the primary analysis; KM y-axis mislabelled, with no HR or medians; glucose table mislabelled; placeholder derivation methods in define.xml |
 | yamaa | Documentation defects: BMI formula; lab-ratio limits; completer flag definition; Hy's Law threshold; VISNUMEN filter term |
+| Both | Treatment-emergent definition: no upper window and TRTEMFL blank instead of "N" (statistical-reviewer); define.xml and the SAP give different definitions (yamaa) |
 
-All of the statistical-reviewer's items above are visible in the datasets, programs, ADRG and define.xml that Elsa had.
-
-**Answer to Step 1, for Pilot 1:** used together, the open-source tools covered the statistical content of the FDA AI review and caught data issues it did not raise. What they do not check is regulatory completeness: required modules, forms and a restorable computing environment. That is Elsa's main focus, and a gap a sponsor can close with a completeness checklist before submission.
+Details: [Elsa's Pilot 1 filing review](reports/FDA_filing_agent_reviews/CDISCPILOT01_Statistical_Filing_Review_v2_python.md), the [statistical-reviewer's Pilot 1 report](reports/statistical_review_pilot1_2026-10-27.md) and the [yamaa Pilot 1 dashboard](https://rconsortium.github.io/submissions-pilot7-synthetic-data/studies/cdiscpilot01/).
 
 ### B) Pilot 3: yamaa vs statistical-reviewer vs Elsa
 
@@ -93,7 +108,6 @@ All of the statistical-reviewer's items above are visible in the datasets, progr
 | yamaa: ADaM cells reproduced from SDTM | 100% (2.3 M) |
 | yamaa: documentation consistency items (conflict / divergence / gap) | 248 (23 / 66 / 150)\* |
 | statistical-reviewer: findings (High / Medium / Low) | 2 / 8 / 7 |
-| statistical-reviewer: overall result | FAIL |
 | statistical-reviewer: primary efficacy result reproduced | Yes |
 
 \* The remaining 9 items are marked "not reviewed" or "unclear".
@@ -136,7 +150,6 @@ Details: [Elsa's Pilot 3 filing review](reports/FDA_filing_agent_reviews/CDISCPI
 | yamaa: ADaM cells reproduced from SDTM | 100% (2.3 M) |
 | yamaa: documentation consistency items (conflict / divergence / gap) | 233 (18 / 51 / 156)\* |
 | statistical-reviewer: findings (High / Medium / Low) | 3 / 11 / 8 |
-| statistical-reviewer: overall result | FAIL |
 | statistical-reviewer: primary efficacy result reproduced | Yes |
 
 \* The remaining 8 items are marked "not reviewed" or "unclear".
@@ -184,17 +197,14 @@ Details: [Elsa's Pilot 5 filing review](reports/FDA_filing_agent_reviews/CDISCPI
 
 ## Practical suggestions for sponsors
 
-- **Pre-check with both kinds of tool.** Use a process-level tool such as yamaa for operational fixes, and a data-level tool such as the statistical-reviewer for signals the CSR must explain.
-- **Make derivations executable.** Write define.xml methods with real variable names and codelist values, so they reproduce the data when run literally. Better still, ship a machine-executable specification.
-- **Keep documents consistent.** Use one source for each rule across the SAP, define.xml, ADRG and specs, and keep variable labels consistent across datasets. The specification and codelists should match what is in the data. Every claim in the ADRG and CSR should be checkable against the data.
-- **Submit what the SAP promises.** Provide an output for every pre-specified endpoint, sensitivity analysis and subgroup analysis, or state why it is absent.
-- **Label outputs accurately.** Titles, footnotes and axis labels should describe the analysis actually performed.
-- **Ship a complete, machine-readable package.** Include every referenced document. Provide results in structured form (for example ARD or CSV) alongside the PDFs, and use valid Dataset-JSON with no local paths.
-- **Make programs rerunnable.** Every program should rebuild the submitted files from a clean, locked environment, with package sources that will still exist at review time.
-- **Anticipate the questions.** Populate traceability fields such as AEACN and SRCDOM/SRCVAR. State the estimand and the sensitivity analyses. Explain every population exclusion, such as the 20 subjects outside the efficacy population. Document known data artefacts in the ADRG.
-- **Check regulatory completeness too.** Elsa checked the package against the refuse-to-file criteria in MAPP 6025.4: required modules, subgroup analyses and forms. Neither open-source tool does this. Run a completeness checklist, and state in the cover letter anything intentionally omitted and why.
+- **Pre-audit with AI tools.** Use a process-level tool (yamaa), a data-level tool (statistical-reviewer) and a completeness check against the refuse-to-file criteria (MAPP 6025.4).
+- **Make derivations executable.** define.xml methods should reproduce the data when run literally; better still, ship an executable specification.
+- **Keep documents consistent with each other and with the data.** Use one source for each rule across the SAP, define.xml, ADRG and specs.
+- **Submit what the SAP promises, labelled accurately.** Provide an output for every pre-specified analysis, or state why it is absent, with titles and labels that match the analysis.
+- **Ship a complete, rerunnable package.** Include every referenced document and structured results alongside the PDFs, and make programs rebuild the files in a locked environment.
+- **Anticipate the questions.** Populate traceability fields such as AEACN, state the estimand and sensitivity analyses, and explain population exclusions and known data artefacts.
 
-Details, with the evidence from each pilot and a 12-item pre-submission checklist, are in [§6 of the statistical-reviewer vs yamaa comparison](reports/report2_stat-reviewer_vs_yamaa_comparison_2026-10-27.md#6-making-a-submission-ai-reviewer-friendly). Further Pilot 1 lessons are in [§6 of the Pilot 1 three-way comparison](reports/report3_yamaa_vs_stat-reviewer_vs_elsa_pilot1_2026-11-01.md#6-lessons-for-ai-reviewer-friendly-submissions).
+Details and a 12-item pre-submission checklist are in [§6 of the statistical-reviewer vs yamaa comparison](reports/report2_stat-reviewer_vs_yamaa_comparison_2026-10-27.md#6-making-a-submission-ai-reviewer-friendly); more Pilot 1 lessons are in [§6 of the Pilot 1 three-way comparison](reports/report3_yamaa_vs_stat-reviewer_vs_elsa_pilot1_2026-11-01.md#6-lessons-for-ai-reviewer-friendly-submissions).
 
 ## Caveats
 
